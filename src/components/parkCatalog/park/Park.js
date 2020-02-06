@@ -1,17 +1,23 @@
 import React from 'react';
 import Slider from './components/Slider'
+import Container from "@material-ui/core/Container";
+import CssBaseline from "@material-ui/core/CssBaseline";
+
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import Header from "./components/Header";
+
+const sections = [{ title: 'Home', url: '#' },
+    { title: 'Who we are', url: '#' },
+    { title: 'Sign in ', url: '#' },
+    { title: 'Sign up', url: '#' }]
+
 
 
 export class Park extends React.Component{
     constructor(props) {
         super(props);
-        const sections = [{ title: 'Home', url: '#' },
-            { title: 'Who are we', url: '#' },
-            { title: 'Sign in ', url: '#' },
-            { title: 'Sign up', url: '#' }]
+
     }
-
-
 
     render(){
         return (
@@ -19,8 +25,12 @@ export class Park extends React.Component{
                 <React.Fragment>
                     <CssBaseline />
                     <Container maxWidth="lg">
-                        <Header title="Park" sections={sections} />
-                        <Slider />
+                        <Header title="Park x" sections={sections} />
+                        <br/>
+                        <div align={"center"}>
+                            <Slider  />
+                        </div>
+
                     </Container>
                 </React.Fragment>
             </div>
@@ -29,7 +39,6 @@ export class Park extends React.Component{
 
 
     }
-
-
-
 }
+
+
