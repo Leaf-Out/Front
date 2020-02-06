@@ -6,9 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
 export class ParkCard extends React.Component {
-    constructor(props) {
-
-    }
     render() {
 
         return (
