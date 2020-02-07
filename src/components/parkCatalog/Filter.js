@@ -9,16 +9,19 @@ import Grid from '@material-ui/core/Grid'
 
 
 export class Filter extends React.Component {
-    in = (icon, type) => {
+    in = (icon,type) => {
+        console.log(icon);
+        
         return (
             <div>
                 <div >
+                <Icon>add_circle</Icon>
+
                     <Icon>
                         {icon}
                     </Icon>
                 </div>
                 <TextField type={type} />
-                <input />
             </div>
         )
     }
