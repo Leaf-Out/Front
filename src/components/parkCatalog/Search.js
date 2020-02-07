@@ -2,7 +2,7 @@ import React from 'react';
 
 import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
-import { Filter } from './Filter'
+import { Filter } from './Filter';
 
 export class Search extends React.Component {
     render() {

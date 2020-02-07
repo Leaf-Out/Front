@@ -1,71 +1,37 @@
 import React from 'react';
 import ChildCareIcon from '@material-ui/icons/ChildCare';
 import Icon from '@material-ui/core/Icon';
-import ExploreIcon from '@material-ui/icons/Explore';
 import RowingIcon from '@material-ui/icons/Rowing';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid'
+import { BottomNavigation } from '@material-ui/core';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
 
 
 export class Filter extends React.Component {
-    in = (icon,type) => {
-        console.log(icon);
-        
-        return (
-            <div>
-                <div >
-                <Icon>add_circle</Icon>
-
-                    <Icon>
-                        {icon}
-                    </Icon>
-                </div>
-                <TextField type={type} />
-            </div>
-        )
+    constructor(props){
+        super(props)
+        this.state = {
+            selected: 'childs'
+        }
     }
-
     render() {
         return (
             <div>
-                <Grid
-                    container
-                    direction="row"
-                    justify="center"
-                    alignItems="flex-start"
-                >
-
-                    <div>
-                        <div >
-                            <ChildCareIcon />
-                        </div>
-                        <TextField type="number" />
-                    </div>
-                    <div>
-                        <div >
-                            <EmojiPeopleIcon />
-                        </div>
-                        <TextField type="number" />
-                    </div>
-                    <div>
-                        <div >
-                            <ExploreIcon />
-                        </div>
-                        <TextField type="text" />
-                    </div>
-                    <div>
-                        <div >
-                            <RowingIcon />
-                        </div>
-                        <TextField type="text" />
-                    </div>
-                </Grid>
-                {/* {this.in("ChildCareIcon", "number")}
-                {this.in("EmojiPeopleIcon", "number")}
-                {this.in("RowingIcon", "text")}
-                {this.in("ExploreIcon", "text")} */}
+                <BottomNavigation value={this.state.selected} onChange={this.handleChange}>
+                    <BottomNavigationAction label="childs" value="childs" icon={<ChildCareIcon />} />
+                    <BottomNavigationAction label="adults" value="adults" icon={<EmojiPeopleIcon />} />
+                    <BottomNavigationAction label="location" value="location" icon={<LocationOnIcon />} />
+                    <BottomNavigationAction label="activities" value="activities" icon={<RowingIcon />} />
+                </BottomNavigation>
             </div>
         )
     }
+
+    handleChange = (event, newValue) => {
+        this.setState( {
+            selected: newValue
+        });
+      }
 }
