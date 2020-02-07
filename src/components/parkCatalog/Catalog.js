@@ -15,7 +15,7 @@ export class Catalog extends React.Component {
         return (
             <div>
                 <Search />
-                <GridList cols={4} spacing={1}>
+                <GridList cols={4} spacing={10}>
                     {this.state.cards.map(card => (
                         <GridListTile >
                             <ParkCard />
