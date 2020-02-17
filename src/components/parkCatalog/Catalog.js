@@ -4,6 +4,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import { Search } from './Search';
 import "./Catalog.css"
 import { ParkCard } from './park/ParkCard';
+import { PlanCard } from './plan/PlanCard';
 
 
 export class Catalog extends React.Component {
@@ -18,7 +19,7 @@ export class Catalog extends React.Component {
             <div>
                 <Search />
                 <div className="catalog">
-                    <GridList cols={4} spacing={20}>
+                    <GridList cols={3} spacing={20}>
                         {this.state.cards.map(card => (
                             <GridListTile >
                                 <ParkCard />

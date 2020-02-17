@@ -4,8 +4,10 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import EcoRoundedIcon from '@material-ui/icons/EcoRounded';
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 
-export class ParkCard extends React.Component {
+
+export class PlanCard extends React.Component {
 
     getRating = () => {
         //TODO fetch
@@ -14,22 +16,27 @@ export class ParkCard extends React.Component {
 
     getName = () => {
         //TODO fetch
-        return "Mock Park Name"
+        return "Mock Plan Name"
     }
 
     getDescription = () => {
         //TODO fetch
-        return "Mock Park description"
+        return "Mock Plan description"
+    }
+
+    getPrice = () => {
+        //TODO fetch
+        return 15000
     }
 
     state = {
         rating: this.getRating(),
         name: this.getName(),
-        description: this.getDescription()
+        description: this.getDescription(),
+        price: this.getPrice()
     }
 
     render() {
-
         return (
             <Paper elevation={3}>
                 <Grid container direction={"row"}>
@@ -38,15 +45,22 @@ export class ParkCard extends React.Component {
                             <img alt="complex" src="/public/logo512.png" />
                         </ButtonBase>
                     </Grid>
-                    <Grid container item xs={7} direction={"column"}>
-                        <Typography>{this.state.name}</Typography>
-                        <Typography>{this.state.description}</Typography>
-                        
+                    <Grid container item xs={7}>
+                        <Grid item xs={12}>
+                            <Typography>{this.state.name}</Typography>
+                            <Typography>{this.state.description}</Typography>
+                        </Grid>
+                        <Grid container justify="flex-end" alignItems="flex-end" item xs={12}>
+                            <Typography>$ {this.state.price}</Typography>
+                        </Grid>
                     </Grid>
                     <Grid container justify="center" item xs={2}>
                         <Grid container justify="center" item xs={12}>
                             <Typography>{this.state.rating}</Typography>
                             <EcoRoundedIcon style={{ fill: '#63ad57' }}/>
+                        </Grid>
+                        <Grid container align="flex-start" item xs={12}>
+                            <ShoppingCartOutlinedIcon/>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -54,4 +68,3 @@ export class ParkCard extends React.Component {
         );
     }
 }
-  
