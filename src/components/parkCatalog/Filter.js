@@ -4,7 +4,18 @@ import Icon from "@material-ui/core/Icon";
 import RowingIcon from "@material-ui/icons/Rowing";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import TextField from "@material-ui/core/TextField";
-import { BottomNavigation, Popper, Chip, Divider } from "@material-ui/core";
+import {
+  BottomNavigation,
+  Popper,
+  Chip,
+  Divider,
+  FormControlLabel,
+  Checkbox,
+  FormControl,
+  FormLabel,
+  FormGroup
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 
@@ -14,38 +25,71 @@ export class Filter extends React.Component {
     this.state = {
       anchorEl: null,
       selected: "childs",
-      poperContent: "Filter Here"
+      popperContent: "Filter Here"
     };
   }
+
+  getFilterContent = keyWord => {
+    //Fetch data
+    let items = ["item", "item", "item", "item"];
+    return items;
+  };
+
   handleChange = (event, newValue) => {
     this.setState({
       selected: newValue
     });
   };
 
-  handleClick = (event) => {
+  tooglePopper = event => {
     this.setState(prevState => ({
       anchorEl: prevState.anchorEl ? null : event.currentTarget
     }));
   };
 
   filterByVisitors = () => {
+    const gg = (
+      <div>
+        <TextField label="Adults" type="number" />
+        <TextField label="Childs" type="number" />
+      </div>
+    );
     this.setState({
-        poperContent:(
-            <div>
-                <TextField type="number"> Adults</TextField>
-                <TextField type="number"> Childs</TextField>
-            </div>
-        )
-    })
+      popperContent: gg
+    });
   };
 
-  filterByList = (Category) => {
-    this.setState({poperContent:(<div></div>)})
+  filterByList = Category => {
+    let elements = this.getFilterContent(Category).map(item => {
+      return (
+        <FormControlLabel
+          control={<Checkbox checked={false} value="item" />}
+          label={item}
+        />
+      );
+    });
+    const content = (
+      <FormControl component="fieldset">
+        <FormLabel component="legend">Filter by {Category}</FormLabel>
+        <FormGroup>{elements}</FormGroup>
+      </FormControl>
+    );
+
+    this.setState({
+      popperContent: content
+    });
   };
-  filterByActivities = () => {};
+  // filterByActivities = () => {};
   render() {
-    const content = (<div> {this.state.poperContent} </div>);
+    console.log(this.state.classes());
+
+    const content = (
+      <div style={ {
+        border: "1px solid",
+        padding: theme.spacing(1),
+        backgroundColor: theme.palette.background.paper
+      }}> {this.state.popperContent} </div>
+    );
     const open = Boolean(this.state.anchorEl);
     return (
       <div>
@@ -59,17 +103,23 @@ export class Filter extends React.Component {
         <Chip
           icon={<EmojiPeopleIcon />}
           label="Visitors"
-          onClick={this.handleClick}
+          onClick={e => {
+            this.filterByVisitors();
+            this.tooglePopper(e);
+          }}
         />
         <Chip
           icon={<LocationOnIcon />}
           label="Location"
-          onClick={this.handleClick}
+          onClick={e => {
+            this.filterByList("Location");
+            this.tooglePopper(e);
+          }}
         />
         <Chip
           icon={<RowingIcon />}
           label="Activities"
-          onClick={this.handleClick}
+          // onClick={this.handleClick}
         />
 
         <Chip icon={<RowingIcon />} label="More" onClick={this.handleClick} />
