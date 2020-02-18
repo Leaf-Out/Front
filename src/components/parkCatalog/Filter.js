@@ -19,7 +19,27 @@ import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 
+const useStyles = makeStyles(theme => ({
+  bar: {
+    borderRadius: "25px",
+    border: "2px solid #ede1cc"
+  },
+  chip: {
+    backgroundColor: "#63ad57"
+  },
+  paper: {
+    border: "1px solid",
+    padding: theme.spacing(1),
+    background: "#56ab2f" /* fallback for old browsers */,
+    background:
+      "-webkit-linear-gradient(to right, #a8e063, #56ab2f)" /* Chrome 10-25, Safari 5.1-6 */,
+    background:
+      "linear-gradient(to right, #a8e063, #56ab2f)" /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+}));
+
 export function Filter(props) {
+  const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [contentEl, setContentEl] = React.useState("Filter Here");
 
@@ -36,9 +56,6 @@ export function Filter(props) {
   // };
 
   const tooglePopper = event => {
-    // this.setState(prevState => ({
-    //   anchorEl: prevState.anchorEl ? null : event.currentTarget
-    // }));
     setAnchorEl(anchorEl ? null : event.currentTarget);
   };
 
@@ -70,21 +87,18 @@ export function Filter(props) {
     setContentEl(content);
   };
   // filterByActivities = () => {};
-  const content = <div> {contentEl} </div>;
+  const content = <div className={classes.paper}> {contentEl} </div>;
 
   //Used for toogle the popper
   const open = Boolean(anchorEl);
   return (
-    <div>
-      <Popper
-        open={open}
-        anchorEl={anchorEl}
-        placement="bottom"
-      >
+    <div className={classes.bar}>
+      <Popper open={open} anchorEl={anchorEl} placement="bottom">
         {content}
       </Popper>
       <Chip
         icon={<EmojiPeopleIcon />}
+        className={classes.chip}
         label="Visitors"
         onClick={e => {
           filterByVisitors();
@@ -94,6 +108,7 @@ export function Filter(props) {
       <Chip
         icon={<LocationOnIcon />}
         label="Location"
+        className={classes.chip}
         onClick={e => {
           filterByList("Location");
           tooglePopper(e);
@@ -102,10 +117,23 @@ export function Filter(props) {
       <Chip
         icon={<RowingIcon />}
         label="Activities"
+        className={classes.chip}
+        onClick={e => {
+          filterByList("Activities");
+          tooglePopper(e);
+        }}
         // onClick={this.handleClick}
       />
 
-      <Chip icon={<RowingIcon />} label="More" />
+      <Chip
+        icon={<RowingIcon />}
+        label="More"
+        className={classes.chip}
+        onClick={e => {
+          filterByList("More Options");
+          tooglePopper(e);
+        }}
+      />
     </div>
   );
 }

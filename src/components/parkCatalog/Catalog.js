@@ -15,7 +15,6 @@ export class Catalog extends React.Component {
         return (
             <div>
                 <Search />
-                <Catalog/>
             </div>
         )
     }
