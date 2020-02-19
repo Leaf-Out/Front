@@ -5,6 +5,17 @@ import Link from "@material-ui/core/Link";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {Image} from "@material-ui/icons";
 
+const sections = [{ title: 'Home', url: '#' },
+    { title: 'About', url: '#' },
+    { title: 'Sign in ', url: '#' },
+    { title: 'Sign up', url: '#' }]
+
+const sectionSignIn = [{ title: 'Home', url: '#' },
+    { title: 'About', url: '#' },
+    { title: 'Shoping Cart ', url: '#' },
+    { title: 'Log out', url: '#' }]
+
+
 const useStyles = makeStyles(theme => ({
     toolbar: {
         borderBottom: `1px solid ${theme.palette.divider}`,
@@ -21,7 +32,7 @@ const useStyles = makeStyles(theme => ({
         flexShrink: 0,
     },
 }));
-export default function Header(props) {
+function Header2(props) {
     const classes = useStyles();
     const { sections, title } = props;
 
@@ -58,3 +69,37 @@ export default function Header(props) {
         </React.Fragment>
     );
 }
+
+export class Header extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {isLoggedIn: false}
+        this.handleSignIn = this.handleSignIn.bind(this);
+        if (!localStorage.getItem("isLoggedIn")) {
+            localStorage.setItem("isLoggedIn", this.state.isLoggedIn);
+        }
+    }
+
+    handleSignIn() {
+        this.setState({isLoggedIn: true})
+    }
+
+    render() {
+
+        const isLoggedIn = this.state.isLoggedIn || (localStorage.getItem("isLoggedIn") == "true");
+        let choose;
+        if (!isLoggedIn) {
+            choose = sections;
+        } else {
+            choose = sectionSignIn;
+
+        }
+        return (
+            <Header2 sections={choose}/>
+        );
+    }
+}
+
+
+
