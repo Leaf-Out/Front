@@ -6,6 +6,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Footer from '../../elements/Footer';
 import Location from './components/Location';
 import { Header } from '../../elements/Header';
+import { PlanSlider } from './components/PlanSlider';
 
 
 export class Park extends React.Component{
@@ -29,6 +30,9 @@ export class Park extends React.Component{
                         </div>
                         <div align={"center"}>
                             <Location />
+                        </div>
+                        <div align={"center"}>
+                            <PlanSlider />
                         </div>
                         <br/>
                         <Footer/>
