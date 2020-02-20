@@ -5,11 +5,6 @@ import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {Header} from "./components/Header";
 
-
-
-
-
-
 export class Park extends React.Component{
     constructor(props) {
         super(props);
@@ -22,7 +17,6 @@ export class Park extends React.Component{
                 <React.Fragment>
                     <CssBaseline />
                     <Container maxWidth="lg">
-                        <Header title="Park x"  />
                         <br/>
                         <LeafRating/>
                         <div align={"center"}>
