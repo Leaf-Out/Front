@@ -3,6 +3,7 @@ import { Home } from "./components/homePage/Home";
 import { Catalog } from "./components/parkCatalog/Catalog";
 import { Header } from './components/parkCatalog/park/components/Header';
 import { Park } from './components/parkCatalog/park/Park';
+import SignIn from "./components/session/SignIn";
 import {
   BrowserRouter as Router,
   Switch,
@@ -15,7 +16,6 @@ export default class App extends React.Component {
     return (
       <Router>
         <div>
-          <Header />
           <Switch>
             <Route exact path="/">
               <Home />
@@ -23,11 +23,14 @@ export default class App extends React.Component {
             <Route exact path="/home">
               <Home />
             </Route>
-            <Route path="/catalog">
+            <Route exact path="/catalog">
               <Catalog />
             </Route>
-            <Route path="/park">
+            <Route exact path="/park">
               <Park />
+            </Route>
+            <Route exact path="/SignIn">
+              <SignIn />
             </Route>
           </Switch>
         </div>

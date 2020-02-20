@@ -13,8 +13,8 @@ import {
 
 const sections = [{ title: 'Home', url: '#' },
     { title: 'About', url: '#' },
-    { title: 'Sign in ', url: '#' },
-    { title: 'Sign up', url: '#' }]
+    { title: 'SignIn ', url: '#' },
+    { title: 'SignUp', url: '#' }]
 
 const sectionSignIn = [{ title: 'Home', url: '#' },
     { title: 'About', url: '#' },

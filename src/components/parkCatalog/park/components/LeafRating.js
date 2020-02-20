@@ -2,7 +2,7 @@ import React from 'react';
 import Box from '@material-ui/core/Box';
 import Rating from '@material-ui/lab/Rating';
 import { withStyles } from '@material-ui/core/styles';
-import EcoRoundedIcon from '@material-ui/icons/EcoRounded';
+import EcoRoundedIcon from '@material-ui/icons/EcoRounded'
 
 export class LeafRating extends React.Component{
     getRating = ()=>{

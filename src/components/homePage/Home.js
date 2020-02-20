@@ -9,7 +9,6 @@ import SearchIcon from "@material-ui/icons/Search";
 import EcoIcon from '@material-ui/icons/Eco';
 import { Slider } from "../parkCatalog/park/components/Slider";
 import { Header } from "../parkCatalog/park/components/Header";
-import { Image } from '@material-ui/icons';
 
 export class Home extends React.Component {
     constructor(props){
@@ -19,6 +18,9 @@ export class Home extends React.Component {
     render() {
         return (
             <div className="background">
+                <div>
+                    <Header />
+                </div>
                 <div>
                     <Card className="card">
                         <CardContent>
