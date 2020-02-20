@@ -1,6 +1,6 @@
 import React from 'react';
 import './Home.css'
-import { Card, CardContent, Typography, Paper, TextField, InputAdornment, Button, IconButton } from "@material-ui/core";
+import { Card, CardContent, Typography, Paper, TextField, InputAdornment, Button, IconButton, Grid } from "@material-ui/core";
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
 import DirectionsIcon from '@material-ui/icons/Directions';
@@ -9,6 +9,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import EcoIcon from '@material-ui/icons/Eco';
 import { Slider } from "../parkCatalog/park/components/Slider";
 import { Header } from "../parkCatalog/park/components/Header";
+import { Image } from '@material-ui/icons';
 
 export class Home extends React.Component {
 
@@ -93,6 +94,68 @@ export class Home extends React.Component {
                 <br />
                 <div align={"center"}>
                     <Slider />
+                </div>
+                <div align={"center"}>
+                    <Card className="friendsCard">
+                        <CardContent>
+                            <Grid container spacing={7}>
+                                <Grid item xs={5}>
+                                    <Paper className="partnersPaper">
+                                        Lorem Ipsum is simply dummy text of the
+                                        printing and typesetting industry. Lorem
+                                        Ipsum has been the industry's standard
+                                        dummy text ever since the 1500s, when an
+                                        unknown printer took a galley of type and
+                                        scrambled it to make a type specimen book.
+                                        It has survived not only five centuries,
+                                        but also the leap into electronic
+                                        typesetting, remaining essentially
+                                        unchanged. It was popularised in the 1960s
+                                        with the release of Letraset sheets
+                                        with the release of Letraset sheets
+                                        with the release of Letraset sheets
+                                        with the release of Letraset sheets
+                                    </Paper>
+                                </Grid>
+                                <Grid item xs={7}>
+                                    <Grid container spacing={10}>
+                                        <Grid item>
+                                            <Paper className="paperGrid">
+                                                <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" width={100} />
+                                            </Paper>
+                                        </Grid>
+                                        <Grid item>
+                                            <Paper className="paperGrid">
+                                                <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" width={100} />
+                                            </Paper>
+                                        </Grid>
+                                        <Grid item>
+                                            <Paper className="paperGrid">
+                                                <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" width={100} />
+                                            </Paper>
+                                        </Grid>
+                                    </Grid>
+                                    <Grid container spacing={10}>
+                                        <Grid item>
+                                            <Paper className="paperGrid">
+                                                <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" width={100} />
+                                            </Paper>
+                                        </Grid>
+                                        <Grid item>
+                                            <Paper className="paperGrid">
+                                                <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" width={100} />
+                                            </Paper>
+                                        </Grid>
+                                        <Grid item>
+                                            <Paper className="paperGrid">
+                                                <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" width={100} />
+                                            </Paper>
+                                        </Grid>
+                                    </Grid>
+                                </Grid>
+                            </Grid>
+                        </CardContent>
+                    </Card>
                 </div>
             </div>
         );
