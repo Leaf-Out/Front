@@ -8,7 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import SearchIcon from "@material-ui/icons/Search";
 import EcoIcon from '@material-ui/icons/Eco';
 import { Slider } from "../parkCatalog/park/components/Slider";
-import { Header } from "../parkCatalog/park/components/Header";
+import { Header } from "../elements/Header";
 
 export class Home extends React.Component {
     constructor(props){

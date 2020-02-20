@@ -3,7 +3,10 @@ import {Slider} from './components/Slider'
 import {LeafRating} from './components/LeafRating'
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import {Header} from "./components/Header";
+import Footer from '../../elements/Footer';
+import Location from './components/Location';
+import { Header } from '../../elements/Header';
+
 
 export class Park extends React.Component{
     constructor(props) {
@@ -15,16 +18,20 @@ export class Park extends React.Component{
         return (
             <div>
                 <React.Fragment>
+                    <Header />
                     <CssBaseline />
+                    
                     <Container maxWidth="lg">
                         <br/>
                         <LeafRating/>
                         <div align={"center"}>
                             <Slider  />
                         </div>
+                        <div align={"center"}>
+                            <Location />
+                        </div>
                         <br/>
-
-
+                        <Footer/>
                     </Container>
                 </React.Fragment>
             </div>
