@@ -121,34 +121,34 @@ export class Home extends React.Component {
                                     <Grid container spacing={10}>
                                         <Grid item>
                                             <Paper className="paperGrid">
-                                                <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" width={100} />
+                                                <img /*To Put*/ />
                                             </Paper>
                                         </Grid>
                                         <Grid item>
                                             <Paper className="paperGrid">
-                                                <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" width={100} />
+                                                <img /*To Put*/ />
                                             </Paper>
                                         </Grid>
                                         <Grid item>
                                             <Paper className="paperGrid">
-                                                <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" width={100} />
+                                                <img /*To Put*/ />
                                             </Paper>
                                         </Grid>
                                     </Grid>
                                     <Grid container spacing={10}>
                                         <Grid item>
                                             <Paper className="paperGrid">
-                                                <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" width={100} />
+                                                <img /*To Put*/ />
                                             </Paper>
                                         </Grid>
                                         <Grid item>
                                             <Paper className="paperGrid">
-                                                <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" width={100} />
+                                                <img /*To Put*/ />
                                             </Paper>
                                         </Grid>
                                         <Grid item>
                                             <Paper className="paperGrid">
-                                                <img src="https://cdn4.iconfinder.com/data/icons/logos-3/600/React.js_logo-512.png" width={100} />
+                                                <img /*To Put*/ />
                                             </Paper>
                                         </Grid>
                                     </Grid>
