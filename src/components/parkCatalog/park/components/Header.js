@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
         borderBottom: `1px solid ${theme.palette.divider}`,
     },
     toolbarTitle: {
-        flex: 1,
+        flex: 1
     },
     toolbarSecondary: {
         justifyContent: 'space-between',

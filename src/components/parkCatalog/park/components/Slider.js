@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Carousel from 'nuka-carousel';
 
-export default class extends React.Component {
+export class Slider extends React.Component {
     render() {
         return (
             <Carousel framePadding={"20px"} width={"60%"} cellAlign={"center"}>

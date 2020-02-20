@@ -7,12 +7,15 @@ import DirectionsIcon from '@material-ui/icons/Directions';
 import MenuIcon from '@material-ui/icons/Menu'
 import SearchIcon from "@material-ui/icons/Search";
 import EcoIcon from '@material-ui/icons/Eco';
+import { Slider } from "../parkCatalog/park/components/Slider";
+import { Header } from "../parkCatalog/park/components/Header";
 
 export class Home extends React.Component {
 
     render() {
         return (
             <div className="background">
+                <Header />
                 <div>
                     <Card className="card">
                         <CardContent>
@@ -86,7 +89,10 @@ export class Home extends React.Component {
                         </CardContent>
                     </Card>
                 </div>
-                <div>
+                <br />
+                <br />
+                <div align={"center"}>
+                    <Slider />
                 </div>
             </div>
         );
