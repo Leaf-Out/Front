@@ -15,10 +15,26 @@ export class LeafRating extends React.Component{
         return 3.5
     }
 
+    isVoted = ()=>{
+        //TODO fetch to know if its already voted
+        return false
+    }
+
+    vote = ()=>{
+        //TODO post vote
+        if (this.state.isVoted) {
+
+        } else {
+
+        }
+    }
+
     constructor(props) {
         super(props);
         this.state = {
-            rating: this.getRating()
+            rating: this.getRating(),
+            isVoted: this.isVoted()
+
         }
     }    
     
