@@ -4,11 +4,6 @@ import Rating from '@material-ui/lab/Rating';
 import { withStyles } from '@material-ui/core/styles';
 import EcoRoundedIcon from '@material-ui/icons/EcoRounded';
 
-
-
-
-
-
 export class LeafRating extends React.Component{
     getRating = ()=>{
         //TODO fetch raiting
