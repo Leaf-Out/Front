@@ -12,11 +12,13 @@ import { Header } from "../parkCatalog/park/components/Header";
 import { Image } from '@material-ui/icons';
 
 export class Home extends React.Component {
+    constructor(props){
+        super(props);
+    }
 
     render() {
         return (
             <div className="background">
-                <Header />
                 <div>
                     <Card className="card">
                         <CardContent>
@@ -83,6 +85,7 @@ export class Home extends React.Component {
                                     variant="contained"
                                     color="primary"
                                     endIcon={<SearchIcon />}
+                                    href={"/catalog"}
                                 >
                                     Search
                             </Button>

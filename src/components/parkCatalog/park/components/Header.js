@@ -1,9 +1,15 @@
 import React from "react";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
+import LinkUi from "@material-ui/core/Link";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {Image} from "@material-ui/icons";
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link
+  } from "react-router-dom";
 
 const sections = [{ title: 'Home', url: '#' },
     { title: 'About', url: '#' },
@@ -52,7 +58,8 @@ function Header2(props) {
                 </Typography>
                 <Toolbar component="nav" variant="dense" className={classes.toolbarSecondary}>
                     {sections.map(section => (
-                        <Link
+                    <Link to={'/'+section.title}>
+                        <LinkUi
                             color="inherit"
                             noWrap
                             key={section.title}
@@ -61,7 +68,8 @@ function Header2(props) {
                             className={classes.toolbarLink}
                         >
                             {section.title}
-                        </Link>
+                        </LinkUi>
+                    </Link>
                     ))}
                 </Toolbar>
             </Toolbar>
