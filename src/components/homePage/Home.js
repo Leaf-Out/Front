@@ -9,14 +9,18 @@ import SearchIcon from "@material-ui/icons/Search";
 import EcoIcon from '@material-ui/icons/Eco';
 import { Slider } from "../parkCatalog/park/components/Slider";
 import { Header } from "../parkCatalog/park/components/Header";
-import { Image } from '@material-ui/icons';
 
 export class Home extends React.Component {
+    constructor(props){
+        super(props);
+    }
 
     render() {
         return (
             <div className="background">
-                <Header />
+                <div>
+                    <Header />
+                </div>
                 <div>
                     <Card className="card">
                         <CardContent>
@@ -83,6 +87,7 @@ export class Home extends React.Component {
                                     variant="contained"
                                     color="primary"
                                     endIcon={<SearchIcon />}
+                                    href={"/catalog"}
                                 >
                                     Search
                             </Button>
