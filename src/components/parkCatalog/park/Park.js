@@ -1,5 +1,5 @@
 import React from 'react';
-import Slider from './components/Slider'
+import {Slider} from './components/Slider'
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
@@ -23,7 +23,6 @@ export class Park extends React.Component{
                 <React.Fragment>
                     <CssBaseline />
                     <Container maxWidth="lg">
-                        <Header title="Park x"  />
                         <br/>
                         <div align={"center"}>
                             <Slider  />
