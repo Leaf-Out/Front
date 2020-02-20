@@ -1,7 +1,7 @@
 import React from 'react';
 import { Home } from "./components/homePage/Home";
 import { Catalog } from "./components/parkCatalog/Catalog";
-import { Header } from './components/parkCatalog/park/components/Header';
+import { Header } from './components/elements/Header';
 import { Park } from './components/parkCatalog/park/Park';
 import SignIn from "./components/session/SignIn";
 import {
