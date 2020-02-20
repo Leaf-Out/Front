@@ -1,15 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import {Park} from "./components/parkCatalog/park/Park";
+import { Home } from "./components/homePage/Home";
 
-
-function App() {
-  return (
-    <div className="App">
-      <Park />
-    </div>
-  );
+export default class App extends React.Component {
+  render(){
+    return (
+      <div>
+          <Home/>
+      </div>
+    );
+  }
 }
-
-export default App;

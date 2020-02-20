@@ -1,0 +1,35 @@
+.background {
+    background-image: url("../../static/src/img/background.jpg");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.card {
+    display: inline-flex;
+    margin-top: 130px;
+    margin-left: 200px;
+    width: 30vw;
+    height: 20vw;
+}
+
+.root {
+    padding: '2px 4px';
+    display: flex;
+    align-items: center;
+    width: 400;
+}
+
+.input {
+    flex: 1;
+}
+
+.iconButton {
+    padding: 10;
+}
+
+.divider {
+    height: 28;
+    margin: 4;
+}
