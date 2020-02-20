@@ -1,15 +1,9 @@
 import React from 'react';
 import {Slider} from './components/Slider'
+import {LeafRating} from './components/LeafRating'
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
-
-import makeStyles from "@material-ui/core/styles/makeStyles";
 import {Header} from "./components/Header";
-
-
-
-
-
 
 export class Park extends React.Component{
     constructor(props) {
@@ -24,6 +18,7 @@ export class Park extends React.Component{
                     <CssBaseline />
                     <Container maxWidth="lg">
                         <br/>
+                        <LeafRating/>
                         <div align={"center"}>
                             <Slider  />
                         </div>
@@ -34,10 +29,5 @@ export class Park extends React.Component{
                 </React.Fragment>
             </div>
         );
-
-
-
     }
 }
-
-
