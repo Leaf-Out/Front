@@ -1,12 +1,12 @@
 import React from 'react';
-import {Slider} from './components/Slider'
-import {LeafRating} from './components/LeafRating'
+import {Slider} from '../elements/Slider'
+import {LeafRating} from '../elements/LeafRating'
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Footer from '../../elements/Footer';
-import Location from './components/Location';
-import { Header } from '../../elements/Header';
-import { PlanSlider } from './components/PlanSlider';
+import Footer from '../elements/Footer';
+import Location from '../elements/Location';
+import { Header } from '../elements/Header';
+import { PlanSlider } from '../elements/PlanSlider';
 
 
 export class Park extends React.Component{

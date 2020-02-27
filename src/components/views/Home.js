@@ -1,5 +1,5 @@
 import React from 'react';
-import './Home.css'
+import './css/Home.css'
 import { Card, CardContent, Typography, Paper, TextField, InputAdornment, Button, IconButton, Grid } from "@material-ui/core";
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
@@ -7,7 +7,7 @@ import DirectionsIcon from '@material-ui/icons/Directions';
 import MenuIcon from '@material-ui/icons/Menu'
 import SearchIcon from "@material-ui/icons/Search";
 import EcoIcon from '@material-ui/icons/Eco';
-import { Slider } from "../parkCatalog/park/components/Slider";
+import { Slider } from "../elements/Slider";
 import { Header } from "../elements/Header";
 
 export class Home extends React.Component {

@@ -1,14 +1,12 @@
 import React from 'react';
-import { Home } from "./components/homePage/Home";
-import { Catalog } from "./components/parkCatalog/Catalog";
-import { Header } from './components/elements/Header';
-import { Park } from './components/parkCatalog/park/Park';
-import SignIn from "./components/session/SignIn";
+import { Home } from "./components/views/Home";
+import { Catalog } from "./components/elements/Catalog";
+import { Park } from './components/views/Park';
+import SignIn from "./components/views/SignIn";
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 
 export default class App extends React.Component {

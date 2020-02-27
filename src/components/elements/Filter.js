@@ -1,14 +1,10 @@
 import React from "react";
-import ChildCareIcon from "@material-ui/icons/ChildCare";
-import Icon from "@material-ui/core/Icon";
 import RowingIcon from "@material-ui/icons/Rowing";
 import EmojiPeopleIcon from "@material-ui/icons/EmojiPeople";
 import TextField from "@material-ui/core/TextField";
 import {
-  BottomNavigation,
   Popper,
   Chip,
-  Divider,
   FormControlLabel,
   Checkbox,
   FormControl,
@@ -16,7 +12,6 @@ import {
   FormGroup
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 
 const useStyles = makeStyles(theme => ({

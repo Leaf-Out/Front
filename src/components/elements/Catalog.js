@@ -2,9 +2,8 @@ import React from 'react';
 import { GridList } from '@material-ui/core';
 import GridListTile from '@material-ui/core/GridListTile';
 import { Search } from './Search';
-import "./Catalog.css"
-import { ParkCard } from './park/ParkCard';
-import { PlanCard } from './plan/PlanCard';
+import "./css/Catalog.css"
+import { ParkCard } from './ParkCard';
 
 
 export class Catalog extends React.Component {

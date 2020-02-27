@@ -5,10 +5,7 @@ import LinkUi from "@material-ui/core/Link";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {Image} from "@material-ui/icons";
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link
+    BrowserRouter as Link
   } from "react-router-dom";
 
 const sections = [{ title: 'Home', url: '#' },

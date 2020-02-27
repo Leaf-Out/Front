@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Carousel from 'nuka-carousel';
-import { PlanCard } from '../../plan/PlanCard';
+import { PlanCard } from './PlanCard';
 
 export class PlanSlider extends React.Component {
     render() {

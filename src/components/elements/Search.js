@@ -1,11 +1,9 @@
 import React from "react";
 
-import InputBase from "@material-ui/core/InputBase";
 import SearchIcon from "@material-ui/icons/Search";
 import { Filter } from "./Filter";
 import { TextField, InputAdornment } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import { classes } from "istanbul-lib-coverage";
 
 const useStyles = makeStyles(theme => ({
     margin: {
