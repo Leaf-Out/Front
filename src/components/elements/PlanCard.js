@@ -41,7 +41,7 @@ export class PlanCard extends React.Component {
             <Paper elevation={3}>
                 <Grid container direction={"row"}>
                     <Grid container alignItems="stretch" item xs={3} >
-                        <ButtonBase>
+                        <ButtonBase href={"/plan"}>
                             <img alt="complex" src="/public/logo512.png" />
                         </ButtonBase>
                     </Grid>
