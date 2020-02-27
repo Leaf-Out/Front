@@ -7,6 +7,7 @@ import Footer from '../elements/Footer';
 import Location from '../elements/Location';
 import { Header } from '../elements/Header';
 import { PlanSlider } from '../elements/PlanSlider';
+import { Typography } from '@material-ui/core';
 
 
 export class Park extends React.Component{
@@ -23,6 +24,7 @@ export class Park extends React.Component{
                     <CssBaseline />
                     
                     <Container maxWidth="lg">
+                        <Typography align="center">Park Name</Typography>
                         <br/>
                         <LeafRating/>
                         <div align={"center"}>
