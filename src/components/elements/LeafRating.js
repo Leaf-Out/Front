@@ -6,8 +6,13 @@ import EcoRoundedIcon from '@material-ui/icons/EcoRounded'
 
 export class LeafRating extends React.Component{
     getRating = ()=>{
-        //TODO fetch raiting
-        return 3.5
+        if (this.isVoted()) {
+            //TODO fetch raiting
+            return 3.5
+        } else {
+            //TODO fetch everage raiting
+            return 0
+        }        
     }
 
     isVoted = ()=>{
@@ -15,12 +20,15 @@ export class LeafRating extends React.Component{
         return false
     }
 
-    vote = ()=>{
-        //TODO post vote
+    vote = (newValue)=>{
         if (this.state.isVoted) {
-
+            if (newValue === null) {
+                //TODO delete vote
+            } else {
+                //TODO update vote
+            }            
         } else {
-
+            //TODO post vote
         }
     }
 
@@ -36,7 +44,16 @@ export class LeafRating extends React.Component{
     render(){
         return (
             <Box component="fieldset" mb={3} borderColor="transparent">
-                <StyledRating precision={0.5} value={this.state.rating} icon={<EcoRoundedIcon fontSize="inherit"/>}></StyledRating>
+                <StyledRating 
+                    precision={0.5} 
+                    value={this.state.rating} 
+                    icon={<EcoRoundedIcon fontSize="inherit"/>}
+                    
+                      onChange={(event, newValue) => {
+                        this.vote(newValue);
+                      }}
+                    > 
+                </StyledRating>
             </Box>
                         
         )}
