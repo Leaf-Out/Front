@@ -35,7 +35,7 @@ export class Plan extends React.Component{
                         </Tabs>
                         <Typography>Plan Description</Typography>
                         <Typography>Plan Activities</Typography>
-                        <CommentSection></CommentSection>
+                        <CommentSection />
                         <Footer/>
                     </Container>
                     

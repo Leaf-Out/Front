@@ -10,54 +10,63 @@ import Avatar from '@material-ui/core/Avatar';
 export class CommentSection extends React.Component{
     constructor(props) {
         super(props);
+    }
 
+    getComments = ()=>{
+        //TODO fetch comment list
+        var comments = [
+            {
+                "author":"Sergio Ruiz",
+                "title": "Me Encantó",
+                "content": "Pagué por este plan un precio menor al que habría tenido que pagar en otros lugares y es mucho más completo"
+            } , 
+            {
+                "author":"Luis Moreno",
+                "title": "Excelente plan en familia",
+                "content": "Este plan tiene las actividades perfectas para cada miembro de la familia, me encantó :)"
+            }
+        ]
+        return comments
     }
 
     render(){
         return (
             <div>
                 <List>
-                    <ListItem alignItems="flex-start">
-                        <ListItemAvatar>
-                        <Avatar alt="User Sample1" />
-                        </ListItemAvatar>
-                        <ListItemText
-                        primary="Sample comment 1"
-                        secondary={
-                            <React.Fragment>
-                            <Typography
-                                component="span"
-                                variant="body2"
-                                color="textPrimary"
-                            >
-                                Sample comment
-                            </Typography>
-                            {"This is a comment sample"}
-                            </React.Fragment>
-                        }
-                        />
-                    </ListItem>
-                    <Divider variant="inset" component="li" />
-                    <ListItem alignItems="flex-start">
-                        <ListItemAvatar>
-                        <Avatar alt="User Sample2" />
-                        </ListItemAvatar>
-                        <ListItemText
-                        primary="Sample comment 2"
-                        secondary={
-                            <React.Fragment>
-                            <Typography
-                                component="span"
-                                variant="body2"
-                                color="textPrimary"
-                            >
-                                Sample comment
-                            </Typography>
-                            {"This is a comment sample"}
-                            </React.Fragment>
-                        }
-                        />
-                    </ListItem>
+                    {
+                        this.getComments().map(function(comment){
+                            return (
+                                <div>
+                                    <ListItem alignItems="flex-start">
+                                        <ListItemAvatar>
+                                            <Avatar>
+                                                {
+                                                comment.author.charAt(0)   
+                                                }
+                                            </Avatar>
+                                            <ListItemText
+                                                primary= {comment.title}
+                                                secondary={
+                                                    <React.Fragment>
+                                                    <Typography
+                                                        component="span"
+                                                        variant="body2"
+                                                        color="textPrimary"
+                                                    >
+                                                        {comment.author}
+                                                    </Typography>
+                                                    <br/>
+                                                    {comment.content}
+                                                    </React.Fragment>
+                                                }
+                                                />
+                                        </ListItemAvatar>
+                                    </ListItem>
+                                    <Divider variant="inset" component="li" />
+                                </div>
+                            )
+                        })  
+                    }                 
                 </List>
             </div>
         );
