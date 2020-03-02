@@ -1,14 +1,15 @@
 import React from 'react';
 import { Header } from '../elements/Header';
+import Grid from '@material-ui/core/Grid';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Footer from '../elements/Footer';
 import {Slider} from '../elements/Slider';
 import { Typography } from '@material-ui/core';
-import { Tabs, Tab } from '@material-ui/core';
 import {LeafRating} from '../elements/LeafRating';
 import {CommentSection} from "../elements/CommentSection";
-
+import { FeeTable } from '../elements/FeeTable';
+  
 export class Plan extends React.Component{
     constructor(props) {
         super(props);
@@ -21,18 +22,21 @@ export class Plan extends React.Component{
                     <Header />
                     <CssBaseline />
                     <Container maxWidth="lg">
-                        <Typography align="center">Plan Name</Typography>
+                        <Typography align="center" variant="h3">Plan Name</Typography>
                         <br/>
-                        <LeafRating/>
+                        <Grid container>
+                            <Grid item xs={6}>
+                                <LeafRating/>
+                            </Grid>
+                            <Grid item xs={6} container justify="flex-end">
+                                <FeeTable />
+                            </Grid>
+                        </Grid>
+                        
                         <div align={"center"}>
                             <Slider  />
                         </div>
                         <br/>
-                        <Tabs>
-                            <Tab label="Adult"></Tab>
-                            <Tab label="Child"></Tab>
-                            <Tab label="Foreign"></Tab>
-                        </Tabs>
                         <Typography>Plan Description</Typography>
                         <Typography>Plan Activities</Typography>
                         <CommentSection />
