@@ -8,6 +8,7 @@ import Location from '../elements/Location';
 import { Header } from '../elements/Header';
 import { PlanSlider } from '../elements/PlanSlider';
 import { Typography } from '@material-ui/core';
+import { Description } from '../elements/Description';
 
 
 export class Park extends React.Component{
@@ -30,6 +31,13 @@ export class Park extends React.Component{
                         <div align={"center"}>
                             <Slider  />
                         </div>
+                        <div align={"center"}>
+                            <Description type = "Activities"/>
+                        </div>
+                        <div align={"center"}>
+                            <Description type = "Descripción"/>
+                        </div>
+                        
                         <div align={"center"}>
                             <Location />
                         </div>

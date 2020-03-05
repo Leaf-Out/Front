@@ -9,6 +9,7 @@ import { Typography } from '@material-ui/core';
 import {LeafRating} from '../elements/LeafRating';
 import {CommentSection} from "../elements/CommentSection";
 import { FeeTable } from '../elements/FeeTable';
+import { Description } from '../elements/Description';
   
 export class Plan extends React.Component{
     constructor(props) {
@@ -37,8 +38,12 @@ export class Plan extends React.Component{
                             <Slider  />
                         </div>
                         <br/>
-                        <Typography>Plan Description</Typography>
-                        <Typography>Plan Activities</Typography>
+                        <div align={"center"}>
+                            <Description type = "Activities"/>
+                        </div>
+                        <div align={"center"}>
+                            <Description type = "Descripción"/>
+                        </div>
                         <CommentSection />
                         <Footer/>
                     </Container>
