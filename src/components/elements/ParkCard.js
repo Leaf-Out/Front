@@ -7,25 +7,10 @@ import EcoRoundedIcon from '@material-ui/icons/EcoRounded';
 
 export class ParkCard extends React.Component {
 
-    getRating = () => {
-        //TODO fetch
-        return 3.5
-    }
-
-    getName = () => {
-        //TODO fetch
-        return "Mock Park Name"
-    }
-
-    getDescription = () => {
-        //TODO fetch
-        return "Mock Park description"
-    }
-
     state = {
-        rating: this.getRating(),
-        name: this.getName(),
-        description: this.getDescription()
+        rating: this.props.rating,
+        name: this.props.name,
+        description: this.props.description
     }
 
     render() {
