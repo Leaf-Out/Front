@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import './css/SignIn.css';
+
+import axios from "axios";
 
 function Copyright() {
   return (
@@ -59,6 +61,23 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  const [credentials, setCrendentials] = useState({name:'',password:''});
+
+  const login = async ()=>{
+
+    let requestUrl = 'http://localhost:8080/login?username=' + credentials.name + '&' + 'password=' + credentials.password
+        await axios.post(requestUrl, { "headers": { "Authorization": "" } })
+              .then(res => {
+                  console.log(res); 
+              })
+  }
+
+  const handleSubmit = async ()=>{
+    let user= document.querySelector("#name").value
+    let key = document.querySelector("#password").value
+    setCrendentials({name:user,password:key});
+    await login();
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -78,10 +97,10 @@ export default function SignIn() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="user"
+              label="user"
+              name="user"
+              autoComplete="user"
               autoFocus
             />
             <TextField
@@ -105,6 +124,7 @@ export default function SignIn() {
               variant="contained"
               color="primary"
               className={classes.submit}
+              onClick={handleSubmit()}
               href="/"
             >
               Sign In

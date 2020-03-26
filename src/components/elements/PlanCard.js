@@ -8,7 +8,6 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 
 
 export class PlanCard extends React.Component {
-
     getRating = () => {
         //TODO fetch
         return 3.5
@@ -30,10 +29,12 @@ export class PlanCard extends React.Component {
     }
 
     state = {
-        rating: this.getRating(),
-        name: this.getName(),
-        description: this.getDescription(),
-        price: this.getPrice()
+        api: "http://localhost:8080/plans",
+        loading: true,
+        rating: this.props.rating,
+        name: this.props.name,
+        description: this.props.description,
+        price: this.props.price
     }
 
     render() {

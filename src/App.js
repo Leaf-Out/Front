@@ -9,6 +9,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import PlanRegister from './components/views/PlanRegister';
 
 export default class App extends React.Component {
   render() {
@@ -33,6 +34,9 @@ export default class App extends React.Component {
             </Route>
             <Route exact path="/Plan">
               <Plan />
+            </Route>
+            <Route exact path="/Plan-register">
+              <PlanRegister/>
             </Route>
           </Switch>
         </div>
