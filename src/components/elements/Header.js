@@ -92,7 +92,7 @@ export class Header extends React.Component {
 
     render() {
 
-        const isLoggedIn = this.state.isLoggedIn || (localStorage.getItem("isLoggedIn") == "true");
+        const isLoggedIn = this.state.isLoggedIn || (localStorage.getItem("isLoggedIn") === "true");
         let choose;
         if (!isLoggedIn) {
             choose = sections;

@@ -7,7 +7,7 @@ export class PlanSlider extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      api: `http://localhost:8080/parks/` + props.parkName + `/plans`,
+      api: `http://localhost:8080/parks/` + props.parkId + `/plans`,
       plans: [],
       login: true
     };
@@ -17,11 +17,10 @@ export class PlanSlider extends React.Component {
     this.getData();
   }
   getData = async () => {
-    let url = 'http://localhost:8080/parks/'
-      await axios.get(url, { "headers": { "Authorization": "" } })
+      await axios.get(this.state.api, { "headers": { "Authorization": "Bearer " + localStorage.getItem("token")} })
             .then(res => {
                 this.setState( {cards:res.data});
-            })
+            }).catch(err => {this.setState({cards:[]})})
   };
 
   render() {

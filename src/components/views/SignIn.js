@@ -13,7 +13,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import './css/SignIn.css';
-
+import { useHistory } from "react-router-dom";
+import jwt from 'jsonwebtoken';
 import axios from "axios";
 
 function Copyright() {
@@ -60,23 +61,25 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SignIn() {
+  const history=useHistory();
   const classes = useStyles();
-  const [credentials, setCrendentials] = useState({name:'',password:''});
 
-  const login = async ()=>{
+  const [name, setName] = useState('');
+  const [password, setPassword] = useState('');
 
-    let requestUrl = 'http://localhost:8080/login?username=' + credentials.name + '&' + 'password=' + credentials.password
-        await axios.post(requestUrl, { "headers": { "Authorization": "" } })
-              .then(res => {
-                  console.log(res); 
-              })
+  const login = async () => {
+
+    let requestUrl = 'http://localhost:8080/login?username=' + name + '&' + 'password=' + password
+    await axios.post(requestUrl, { "headers": { "Authorization": "" } })
+      .then(res => {
+        console.log(jwt.decode(res.data.token))
+        localStorage.setItem("token",res.data.token)
+        history.push("/")
+      })
   }
 
-  const handleSubmit = async ()=>{
-    let user= document.querySelector("#name").value
-    let key = document.querySelector("#password").value
-    setCrendentials({name:user,password:key});
-    await login();
+  const handleSubmit = (event) => {
+    login();
   }
 
   return (
@@ -102,6 +105,7 @@ export default function SignIn() {
               name="user"
               autoComplete="user"
               autoFocus
+              onChange={(e) => setName(e.target.value)}
             />
             <TextField
               variant="outlined"
@@ -113,19 +117,19 @@ export default function SignIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={(e) => setPassword(e.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
             <Button
-              type="submit"
+
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={handleSubmit()}
-              href="/"
+              onClick={handleSubmit}
             >
               Sign In
             </Button>

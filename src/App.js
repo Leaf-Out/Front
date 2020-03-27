@@ -26,7 +26,7 @@ export default class App extends React.Component {
             <Route exact path="/catalog">
               <Catalog />
             </Route>
-            <Route exact path="/park">
+            <Route path="/park/:parkId">
               <Park />
             </Route>
             <Route exact path="/SignIn">
