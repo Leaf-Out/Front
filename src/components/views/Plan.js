@@ -6,9 +6,9 @@ import Container from "@material-ui/core/Container";
 import Footer from '../elements/Footer';
 import {Slider} from '../elements/Slider';
 import { Typography } from '@material-ui/core';
-import {LeafRating} from '../elements/LeafRating';
+import LeafRating from '../elements/LeafRating';
 import {CommentSection} from "../elements/CommentSection";
-import { FeeTable } from '../elements/FeeTable';
+import FeeTable from '../elements/FeeTable';
   
 export class Plan extends React.Component{
     constructor(props) {
@@ -29,7 +29,13 @@ export class Plan extends React.Component{
                                 <LeafRating/>
                             </Grid>
                             <Grid item xs={6} container justify="flex-end">
-                                <FeeTable />
+                                <FeeTable prices={
+                                    {
+                                        "ADULT": 30000,
+                                        "FOREIGN": 45000,
+                                        "CHILDREN": 15000
+                                    }
+                                }/>
                             </Grid>
                         </Grid>
                         

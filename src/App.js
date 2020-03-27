@@ -9,10 +9,29 @@ import {
   Switch,
   Route
 } from "react-router-dom";
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
 
-export default class App extends React.Component {
-  render() {
-    return (
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      light: '#dcedc8',
+      main: '#c5e1a5',
+      dark: '#acc982',
+      contrastText: '#000000',
+    },
+    secondary: {
+      light: '#efefef',
+      main: '#bdbdbd',
+      dark: '#8d8d8d',
+      contrastText: '#000000',
+    },
+  },
+});
+
+const App = () => {
+  return (
+    <ThemeProvider theme={theme}>
       <Router>
         <div>
           <Switch>
@@ -37,8 +56,8 @@ export default class App extends React.Component {
           </Switch>
         </div>
       </Router>
-    );
-  }
-
-
+    </ThemeProvider>
+  );
 }
+
+export default App

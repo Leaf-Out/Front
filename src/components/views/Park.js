@@ -1,6 +1,6 @@
 import React from 'react';
 import {Slider} from '../elements/Slider'
-import {LeafRating} from '../elements/LeafRating'
+import LeafRating from '../elements/LeafRating'
 import Container from "@material-ui/core/Container";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Footer from '../elements/Footer';

@@ -1,52 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tabs, Tab } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 
 function TabContainer(props) {
-    return (
-      <Typography component="div" align="center">
-        {props.children}
-      </Typography>
-    );
-  }
-  
-  TabContainer.propTypes = {
-    children: PropTypes.node.isRequired,
-  };
+  return (
+    <Typography component="div" align="center">
+      {props.children}
+    </Typography>
+  );
+}
 
-export class FeeTable extends React.Component{
-    state = {
-        value: 0,
-      };
-    
-    getPrice = (fee) => {
-        //TODO fetch fee
-        if (fee === 0) {
-            return 30000
-        } else if (fee == 1) {
-            return 10000
-        } else {
-            return 50000
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+export default function FeeTable(props) {
+
+  const [value, setValue] = useState(0);
+  const [prices] = useState(Object.entries(props.prices));
+
+  return (
+    <div>
+      <Tabs value={value} onChange={(event, value) => { setValue(value) }} indicatorColor="primary">
+        {
+          prices.map(function (fee) {
+            let population = fee[0]
+            return (
+              <Tab label={population} />
+            )
+          })
         }
-    }
-    handleChange = (event, value) => {
-    this.setState({ value });
-    };
-    render(){
-        const { value } = this.state;
-
-        return (
-            <div>
-                <Tabs value={value} onChange={this.handleChange} indicatorColor="">
-                    <Tab label="Aduld" />
-                    <Tab label="Child" />
-                    <Tab label="Foreign" />
-                </Tabs>
-                {value === 0 && <TabContainer>$ {this.getPrice(this.state.value)}</TabContainer>}
-                {value === 1 && <TabContainer>$ {this.getPrice(this.state.value)}</TabContainer>}
-                {value === 2 && <TabContainer>$ {this.getPrice(this.state.value)}</TabContainer>}
-            </div>
-    );
-  }
+      </Tabs>
+      {
+          prices.map(function (fee, i) {
+            let price = fee[1]
+            return (
+              value === i && <TabContainer>$ {price}</TabContainer>
+            )
+          })
+        }
+    </div>
+  );
 }
