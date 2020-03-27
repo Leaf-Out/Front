@@ -4,53 +4,48 @@ import Grid from '@material-ui/core/Grid';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Footer from '../elements/Footer';
-import {Slider} from '../elements/Slider';
+import { Slider } from '../elements/Slider';
 import { Typography } from '@material-ui/core';
 import LeafRating from '../elements/LeafRating';
-import {CommentSection} from "../elements/CommentSection";
+import { CommentSection } from "../elements/CommentSection";
 import FeeTable from '../elements/FeeTable';
-  
-export class Plan extends React.Component{
-    constructor(props) {
-        super(props);
 
-    }
-    render(){
-        return (
-            <div>
-                <React.Fragment>
-                    <Header />
-                    <CssBaseline />
-                    <Container maxWidth="lg">
-                        <Typography align="center" variant="h3">Plan Name</Typography>
-                        <br/>
-                        <Grid container>
-                            <Grid item xs={6}>
-                                <LeafRating/>
-                            </Grid>
-                            <Grid item xs={6} container justify="flex-end">
-                                <FeeTable prices={
-                                    {
-                                        "ADULT": 30000,
-                                        "FOREIGN": 45000,
-                                        "CHILDREN": 15000
-                                    }
-                                }/>
-                            </Grid>
+export default function Plan() {
+    return (
+        <div>
+            <React.Fragment>
+                <Header />
+                <CssBaseline />
+                <Container maxWidth="lg">
+                    <Typography align="center" variant="h3">Plan Name</Typography>
+                    <br />
+                    <Grid container>
+                        <Grid item xs={6}>
+                            <LeafRating />
                         </Grid>
-                        
-                        <div align={"center"}>
-                            <Slider  />
-                        </div>
-                        <br/>
-                        <Typography>Plan Description</Typography>
-                        <Typography>Plan Activities</Typography>
-                        <CommentSection />
-                        <Footer/>
-                    </Container>
-                    
-                </React.Fragment>
-            </div>
-        );
-    }
+                        <Grid item xs={6} container justify="flex-end">
+                            <FeeTable prices={
+                                {
+                                    "ADULT": 30000,
+                                    "FOREIGN": 45000,
+                                    "CHILDREN": 15000
+                                }
+                            } />
+                        </Grid>
+                    </Grid>
+
+                    <div align={"center"}>
+                        <Slider />
+                    </div>
+                    <br />
+                    <Typography>Plan Description</Typography>
+                    <Typography>Plan Activities</Typography>
+                    <CommentSection />
+                    <Footer />
+                </Container>
+
+            </React.Fragment>
+        </div>
+    );
+
 }
