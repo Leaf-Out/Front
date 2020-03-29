@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Rating from '@material-ui/lab/Rating';
-import { withStyles, ThemeProvider } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import EcoRoundedIcon from '@material-ui/icons/EcoRounded'
 
 const CustomColorRating = withStyles(theme => ({

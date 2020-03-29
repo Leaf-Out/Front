@@ -12,6 +12,7 @@ import BeachAccessRoundedIcon from '@material-ui/icons/BeachAccessRounded';
 import AccountTreeRoundedIcon from '@material-ui/icons/AccountTreeRounded';
 import StyleIcon from '@material-ui/icons/Style';
 import { Link, useHistory } from 'react-router-dom';
+import { Divider } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     grow: {
@@ -26,7 +27,7 @@ const useStyles = makeStyles(theme => ({
         color: theme.palette.common.white,
     },
     nav: {
-        backgroundColor: theme.palette.secondary.light,
+        backgroundColor: theme.palette.common.white,
         boxShadow: 'none'
     },
     homeNav: {
@@ -121,7 +122,7 @@ export default function Header(props) {
     const classes = useStyles()
     const [role] = useState(
         //TODO localstorage token
-        "ADMIN"
+        null
     )
     const navStyle = props.isHome ? classes.homeNav : classes.nav
     const homeButtonStyle = props.isHome ? classes.mainHomeButton : classes.mainButton
@@ -141,6 +142,7 @@ export default function Header(props) {
                     {role === null ? <PublicNav isHome={props.isHome} /> : role === "USER" ? <UserNav isHome={props.isHome} /> : <AdminNav isHome={props.isHome} />}
                 </Toolbar>
             </AppBar>
+            <Divider />
         </div>
     );
 }
