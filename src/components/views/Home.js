@@ -9,84 +9,118 @@ import SearchIcon from "@material-ui/icons/Search";
 import EcoIcon from '@material-ui/icons/Eco';
 import { Slider } from "../elements/Slider";
 import Header from "../elements/Header";
+import { makeStyles } from '@material-ui/core/styles';
+import Background from "../../static/src/img/background.jpg";
+
+const useStyles = makeStyles(theme => ({
+    background: {
+        backgroundImage: "url(" + Background + ")",
+        height: "100vh",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover"
+    },
+    card: {
+        marginTop: "5%",
+        marginLeft: "5%",
+        width: "25%",
+        height: "53%",
+    },
+    title: {
+        marginLeft: "7.5%",
+        marginRight: "7.5%",
+        marginTop: "7.5%"
+    },
+    label: {
+        marginLeft: "7.5%",
+        marginRight: "7.5%",
+        marginTop: "5%"
+    },
+    input: {
+        marginLeft: "7.5%",
+        marginRight: "7.5%",
+        marginTop: "1.5%",
+        width: "85%",
+        height: 45,
+        borderColor: theme.palette.primary.dark
+    },
+    adultLabel: {
+        marginLeft: "15%",
+        marginRight: "15%",
+        marginTop: "10%"
+    },
+    childrenLabel: {
+        marginLeft: "5%",
+        marginRight: "15%",
+        marginTop: "10%"
+    },
+    adults: {
+        marginLeft: "15%",
+        marginRight: "10%",
+        marginTop: "3%",
+        width: "80%",
+        height: 45
+    },
+    children: {
+        marginLeft: "5%",
+        marginRight: "15%",
+        marginTop: "3%",
+        width: "80%",
+        height: 45
+    },
+    searchButton: {
+        marginRight: "7.5%",
+        marginTop: "10%",
+        height: 45
+    }
+}));
 
 export default function Home() {
+    const classes = useStyles()
     return (
         <div>
-            <div className="background">
+            <div className={classes.background}>
                 <Header isHome={true} />
-                <Card className="card">
-                    <CardContent>
-                        <Typography variant="h4">
-                            Search
-                        </Typography>
-                        <br />
-                        <form noValidate autoComplete="off">
-                            <Paper component="form" className="root">
-                                <IconButton aria-label="menu">
-                                    <MenuIcon />
-                                </IconButton>
-                                <InputBase
-                                    className="input"
-                                    placeholder="Search Google Maps"
-                                    inputProps={{ 'aria-label': 'search google maps' }}
-                                />
-                                <IconButton type="submit" className="iconButton" aria-label="search">
-                                    <SearchIcon />
-                                </IconButton>
-                                <Divider orientation="vertical" className="divider" />
-                                <IconButton color="primary" className="iconButton" aria-label="directions">
-                                    <DirectionsIcon />
-                                </IconButton>
-                            </Paper>
-                            <br />
-                            <br />
-                            <TextField
-                                id="input-with-icon-textfield"
-                                label="Activities"
-                                variant="outlined"
-                                InputProps={{
-                                    startAdornment: (
-                                        <InputAdornment position="start">
-                                            <EcoIcon />
-                                        </InputAdornment>
-                                    ),
-                                }}
-                            />
-                            <br />
-                            <br />
-                            <TextField className="spacer"
-                                id="outlined-number"
-                                label="Adults"
-                                type="number"
-                                size="small"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                variant="outlined"
-                            />
-                            <TextField
-                                id="outlined-number"
-                                label="Children"
-                                type="number"
-                                size="small"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                                variant="outlined"
-                            />
-                            <br />
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                endIcon={<SearchIcon />}
-                                href={"/catalog"}
-                            >
-                                Search
-                            </Button>
-                        </form>
-                    </CardContent>
-                </Card>
+                <Paper className={classes.card}>
+                    <Grid container>
+                        <Grid item xs={12}>
+                            <Typography variant="h4" className={classes.title}>Search text that needs to be defined and long</Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Typography variant="body1" className={classes.label}>Place</Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField label="Where you want to go?" variant="outlined" className={classes.input} />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Typography variant="body1" className={classes.label}>Tags</Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField label="Key words" variant="outlined" className={classes.input} />
+                        </Grid>
+                        <Grid container xs={12}>
+                            <Grid item xs={6} container>
+                                <Grid item xs={12}>
+                                    <Typography variant="body1" className={classes.adultLabel}>Adults</Typography>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField label="Adults" type="number" variant="outlined" className={classes.adults} />
+                                </Grid>
+                            </Grid>
+                            <Grid item xs={6} container>
+                                <Grid item xs={12}>
+                                    <Typography variant="body1" className={classes.childrenLabel}>Children</Typography>
+                                </Grid>
+                                <Grid item xs={12}>
+                                    <TextField label="Children" type="number" variant="outlined" className={classes.children} />
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <Grid item xs={12} container justify="flex-end">
+                            <Button className={classes.searchButton} color="primary" variant="contained"> Search </Button>
+                        </Grid>
+                    </Grid>
+                </Paper>
             </div>
             <br />
             <br />

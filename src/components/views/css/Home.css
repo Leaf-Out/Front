@@ -6,32 +6,17 @@
     background-size: cover;
 }
 
-.card {
-    display: block;
-    margin-top: 130px;
-    margin-left: 200px;
-    width: 30vw;
-    height: 20vw;
-}
-
 .root {
-    padding: '2px 4px';
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 2.5%;
     display: flex;
     align-items: center;
-    width: 400;
+    width: auto;
 }
 
 .input {
     flex: 1;
-}
-
-.iconButton {
-    padding: 10;
-}
-
-.divider {
-    height: 28;
-    margin: 4;
 }
 
 .friendsCard {
