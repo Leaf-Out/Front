@@ -8,7 +8,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import SearchIcon from "@material-ui/icons/Search";
 import EcoIcon from '@material-ui/icons/Eco';
 import { Slider } from "../elements/Slider";
-import { Header } from "../elements/Header";
+import Header from "../elements/Header";
 
 export class Home extends React.Component {
     constructor(props){
@@ -19,7 +19,7 @@ export class Home extends React.Component {
         return (
             <div className="background">
                 <div>
-                    <Header />
+                    <Header isHome={true}/>
                 </div>
                 <div>
                     <Card className="card">
