@@ -1,5 +1,4 @@
 import React from 'react';
-import { Slider } from '../elements/Slider'
 import LeafRating from '../elements/LeafRating'
 import Grid from '@material-ui/core/Grid';
 import Container from "@material-ui/core/Container";
@@ -36,7 +35,7 @@ export default function Park() {
                         </Grid>
                     </Grid>
                     <div align={"center"}>
-                        <Slider />
+                        
                     </div>
                     <div align={"center"}>
                         <Location />

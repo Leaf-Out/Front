@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Footer from '../elements/Footer';
-import { Slider } from '../elements/Slider';
 import { Typography } from '@material-ui/core';
 import LeafRating from '../elements/LeafRating';
 import { CommentSection } from "../elements/CommentSection";
@@ -35,7 +34,6 @@ export default function Plan() {
                     </Grid>
 
                     <div align={"center"}>
-                        <Slider />
                     </div>
                     <br />
                     <Typography>Plan Description</Typography>

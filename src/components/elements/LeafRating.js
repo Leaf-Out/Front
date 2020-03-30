@@ -5,13 +5,13 @@ import EcoRoundedIcon from '@material-ui/icons/EcoRounded'
 
 const CustomColorRating = withStyles(theme => ({
     iconFilled: {
-        color: '#c5e1a5',
+        color: '#39796b',
     },
     iconHover: {
-        color: '#acc982',
+        color: '#004d40',
     },
     iconEmpty: {
-        color: '#bdbdbd'
+        color: '#b0bec5'
     }
 }))(Rating);
 

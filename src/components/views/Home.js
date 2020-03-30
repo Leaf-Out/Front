@@ -1,16 +1,11 @@
-import React from 'react';
+import React from 'react'
 import './css/Home.css'
-import { Card, CardContent, Typography, Paper, TextField, InputAdornment, Button, IconButton, Grid } from "@material-ui/core";
-import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
-import DirectionsIcon from '@material-ui/icons/Directions';
-import MenuIcon from '@material-ui/icons/Menu'
-import SearchIcon from "@material-ui/icons/Search";
-import EcoIcon from '@material-ui/icons/Eco';
-import { Slider } from "../elements/Slider";
-import Header from "../elements/Header";
-import { makeStyles } from '@material-ui/core/styles';
-import Background from "../../static/src/img/background.jpg";
+import { Card, CardContent, Typography, Paper, TextField, Button, Grid } from '@material-ui/core'
+import Divider from '@material-ui/core/Divider'
+import Header from '../elements/Header'
+import { makeStyles } from '@material-ui/core/styles'
+import Background from '../../static/src/img/background.jpg'
+import PlanCard from '../elements/PlanCard'
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -30,6 +25,11 @@ const useStyles = makeStyles(theme => ({
         marginLeft: "7.5%",
         marginRight: "7.5%",
         marginTop: "7.5%"
+    },
+    planTitle: {
+        marginLeft: "5%",
+        marginTop: "2.5%",
+        marginRight: "5%",
     },
     label: {
         marginLeft: "7.5%",
@@ -71,7 +71,13 @@ const useStyles = makeStyles(theme => ({
     searchButton: {
         marginRight: "7.5%",
         marginTop: "10%",
-        height: 45
+    },
+    planGrid: {
+        marginTop: "1.5%",
+        marginBottom: "5%",
+        marginLeft: "5%",
+        marginRight: "5%",
+        width: "90%"
     }
 }));
 
@@ -121,12 +127,37 @@ export default function Home() {
                         </Grid>
                     </Grid>
                 </Paper>
+                <Divider />
             </div>
-            <br />
-            <br />
-            <div align={"center"}>
-                <Slider />
-            </div>
+            <Typography variant="h4" className={classes.planTitle}>Popular plans</Typography>
+            <Typography variant="h5" className={classes.planTitle}>This is the sumary of the most popular plans</Typography>
+            <Grid container spacing={3} align="center" className={classes.planGrid}>
+                <Grid item xs={3} >
+                    <PlanCard />
+                </Grid>
+                <Grid item xs={3}>
+                    <PlanCard />
+                </Grid>
+                <Grid item xs={3}>
+                    <PlanCard />
+                </Grid>
+                <Grid item xs={3}>
+                    <PlanCard />
+                </Grid>
+                <Grid item xs={3}>
+                    <PlanCard />
+                </Grid>
+                <Grid item xs={3}>
+                    <PlanCard />
+                </Grid>
+                <Grid item xs={3}>
+                    <PlanCard />
+                </Grid>
+                <Grid item xs={3}>
+                    <PlanCard />
+                </Grid>
+            </Grid>
+            <Divider />
             <div align={"center"}>
                 <Card className="friendsCard">
                     <CardContent>
