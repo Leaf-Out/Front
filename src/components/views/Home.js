@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import './css/Home.css'
 import { Card, CardContent, Typography, Paper, TextField, Button, Grid } from '@material-ui/core'
 import Divider from '@material-ui/core/Divider'
@@ -90,7 +91,7 @@ export default function Home() {
                 <Paper className={classes.card}>
                     <Grid container>
                         <Grid item xs={12}>
-                            <Typography variant="h4" className={classes.title}>Search text that needs to be defined and long</Typography>
+                            <Typography variant="h4" className={classes.title}>Prepare your trip just as you want it.</Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <Typography variant="body1" className={classes.label}>Place</Typography>
@@ -123,7 +124,9 @@ export default function Home() {
                             </Grid>
                         </Grid>
                         <Grid item xs={12} container justify="flex-end">
-                            <Button className={classes.searchButton} color="primary" variant="contained"> Search </Button>
+                            <Link to="/catalog" className={classes.searchButton} style={{ textDecoration: 'none' }}>
+                                <Button  color="primary" variant="contained"> Search </Button>
+                            </Link>
                         </Grid>
                     </Grid>
                 </Paper>

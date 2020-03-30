@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Tabs, Tab } from '@material-ui/core';
+import { Tabs, Tab, IconButton, Grid } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+
 
 function TabContainer(props) {
   return (
-    <Typography component="div" align="center">
-      {props.children}
-    </Typography>
+    <Grid container>
+      <Grid xs={7} align="end">
+        <Typography component="div">
+          {props.children}
+        </Typography >
+      </Grid>
+      <Grid xs={5} align="end">
+        <IconButton variant="outlined" color="primary">
+          <ShoppingCartIcon />
+        </IconButton>
+      </Grid>
+    </Grid>
   );
 }
 
@@ -33,13 +44,13 @@ export default function FeeTable(props) {
         }
       </Tabs>
       {
-          prices.map(function (fee, i) {
-            let price = fee[1]
-            return (
-              value === i && <TabContainer>$ {price}</TabContainer>
-            )
-          })
-        }
+        prices.map(function (fee, i) {
+          let price = fee[1]
+          return (
+            value === i && <TabContainer>$ {price}</TabContainer>
+          )
+        })
+      }
     </div>
   );
 }

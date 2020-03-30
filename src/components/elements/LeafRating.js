@@ -23,7 +23,7 @@ export default function LeafRating() {
         <CustomColorRating
             precision={0.5}
             value={rating}
-            icon={<EcoRoundedIcon fontSize="inherit" />}
+            icon={<EcoRoundedIcon fontSize="large" />}
             onChange={(event, newValue) => {
                 setRating(newValue);
             }}

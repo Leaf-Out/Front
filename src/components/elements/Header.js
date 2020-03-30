@@ -122,7 +122,7 @@ export default function Header(props) {
     const classes = useStyles()
     const [role] = useState(
         //TODO localstorage token
-        null
+        "USER"
     )
     const navStyle = props.isHome ? classes.homeNav : classes.nav
     const homeButtonStyle = props.isHome ? classes.mainHomeButton : classes.mainButton
