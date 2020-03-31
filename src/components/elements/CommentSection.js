@@ -1,74 +1,111 @@
 import React from 'react';
-import { Typography } from '@material-ui/core';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
+import { makeStyles } from '@material-ui/core/styles'
+import { Typography, List, ListItem, Divider, ListItemText, ListItemAvatar, Avatar, TextField, IconButton } from '@material-ui/core';
+import PublishRoundedIcon from '@material-ui/icons/PublishRounded';
 
-export class CommentSection extends React.Component{
-    constructor(props) {
-        super(props);
+const useStyles = makeStyles(theme => ({
+    divider: {
+        marginLeft: "11%",
+        width: "75%"
+    },
+    avatar: {
+        backgroundColor: theme.palette.secondary.light,
+        color: theme.palette.primary.light
+    },
+    postAvatar: {
+        marginLeft: "7.5%",
+        backgroundColor: theme.palette.primary.light,
+        color: theme.palette.secondary.light
+    },
+    comments: {
+        marginTop: "0.5%",
+        marginBottom: "0.5%",
+        marginLeft: "7.5%",
+    },
+    comment: {
+        marginTop: "0.5%",
+        marginBottom: "0.5%",
+        marginLeft: "7.5%",
+        width: "79.5%"
+    },
+    uploadIcon: {
+        backgroundColor: theme.palette.primary.light,
+        color: theme.palette.secondary.light,        
+    },
+    '&:hover': {
+        disableRipple: true,
+        disableFocusRipple: true,
+        backgroundColor: theme.palette.secondary.light,
+        color: theme.palette.primary.light
     }
+}));
 
-    getComments = ()=>{
-        //TODO fetch comment list
-        var comments = [
-            {
-                "author":"Sergio Ruiz",
-                "title": "Me Encantó",
-                "content": "Pagué por este plan un precio menor al que habría tenido que pagar en otros lugares y es mucho más completo"
-            } , 
-            {
-                "author":"Luis Moreno",
-                "title": "Excelente plan en familia",
-                "content": "Este plan tiene las actividades perfectas para cada miembro de la familia, me encantó :)"
-            }
-        ]
-        return comments
-    }
-
-    render(){
-        return (
-            <div>
-                <List>
-                    {
-                        this.getComments().map(function(comment){
-                            return (
-                                <div>
-                                    <ListItem alignItems="flex-start">
-                                        <ListItemAvatar>
-                                            <Avatar>
-                                                {
-                                                comment.author.charAt(0)   
-                                                }
-                                            </Avatar>
-                                            <ListItemText
-                                                primary= {comment.title}
-                                                secondary={
-                                                    <React.Fragment>
+export default function CommentSection(props) {
+    const classes = useStyles()
+    return (
+        <div>
+            <List>
+                {
+                    props.comments.map(function (comment) {
+                        return (
+                            <div>
+                                <ListItem alignItems="flex-start" className={classes.comments}>
+                                    <ListItemAvatar>
+                                        <Avatar className={classes.avatar}>
+                                            {
+                                                comment.author.charAt(0)
+                                            }
+                                        </Avatar>
+                                        <ListItemText
+                                            primary={<b>{comment.title}</b>}
+                                            secondary={
+                                                <div>
                                                     <Typography
                                                         component="span"
                                                         variant="body2"
-                                                        color="textPrimary"
+                                                        color="textSecondary"
                                                     >
                                                         {comment.author}
                                                     </Typography>
-                                                    <br/>
-                                                    {comment.content}
-                                                    </React.Fragment>
-                                                }
-                                                />
-                                        </ListItemAvatar>
-                                    </ListItem>
-                                    <Divider variant="inset" component="li" />
-                                </div>
-                            )
-                        })  
-                    }                 
-                </List>
-            </div>
-        );
-    }
+                                                    <br />
+                                                    <Typography
+                                                        component="span"
+                                                        variant="body1"
+                                                        color="textPrimary"
+                                                    >
+                                                        {comment.content}
+                                                    </Typography>
+
+                                                </div>
+                                            }
+                                        />
+                                    </ListItemAvatar>
+                                </ListItem>
+                                <Divider className={classes.divider} />
+                            </div>
+                        )
+                    })
+                }
+            </List>
+            <Typography variant="h6" className={classes.comments}> <b>How was your experience?</b> </Typography>
+            <Avatar className={classes.postAvatar}>
+                {
+                    //Inicial del usuario actualmente logeado
+                    "U"
+                }
+            </Avatar>
+            <Typography
+                component="span"
+                variant="body2"
+                color="textSecondary"
+                className={classes.comments}
+            >
+                Logged User
+            </Typography><br />
+            <TextField label="Tell everyone about it ..." className={classes.comment} disableRipple={true} disableFocusRipple={true} />
+            <IconButton variant="contained" className={classes.uploadIcon} size="medium">
+                <PublishRoundedIcon />
+            </IconButton>
+        </div>
+    );
 }

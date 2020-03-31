@@ -5,7 +5,6 @@ import { makeStyles } from '@material-ui/core/styles'
 import Footer from '../elements/Footer';
 import Location from '../elements/Location';
 import Header from '../elements/Header';
-import { PlanSlider } from '../elements/PlanSlider';
 import FeeTable from '../elements/FeeTable';
 import LocalOfferRoundedIcon from '@material-ui/icons/LocalOfferRounded';
 import PlaceRoundedIcon from '@material-ui/icons/PlaceRounded';
@@ -13,6 +12,8 @@ import PlanCard from '../elements/PlanCard'
 import ActivityCard from '../elements/ActivityCard'
 import AccountTreeRoundedIcon from '@material-ui/icons/AccountTreeRounded';
 import BeachAccessRoundedIcon from '@material-ui/icons/BeachAccessRounded';
+import CommentSection from '../elements/CommentSection';
+import CommentIcon from '@material-ui/icons/Comment';
 
 const useStyles = makeStyles(theme => ({
     title: {
@@ -77,121 +78,130 @@ export default function Park() {
                 </Grid>
             </Grid>
             <Divider className={classes.divider} />
-            <div>
-                <CardMedia
-                    className={classes.image}
-                    image='https://cdn.pixabay.com/photo/2015/11/07/11/27/plitvice-1031159_1280.jpg'
-                />
-                <Typography variant="h4" className={classes.descriptionTitle}>
-                    Park Description
-                    <IconButton variant="contained" color="primary">
-                        <LocalOfferRoundedIcon />
-                    </IconButton>
+            <CardMedia
+                className={classes.image}
+                image='https://cdn.pixabay.com/photo/2015/11/07/11/27/plitvice-1031159_1280.jpg'
+            />
+            <Typography variant="h4" className={classes.descriptionTitle}>
+                Park Description
+                <IconButton variant="contained" color="primary">
+                    <LocalOfferRoundedIcon />
+                </IconButton>
+            </Typography>
+            <Typography variant="h5" className={classes.description}>
+                Lorem Ipsum is simply dummy text of the
+                printing and typesetting industry. Lorem
+                Ipsum has been the industry's standard
+                dummy text ever since the 1500s, when an
+                unknown printer took a galley of type and
+                scrambled it to make a type specimen book.
+                It has survived not only five centuries,
+                but also the leap into electronic
+                typesetting, remaining essentially
+                unchanged. It was popularised in the 1960s
+                with the release of Letraset sheets
+                with the release of Letraset sheets
+                with the release of Letraset sheets
+                with the release of Letraset sheets
                 </Typography>
-                <Typography variant="h5" className={classes.description}>
-                    Lorem Ipsum is simply dummy text of the
-                    printing and typesetting industry. Lorem
-                    Ipsum has been the industry's standard
-                    dummy text ever since the 1500s, when an
-                    unknown printer took a galley of type and
-                    scrambled it to make a type specimen book.
-                    It has survived not only five centuries,
-                    but also the leap into electronic
-                    typesetting, remaining essentially
-                    unchanged. It was popularised in the 1960s
-                    with the release of Letraset sheets
-                    with the release of Letraset sheets
-                    with the release of Letraset sheets
-                    with the release of Letraset sheets
-                </Typography>
-            </div>
             <Divider className={classes.divider} />
-            <div>
-                <Typography variant="h4" className={classes.descriptionTitle}>
-                    Park Location
+            <Typography variant="h4" className={classes.descriptionTitle}>
+                Park Location
                     <PlaceRoundedIcon color="primary" />
+            </Typography>
+            <Typography variant="h5" className={classes.description}>
+                Lorem Ipsum is simply dummy text of the
+                printing and typesetting industry. Lorem
+                Ipsum has been the industry's standard
+                dummy text ever since the 1500s, when an
+                unknown printer took a galley of type and
+                scrambled it to make a type specimen book.
                 </Typography>
-                <Typography variant="h5" className={classes.description}>
-                    Lorem Ipsum is simply dummy text of the
-                    printing and typesetting industry. Lorem
-                    Ipsum has been the industry's standard
-                    dummy text ever since the 1500s, when an
-                    unknown printer took a galley of type and
-                    scrambled it to make a type specimen book.
-                </Typography>
-                <Location />
-            </div>
+            <Location />
             <Divider className={classes.divider} />
-            <div>
-                <Typography variant="h4" className={classes.descriptionTitle}>
-                    Plans
+            <Typography variant="h4" className={classes.descriptionTitle}>
+                Plans
                     <IconButton variant="contained" color="primary">
-                        <AccountTreeRoundedIcon />
-                    </IconButton>
+                    <AccountTreeRoundedIcon />
+                </IconButton>
+            </Typography>
+            <Typography variant="h5" className={classes.description}>
+                Lorem Ipsum is simply dummy text of the
+                printing and typesetting industry.
                 </Typography>
-                <Typography variant="h5" className={classes.description}>
-                    Lorem Ipsum is simply dummy text of the
-                    printing and typesetting industry.
-                </Typography>
-                <Grid container spacing={3} align="center" className={classes.planGrid}>
-                    <Grid item xs={3} >
-                        <PlanCard />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <PlanCard />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <PlanCard />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <PlanCard />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <PlanCard />
-                    </Grid>
+            <Grid container spacing={3} align="center" className={classes.planGrid}>
+                <Grid item xs={3} >
+                    <PlanCard />
                 </Grid>
-                <Divider className={classes.divider} />
-            </div>
-            <div>
-                <Typography variant="h4" className={classes.descriptionTitle}>
-                    Activities
+                <Grid item xs={3}>
+                    <PlanCard />
+                </Grid>
+                <Grid item xs={3}>
+                    <PlanCard />
+                </Grid>
+                <Grid item xs={3}>
+                    <PlanCard />
+                </Grid>
+                <Grid item xs={3}>
+                    <PlanCard />
+                </Grid>
+            </Grid>
+            <Divider className={classes.divider} />
+            <Typography variant="h4" className={classes.descriptionTitle}>
+                Activities
                     <IconButton variant="contained" color="primary">
-                        <BeachAccessRoundedIcon />
-                    </IconButton>
+                    <BeachAccessRoundedIcon />
+                </IconButton>
+            </Typography>
+            <Typography variant="h5" className={classes.description}>
+                Lorem Ipsum is simply dummy text of the
+                printing and typesetting industry.
                 </Typography>
-                <Typography variant="h5" className={classes.description}>
-                    Lorem Ipsum is simply dummy text of the
-                    printing and typesetting industry.
-                </Typography>
-                <Grid container spacing={3} align="center" className={classes.planGrid}>
-                    <Grid item xs={3} >
-                        <ActivityCard />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <ActivityCard />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <ActivityCard />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <ActivityCard />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <ActivityCard />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <ActivityCard />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <ActivityCard />
-                    </Grid>
-                    <Grid item xs={3}>
-                        <ActivityCard />
-                    </Grid>
+            <Grid container spacing={3} align="center" className={classes.planGrid}>
+                <Grid item xs={3} >
+                    <ActivityCard />
                 </Grid>
-                <Divider className={classes.divider} />
-            </div>
-            <br />
+                <Grid item xs={3}>
+                    <ActivityCard />
+                </Grid>
+                <Grid item xs={3}>
+                    <ActivityCard />
+                </Grid>
+                <Grid item xs={3}>
+                    <ActivityCard />
+                </Grid>
+                <Grid item xs={3}>
+                    <ActivityCard />
+                </Grid>
+                <Grid item xs={3}>
+                    <ActivityCard />
+                </Grid>
+                <Grid item xs={3}>
+                    <ActivityCard />
+                </Grid>
+                <Grid item xs={3}>
+                    <ActivityCard />
+                </Grid>
+            </Grid>
+            <Divider className={classes.divider} />
+            <Typography variant="h4" className={classes.descriptionTitle}>
+                Comment Section
+                    <IconButton variant="contained" color="primary">
+                    <CommentIcon />
+                </IconButton>
+            </Typography>
+            <CommentSection comments={[
+                {
+                    "author": "Sergio Ruiz",
+                    "title": "Me Encantó",
+                    "content": "Pagué por este plan un precio menor al que habría tenido que pagar en otros lugares y es mucho más completo"
+                },
+                {
+                    "author": "Luis Moreno",
+                    "title": "Excelente plan en familia",
+                    "content": "Este plan tiene las actividades perfectas para cada miembro de la familia, me encantó :)"
+                }
+            ]} />
             <Footer />
         </div>
     );
