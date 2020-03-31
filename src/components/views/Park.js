@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import LeafRating from '../elements/LeafRating'
-import { Typography, Divider, CardMedia, Grid, IconButton } from '@material-ui/core';
+import { Typography, Divider, Grid, IconButton, Dialog } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
 import Footer from '../elements/Footer';
 import Location from '../elements/Location';
@@ -14,6 +14,8 @@ import AccountTreeRoundedIcon from '@material-ui/icons/AccountTreeRounded';
 import BeachAccessRoundedIcon from '@material-ui/icons/BeachAccessRounded';
 import CommentSection from '../elements/CommentSection';
 import CommentIcon from '@material-ui/icons/Comment';
+import ChipList from '../elements/ChipList';
+import SimpleImageSlider from "react-simple-image-slider";
 
 const useStyles = makeStyles(theme => ({
     title: {
@@ -42,13 +44,6 @@ const useStyles = makeStyles(theme => ({
         marginTop: "1.5%",
         marginBottom: "1.5%",
     },
-    image: {
-        marginLeft: "29%",
-        marginTop: "1.5%",
-        width: "42%",
-        height: window.innerHeight * 0.43,
-        align: "center"
-    },
     planGrid: {
         marginTop: "1.5%",
         marginBottom: "1.5%",
@@ -60,8 +55,18 @@ const useStyles = makeStyles(theme => ({
 
 export default function Park() {
     const classes = useStyles()
+    const [tags, setTags] = useState(false)
+    const images = [
+        { "url": "https://cdn.pixabay.com/photo/2014/10/04/12/18/stone-arch-472976_1280.jpg" },
+        { "url": "https://cdn.pixabay.com/photo/2017/10/12/06/24/allen-park-2843660_1280.jpg" },
+        { "url": "https://cdn.pixabay.com/photo/2017/05/03/09/12/architecture-2280543_1280.jpg" },
+        { "url": "https://cdn.pixabay.com/photo/2016/08/23/19/51/park-1615341_1280.jpg" }
+    ]
     return (
         <div>
+            <Dialog onClose={(event) => { setTags(false) }} open={tags} fullWidth>
+                <ChipList tags={["Extreme sports", "Ocean", "Paradise", "Relax", "PNN", "Nature"]} />
+            </Dialog>
             <Header />
             <Typography align="center" variant="h3" className={classes.title}> Park Name </Typography>
             <Grid container>
@@ -78,14 +83,17 @@ export default function Park() {
                 </Grid>
             </Grid>
             <Divider className={classes.divider} />
-            <CardMedia
+            <SimpleImageSlider
+                width={window.innerWidth * 0.42}
+                height={window.innerHeight * 0.43}
+                images={images}
                 className={classes.image}
-                image='https://cdn.pixabay.com/photo/2015/11/07/11/27/plitvice-1031159_1280.jpg'
+                style={{ marginLeft: "29%", marginTop: "1.5%" }}
             />
             <Typography variant="h4" className={classes.descriptionTitle}>
                 Park Description
                 <IconButton variant="contained" color="primary">
-                    <LocalOfferRoundedIcon />
+                    <LocalOfferRoundedIcon onClick={(event) => { setTags(true) }} />
                 </IconButton>
             </Typography>
             <Typography variant="h5" className={classes.description}>
@@ -199,7 +207,7 @@ export default function Park() {
                 {
                     "author": "Alejandro Guzmán",
                     "title": "Excelente plan en familia",
-                    "content": "Este plan tiene las actividades perfectas para cada miembro de la familia, me encantó :)"
+                    "content": "Este parque tiene las actividades perfectas para cada miembro de la familia, me encantó :)"
                 },
                 {
                     "author": "Luis Moreno",

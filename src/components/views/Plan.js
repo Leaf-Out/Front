@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Header from '../elements/Header';
 import { makeStyles } from '@material-ui/core/styles'
 import Footer from '../elements/Footer';
-import { Typography, Divider, CardMedia, Grid, IconButton } from '@material-ui/core';
+import { Typography, Divider, Grid, IconButton, Dialog } from '@material-ui/core';
 import LeafRating from '../elements/LeafRating';
 import StyleIcon from '@material-ui/icons/Style';
 import CommentSection from "../elements/CommentSection";
@@ -10,6 +10,8 @@ import FeeTable from '../elements/FeeTable';
 import { Link } from 'react-router-dom';
 import LocalOfferRoundedIcon from '@material-ui/icons/LocalOfferRounded';
 import CommentIcon from '@material-ui/icons/Comment';
+import ChipList from '../elements/ChipList';
+import SimpleImageSlider from "react-simple-image-slider";
 
 const useStyles = makeStyles(theme => ({
     title: {
@@ -38,13 +40,6 @@ const useStyles = makeStyles(theme => ({
         marginTop: "1.5%",
         marginBottom: "1.5%",
     },
-    image: {
-        marginLeft: "29%",
-        marginTop: "1.5%",
-        width: "42%",
-        height: window.innerHeight * 0.43,
-        align: "center"
-    },
     link: {
         color: theme.palette.secondary.main,
         textDecoration: "none",
@@ -56,10 +51,20 @@ const useStyles = makeStyles(theme => ({
 
 export default function Plan(props) {
     const classes = useStyles()
+    const [tags, setTags] = useState(false)
+    const images = [
+        {"url":"https://cdn.pixabay.com/photo/2017/08/07/23/50/climbing-2609319_1280.jpg"},
+        {"url":"https://cdn.pixabay.com/photo/2016/03/09/09/59/men-1245982_1280.jpg"},
+        {"url":"https://cdn.pixabay.com/photo/2017/02/16/17/52/rafting-2071980_1280.jpg"},
+        {"url":"https://cdn.pixabay.com/photo/2016/09/04/19/27/paraglider-1644986_1280.jpg"}                
+    ]
     return (
         <div>
+            <Dialog onClose={(event) => { setTags(false) }} open={tags} fullWidth>
+                <ChipList tags={["Rafting", "Water Sports", "River", "Kayac", "Paddles", "Extreme"]} />
+            </Dialog>
             <Header />
-            <Typography align="center" variant="h3" className={classes.title}>Plan Name </Typography>
+            <Typography align="center" variant="h3" className={classes.title}> Plan Name </Typography>
             <Link to="/park" className={classes.link}>
                 <Typography align="center" variant="h5">Park Name <StyleIcon /></Typography>
             </Link>
@@ -79,13 +84,16 @@ export default function Plan(props) {
             </Grid>
             <Divider className={classes.divider} />
             <div>
-                <CardMedia
+                <SimpleImageSlider
+                    width={window.innerWidth * 0.42}
+                    height={window.innerHeight * 0.43}
+                    images={images}
                     className={classes.image}
-                    image='https://cdn.pixabay.com/photo/2015/04/16/17/02/whitewater-725935_1280.jpg'
+                    style={{marginLeft: "29%", marginTop: "1.5%"}}
                 />
                 <Typography variant="h4" className={classes.descriptionTitle}>
                     Plan Description
-                    <IconButton variant="contained" color="primary">
+                    <IconButton variant="contained" color="primary" onClick={(event) => { setTags(true) }}>
                         <LocalOfferRoundedIcon />
                     </IconButton>
                 </Typography>
