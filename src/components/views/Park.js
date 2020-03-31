@@ -192,14 +192,19 @@ export default function Park() {
             </Typography>
             <CommentSection comments={[
                 {
-                    "author": "Sergio Ruiz",
-                    "title": "Me Encantó",
-                    "content": "Pagué por este plan un precio menor al que habría tenido que pagar en otros lugares y es mucho más completo"
+                    "author": "Juan Ospina",
+                    "title": "Gran experiencia",
+                    "content": "Un lugar muy bonito, mis hijos amaron los animales"
+                },
+                {
+                    "author": "Alejandro Guzmán",
+                    "title": "Excelente plan en familia",
+                    "content": "Este plan tiene las actividades perfectas para cada miembro de la familia, me encantó :)"
                 },
                 {
                     "author": "Luis Moreno",
-                    "title": "Excelente plan en familia",
-                    "content": "Este plan tiene las actividades perfectas para cada miembro de la familia, me encantó :)"
+                    "title": "Muy caro",
+                    "content": "Por el estado de la reserva, debería ser más barato"
                 }
             ]} />
             <Footer />

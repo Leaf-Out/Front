@@ -5,10 +5,11 @@ import Footer from '../elements/Footer';
 import { Typography, Divider, CardMedia, Grid, IconButton } from '@material-ui/core';
 import LeafRating from '../elements/LeafRating';
 import StyleIcon from '@material-ui/icons/Style';
-import { CommentSection } from "../elements/CommentSection";
+import CommentSection from "../elements/CommentSection";
 import FeeTable from '../elements/FeeTable';
 import { Link } from 'react-router-dom';
 import LocalOfferRoundedIcon from '@material-ui/icons/LocalOfferRounded';
+import CommentIcon from '@material-ui/icons/Comment';
 
 const useStyles = makeStyles(theme => ({
     title: {
@@ -110,10 +111,25 @@ export default function Plan(props) {
                 <Typography>Activity grid as a itinerary</Typography>
             </div>
             <Divider className={classes.divider} />
-            <div align={"center"}>
-                <Typography>Refactored comment section</Typography>
-            </div>
             <Divider className={classes.divider} />
+            <Typography variant="h4" className={classes.descriptionTitle}>
+                Comment Section
+                    <IconButton variant="contained" color="primary">
+                    <CommentIcon />
+                </IconButton>
+            </Typography>
+            <CommentSection comments={[
+                {
+                    "author": "Sergio Ruiz",
+                    "title": "Me Encantó",
+                    "content": "Pagué por este plan un precio menor al que habría tenido que pagar en otros lugares y es mucho más completo"
+                },
+                {
+                    "author": "Luis Moreno",
+                    "title": "Excelente plan en familia",
+                    "content": "Este plan tiene las actividades perfectas para cada miembro de la familia, me encantó :)"
+                }
+            ]} />
             <Footer />
         </div>
     );
