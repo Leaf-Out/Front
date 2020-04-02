@@ -11,6 +11,8 @@ import {
 } from "react-router-dom";
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
+import Activity from './components/views/Activity';
+import HomeAdmin from './components/views/HomeAdmin';
 
 const theme = createMuiTheme({
   palette: {
@@ -36,7 +38,7 @@ const App = () => {
         <div>
           <Switch>
             <Route exact path="/">
-              <Home />
+              <HomeAdmin />
             </Route>
             <Route exact path="/home">
               <Home />
@@ -46,6 +48,9 @@ const App = () => {
             </Route>
             <Route exact path="/park">
               <Park />
+            </Route>
+            <Route exact path="/activity">
+              <Activity />
             </Route>
             <Route exact path="/SignIn">
               <SignIn />

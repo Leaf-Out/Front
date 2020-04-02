@@ -9,7 +9,7 @@ function TabContainer(props) {
   return (
     <Grid container>
       <Grid xs={7} align="end">
-        <Typography component="div">
+        <Typography component="div" style={{marginTop: "7.5%"}}>
           {props.children}
         </Typography >
       </Grid>

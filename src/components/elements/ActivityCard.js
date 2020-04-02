@@ -5,11 +5,9 @@ import { makeStyles } from '@material-ui/core/styles'
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import Dialog from '@material-ui/core/Dialog';
 import EcoRoundedIcon from '@material-ui/icons/EcoRounded';
 import MoreRoundedIcon from '@material-ui/icons/MoreRounded';
 import { Link } from 'react-router-dom';
-import Carousel from './Carousel';
 import BeachAccessRoundedIcon from '@material-ui/icons/BeachAccessRounded';
 
 
@@ -29,7 +27,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function ActivityCard() {
     const classes = useStyles()
-    const [dialog, setDialog] = useState(false)
     const images = [
         "https://cdn.pixabay.com/photo/2016/01/19/17/56/whales-1149978_1280.jpg",
         "https://cdn.pixabay.com/photo/2017/05/08/20/50/sub-2296460_1280.jpg",
@@ -41,9 +38,6 @@ export default function ActivityCard() {
     }
     return (
         <Paper elevation={0} className={classes.card}>
-            <Dialog onClose={(event) => { setDialog(false) }} open={dialog} >
-                <Carousel sliders={images}/>
-            </Dialog>
             <Grid container>
                 <Grid xs={12}>
                     <CardMedia
