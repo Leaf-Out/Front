@@ -9,7 +9,7 @@ import Dialog from '@material-ui/core/Dialog';
 import EcoRoundedIcon from '@material-ui/icons/EcoRounded';
 import MoreRoundedIcon from '@material-ui/icons/MoreRounded';
 import { Link } from 'react-router-dom';
-import Carousel from './Carousel';
+// import Carousel from './Carousel';
 import AccountTreeRoundedIcon from '@material-ui/icons/AccountTreeRounded';
 
 
@@ -41,9 +41,9 @@ export default function PlanCard(props) {
     }
     return (
         <Paper elevation={0} className={classes.card}>
-            <Dialog onClose={(event) => { setDialog(false) }} open={dialog} >
+            {/* <Dialog onClose={(event) => { setDialog(false) }} open={dialog} >
                 <Carousel sliders={images}/>
-            </Dialog>
+            </Dialog> */}
             <Grid container>
                 <Grid xs={12}>
                     <CardMedia

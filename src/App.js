@@ -53,9 +53,6 @@ const App = () => {
             <Route exact path="/Plan">
               <Plan />
             </Route>
-            <Route exact path="/Plan-register">
-              <PlanRegister/>
-            </Route>
           </Switch>
         </div>
       </Router>
