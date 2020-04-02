@@ -9,12 +9,8 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-<<<<<<< HEAD
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-=======
-import PlanRegister from './components/views/PlanRegister';
->>>>>>> 0ead43a6303a3599b80fa028b0e26ce7499ba535
 
 const theme = createMuiTheme({
   palette: {
