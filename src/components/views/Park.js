@@ -15,7 +15,7 @@ import BeachAccessRoundedIcon from '@material-ui/icons/BeachAccessRounded';
 import CommentSection from '../elements/CommentSection';
 import CommentIcon from '@material-ui/icons/Comment';
 // import ChipList from '../elements/ChipList';
-// import SimpleImageSlider from "react-simple-image-slider";
+import SimpleImageSlider from "react-simple-image-slider";
 import axios from "axios";
 import { useParams, useHistory } from 'react-router-dom';
 import { get } from '../../api/Get';

@@ -69,7 +69,11 @@ export default function SignIn() {
 
   const login = async () => {
 
+<<<<<<< HEAD
     let requestUrl = 'http://localhost:8080/login?username=' + name + '&password=' + password
+=======
+    let requestUrl = 'http://localhost:8080/login?username=' + name + '&' + 'password=' + password
+>>>>>>> 0ead43a6303a3599b80fa028b0e26ce7499ba535
     await axios.post(requestUrl, { "headers": { "Authorization": "" } })
       .then(res => {
         console.log(jwt.decode(res.data.token))
