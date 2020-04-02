@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import Background from '../../static/src/img/background.jpg'
 import PlanCard from '../elements/PlanCard'
 import { get } from '../../api/Get';
+import jwt from 'jsonwebtoken';
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -98,8 +99,9 @@ export default function Home() {
         }).catch((err)=>{
             setError(true)
             setLoad(false);
-        })        
-    },[])
+        })
+        {jwt.decode(localStorage.getItem("token")).rol[0] === "ADMIN" ? console.log("Soy ADMIN") : console.log("No soy ADMIN")}  
+    },[] )
 
     return (
         <div>

@@ -13,8 +13,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import Activity from './components/views/Activity';
 import HomeAdmin from './components/views/HomeAdmin';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
+import jwt from 'jsonwebtoken';
 
 const theme = createMuiTheme({
   palette: {
@@ -34,16 +33,18 @@ const theme = createMuiTheme({
 });
 
 const App = () => {
+
   return (
     <ThemeProvider theme={theme}>
       <Router>
         <div>
           <Switch>
             <Route exact path="/">
-              <HomeAdmin />
+              <Home />
             </Route>
             <Route exact path="/home">
               <Home />
+              {/* {localStorage.getItem("token") ? jwt.decode(localStorage.getItem("token")).rol[0] === "ADMIN" ? <HomeAdmin /> : <Home /> : <Home />} */}
             </Route>
             <Route exact path="/catalog">
               <Catalog />
