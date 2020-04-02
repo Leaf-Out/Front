@@ -8,7 +8,8 @@ import IconButton from '@material-ui/core/IconButton';
 import EcoRoundedIcon from '@material-ui/icons/EcoRounded';
 import MoreRoundedIcon from '@material-ui/icons/MoreRounded';
 import { Link } from 'react-router-dom';
-import AccountTreeRoundedIcon from '@material-ui/icons/AccountTreeRounded';
+import BeachAccessRoundedIcon from '@material-ui/icons/BeachAccessRounded';
+
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -17,21 +18,22 @@ const useStyles = makeStyles(theme => ({
     image: {
         width: "100%",
         height: window.innerHeight * 0.25,
+        pointerEvents: "all"
     },
     icon: {
         color: theme.palette.primary.main
     }
 }));
 
-export default function PlanCard() {
+export default function ActivityCard() {
     const classes = useStyles()
     const images = [
-        "https://cdn.pixabay.com/photo/2016/03/09/09/59/men-1245982_1280.jpg",
-        "https://cdn.pixabay.com/photo/2017/02/16/17/52/rafting-2071980_1280.jpg",
-        "https://cdn.pixabay.com/photo/2016/09/04/19/27/paraglider-1644986_1280.jpg",
-        "https://cdn.pixabay.com/photo/2017/08/07/23/50/climbing-2609319_1280.jpg"
+        "https://cdn.pixabay.com/photo/2016/01/19/17/56/whales-1149978_1280.jpg",
+        "https://cdn.pixabay.com/photo/2017/05/08/20/50/sub-2296460_1280.jpg",
+        "https://cdn.pixabay.com/photo/2015/03/09/18/34/maldives-666122_1280.jpg",
+        "https://cdn.pixabay.com/photo/2016/10/13/09/06/travel-1737168_1280.jpg"
     ]
-    const getImage = () => {
+    const getImage = () => {        
         return images[Math.floor(Math.random() * 4)]
     }
     return (
@@ -56,13 +58,13 @@ export default function PlanCard() {
                         </Grid>
                     </Grid>
                     <Grid xs={12} align="start">
-                        <Typography ><AccountTreeRoundedIcon className={classes.icon} /> Plan Name</Typography>
+                        <Typography ><BeachAccessRoundedIcon className={classes.icon}/> Activity Name</Typography>
                     </Grid>
                     <Grid xs={10} align="start">
-                        <Typography >$ 120.000 <b>COP avg</b></Typography>
+                        <Typography >$ 15.000 <b>COP avg</b></Typography>
                     </Grid>
                     <Grid xs={2} align="end">
-                        <Link to="/plan">
+                        <Link to="/activity">
                             <IconButton variant="contained" color="primary">
                                 <MoreRoundedIcon />
                             </IconButton>
