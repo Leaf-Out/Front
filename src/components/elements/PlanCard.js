@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function PlanCard() {
+export default function PlanCard(props) {
     const classes = useStyles()
     const [dialog, setDialog] = useState(false)
     const images = [
@@ -53,7 +53,7 @@ export default function PlanCard() {
                 </Grid>
                 <Grid xs={12} container>
                     <Grid xs={6} align="start">
-                        <Typography variant="subtittle1" color="textSecondary">Park name</Typography>
+                        <Typography variant="subtittle1" color="textSecondary">{!props.park ? "default": props.park}</Typography>
                     </Grid>
                     <Grid xs={6} container align="end">
                         <Grid xs={10} align="end">
@@ -64,7 +64,7 @@ export default function PlanCard() {
                         </Grid>
                     </Grid>
                     <Grid xs={12} align="start">
-                        <Typography ><AccountTreeRoundedIcon className={classes.icon}/> Plan Name</Typography>
+                        <Typography ><AccountTreeRoundedIcon className={classes.icon}/> {props.plan.name}</Typography>
                     </Grid>
                     <Grid xs={10} align="start">
                         <Typography >$ 120.000 <b>COP avg</b></Typography>

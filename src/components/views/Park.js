@@ -1,6 +1,6 @@
 import React,{ useEffect, useState } from 'react';
 import LeafRating from '../elements/LeafRating'
-import { Typography, Divider, Grid, IconButton, Dialog } from '@material-ui/core';
+import { Typography, Divider, CardMedia, Grid, IconButton, LinearProgress, CircularProgress, Dialog } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles'
 import Footer from '../elements/Footer';
 import Location from '../elements/Location';
@@ -14,8 +14,11 @@ import AccountTreeRoundedIcon from '@material-ui/icons/AccountTreeRounded';
 import BeachAccessRoundedIcon from '@material-ui/icons/BeachAccessRounded';
 import CommentSection from '../elements/CommentSection';
 import CommentIcon from '@material-ui/icons/Comment';
-import ChipList from '../elements/ChipList';
-import SimpleImageSlider from "react-simple-image-slider";
+// import ChipList from '../elements/ChipList';
+// import SimpleImageSlider from "react-simple-image-slider";
+import axios from "axios";
+import { useParams, useHistory } from 'react-router-dom';
+import { get } from '../../api/Get';
 
 const useStyles = makeStyles(theme => ({
     title: {
@@ -62,41 +65,61 @@ export default function Park() {
         { "url": "https://cdn.pixabay.com/photo/2017/05/03/09/12/architecture-2280543_1280.jpg" },
         { "url": "https://cdn.pixabay.com/photo/2016/08/23/19/51/park-1615341_1280.jpg" }
     ]
+    const {parkId} = useParams();
+    const history=useHistory();
+    const [park,setPark] = useState({});
+    const [load, setLoad] = useState(true);
+    const [error,sestError] = useState(false);
+    
+    useEffect(()=>{
+        
+        get(`/parks/${parkId}`)
+        .then(res => {
+            setPark(res)            
+            setLoad(false)
+        }).catch((err)=>{
+            console.log(err);
+            setLoad(false);
+        })
+    },[])
+
+    if(load){
+        return(
+            <LinearProgress style={{marginTop: "2%"}} />
+            // <CircularProgress style={{width: "50%",height: "50%",marginTop: "5%"}}/>
+        )
+    }
+    else{
     return (
         <div>
-            <Dialog onClose={(event) => { setTags(false) }} open={tags} fullWidth>
+            {/* <Dialog onClose={(event) => { setTags(false) }} open={tags} fullWidth>
                 <ChipList tags={["Extreme sports", "Ocean", "Paradise", "Relax", "PNN", "Nature"]} />
-            </Dialog>
+            </Dialog> */}
             <Header />
-            <Typography align="center" variant="h3" className={classes.title}> Park Name </Typography>
+            <Typography align="center" variant="h3" className={classes.title}> {park.name} </Typography>
             <Grid container>
                 <Grid item xs={5} continer justify="flex-start" className={classes.rating}>
                     <LeafRating />
                 </Grid>
                 <Grid item xs={5} container justify="flex-end" className={classes.fee}>
-                    <FeeTable prices={
-                        {
-                            "ADULT": 15000,
-                            "CHILDREN": 8000
-                        }
-                    } />
+                    { <FeeTable prices={ park.prices}/> }
                 </Grid>
             </Grid>
             <Divider className={classes.divider} />
-            <SimpleImageSlider
+            {/* <SimpleImageSlider
                 width={window.innerWidth * 0.42}
                 height={window.innerHeight * 0.43}
                 images={images}
                 className={classes.image}
                 style={{ marginLeft: "29%", marginTop: "1.5%" }}
-            />
+            /> */}
             <Typography variant="h4" className={classes.descriptionTitle}>
                 Park Description
                 <IconButton variant="contained" color="primary">
                     <LocalOfferRoundedIcon onClick={(event) => { setTags(true) }} />
                 </IconButton>
             </Typography>
-            <Typography variant="h5" className={classes.description}>
+            {/* <Typography variant="h5" className={classes.description}>
                 Lorem Ipsum is simply dummy text of the
                 printing and typesetting industry. Lorem
                 Ipsum has been the industry's standard
@@ -111,6 +134,9 @@ export default function Park() {
                 with the release of Letraset sheets
                 with the release of Letraset sheets
                 with the release of Letraset sheets
+                </Typography> */}
+                <Typography variant="h5" className={classes.description}>
+                    {park.description}
                 </Typography>
             <Divider className={classes.divider} />
             <Typography variant="h4" className={classes.descriptionTitle}>
@@ -118,12 +144,7 @@ export default function Park() {
                     <PlaceRoundedIcon color="primary" />
             </Typography>
             <Typography variant="h5" className={classes.description}>
-                Lorem Ipsum is simply dummy text of the
-                printing and typesetting industry. Lorem
-                Ipsum has been the industry's standard
-                dummy text ever since the 1500s, when an
-                unknown printer took a galley of type and
-                scrambled it to make a type specimen book.
+                {park.location.description}
                 </Typography>
             <Location />
             <Divider className={classes.divider} />
@@ -137,22 +158,15 @@ export default function Park() {
                 Lorem Ipsum is simply dummy text of the
                 printing and typesetting industry.
                 </Typography>
-            <Grid container spacing={3} align="center" className={classes.planGrid}>
-                <Grid item xs={3} >
-                    <PlanCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <PlanCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <PlanCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <PlanCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <PlanCard />
-                </Grid>
+                <Grid container spacing={3} align="center" className={classes.planGrid}>
+                   { park.planList.map( plan =>{
+                    return (
+                        <Grid item xs={3} >
+                            <PlanCard park={park.name} plan={plan}  />
+                        </Grid>
+                        )
+                    })
+                   }
             </Grid>
             <Divider className={classes.divider} />
             <Typography variant="h4" className={classes.descriptionTitle}>
@@ -166,30 +180,14 @@ export default function Park() {
                 printing and typesetting industry.
                 </Typography>
             <Grid container spacing={3} align="center" className={classes.planGrid}>
-                <Grid item xs={3} >
-                    <ActivityCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <ActivityCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <ActivityCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <ActivityCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <ActivityCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <ActivityCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <ActivityCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <ActivityCard />
-                </Grid>
+                {
+                    park.activitiesList.map( activity =>{
+                    return(
+                        <Grid item xs={3} >
+                            <ActivityCard park={parkId} activity={activity}/>
+                        </Grid>
+                    )})
+                }
             </Grid>
             <Divider className={classes.divider} />
             <Typography variant="h4" className={classes.descriptionTitle}>
@@ -198,25 +196,9 @@ export default function Park() {
                     <CommentIcon />
                 </IconButton>
             </Typography>
-            <CommentSection comments={[
-                {
-                    "author": "Juan Ospina",
-                    "title": "Gran experiencia",
-                    "content": "Un lugar muy bonito, mis hijos amaron los animales"
-                },
-                {
-                    "author": "Alejandro Guzmán",
-                    "title": "Excelente plan en familia",
-                    "content": "Este parque tiene las actividades perfectas para cada miembro de la familia, me encantó :)"
-                },
-                {
-                    "author": "Luis Moreno",
-                    "title": "Muy caro",
-                    "content": "Por el estado de la reserva, debería ser más barato"
-                }
-            ]} />
+            <CommentSection comments={park.feedback.comments} />
             <Footer />
         </div>
-    );
-
+        );
+    }
 }

@@ -10,8 +10,8 @@ import FeeTable from '../elements/FeeTable';
 import { Link } from 'react-router-dom';
 import LocalOfferRoundedIcon from '@material-ui/icons/LocalOfferRounded';
 import CommentIcon from '@material-ui/icons/Comment';
-import ChipList from '../elements/ChipList';
-import SimpleImageSlider from "react-simple-image-slider";
+// import ChipList from '../elements/ChipList';
+// import SimpleImageSlider from "react-simple-image-slider";
 
 const useStyles = makeStyles(theme => ({
     title: {
@@ -61,7 +61,7 @@ export default function Plan(props) {
     return (
         <div>
             <Dialog onClose={(event) => { setTags(false) }} open={tags} fullWidth>
-                <ChipList tags={["Rafting", "Water Sports", "River", "Kayac", "Paddles", "Extreme"]} />
+                {/* <ChipList tags={["Rafting", "Water Sports", "River", "Kayac", "Paddles", "Extreme"]} /> */}
             </Dialog>
             <Header />
             <Typography align="center" variant="h3" className={classes.title}> Plan Name </Typography>
@@ -84,13 +84,13 @@ export default function Plan(props) {
             </Grid>
             <Divider className={classes.divider} />
             <div>
-                <SimpleImageSlider
+                {/* <SimpleImageSlider
                     width={window.innerWidth * 0.42}
                     height={window.innerHeight * 0.43}
                     images={images}
                     className={classes.image}
                     style={{marginLeft: "29%", marginTop: "1.5%"}}
-                />
+                /> */}
                 <Typography variant="h4" className={classes.descriptionTitle}>
                     Plan Description
                     <IconButton variant="contained" color="primary" onClick={(event) => { setTags(true) }}>

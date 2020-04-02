@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function ActivityCard() {
+export default function ActivityCard(props) {
     const classes = useStyles()
     const [dialog, setDialog] = useState(false)
     const images = [
@@ -53,18 +53,18 @@ export default function ActivityCard() {
                 </Grid>
                 <Grid xs={12} container>
                     <Grid xs={6} align="start">
-                        <Typography variant="subtittle1" color="textSecondary">Park name</Typography>
+                        <Typography variant="subtittle1" color="textSecondary">{props.park}</Typography>
                     </Grid>
                     <Grid xs={6} container align="end">
                         <Grid xs={10} align="end">
                             <EcoRoundedIcon className={classes.icon} />
                         </Grid>
                         <Grid xs={2}>
-                            <Typography>4.5</Typography>
+                            <Typography>{props.activity.feedback.rating}</Typography>
                         </Grid>
                     </Grid>
                     <Grid xs={12} align="start">
-                        <Typography ><BeachAccessRoundedIcon className={classes.icon}/> Activity Name</Typography>
+                        <Typography ><BeachAccessRoundedIcon className={classes.icon}/>{props.activity.name}</Typography>
                     </Grid>
                     <Grid xs={10} align="start">
                         <Typography >$ 15.000 <b>COP avg</b></Typography>
