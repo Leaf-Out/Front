@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import './css/Home.css'
-import { Card, CardContent, Typography, Paper, TextField, Button, Grid } from '@material-ui/core'
+import { Card, CardContent, Typography, Paper, TextField, Button, Grid, LinearProgress } from '@material-ui/core'
 import Divider from '@material-ui/core/Divider'
 import Header from '../elements/Header'
 import { makeStyles } from '@material-ui/core/styles'
 import Background from '../../static/src/img/background.jpg'
 import PlanCard from '../elements/PlanCard'
+import { get } from '../../api/Get';
 
 const useStyles = makeStyles(theme => ({
     background: {
@@ -84,6 +85,22 @@ const useStyles = makeStyles(theme => ({
 
 export default function Home() {
     const classes = useStyles()
+    const [plans,setPlans] = useState({})
+    const [load,setLoad] = useState(true)
+    const [error,setError] = useState(false)
+
+    useEffect(()=>{
+        
+        get(`/plans/popular`)
+        .then(res => {
+            setPlans(res)            
+            setLoad(false)
+        }).catch((err)=>{
+            setError(true)
+            setLoad(false);
+        })        
+    },[])
+
     return (
         <div>
             <div className={classes.background}>
@@ -135,30 +152,17 @@ export default function Home() {
             <Typography variant="h4" className={classes.planTitle}>Popular plans</Typography>
             <Typography variant="h5" className={classes.planTitle}>This is the sumary of the most popular plans</Typography>
             <Grid container spacing={3} align="center" className={classes.planGrid}>
-                <Grid item xs={3} >
-                    <PlanCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <PlanCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <PlanCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <PlanCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <PlanCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <PlanCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <PlanCard />
-                </Grid>
-                <Grid item xs={3}>
-                    <PlanCard />
-                </Grid>
+                {
+                    load ? 
+                        (<div>Error</div>):
+                    plans.map( (plan) =>{
+                        return (
+                            <Grid item xs={3} >
+                                <PlanCard plan={ plan} />
+                            </Grid>
+                        )
+                    })
+                }
             </Grid>
             <Divider />
             <div align={"center"}>
