@@ -8,6 +8,7 @@ import IconButton from '@material-ui/core/IconButton';
 import EcoRoundedIcon from '@material-ui/icons/EcoRounded';
 import MoreRoundedIcon from '@material-ui/icons/MoreRounded';
 import { Link } from 'react-router-dom';
+// import Carousel from './Carousel';
 import BeachAccessRoundedIcon from '@material-ui/icons/BeachAccessRounded';
 
 
@@ -25,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function ActivityCard() {
+export default function ActivityCard(props) {
     const classes = useStyles()
     const images = [
         "https://cdn.pixabay.com/photo/2016/01/19/17/56/whales-1149978_1280.jpg",
@@ -38,6 +39,9 @@ export default function ActivityCard() {
     }
     return (
         <Paper elevation={0} className={classes.card}>
+            {/* <Dialog onClose={(event) => { setDialog(false) }} open={dialog} >
+                <Carousel sliders={images}/>
+            </Dialog> */}
             <Grid container>
                 <Grid xs={12}>
                     <CardMedia
@@ -47,18 +51,18 @@ export default function ActivityCard() {
                 </Grid>
                 <Grid xs={12} container>
                     <Grid xs={6} align="start">
-                        <Typography variant="subtittle1" color="textSecondary">Park name</Typography>
+                        <Typography variant="subtittle1" color="textSecondary">{props.park}</Typography>
                     </Grid>
                     <Grid xs={6} container align="end">
                         <Grid xs={10} align="end">
                             <EcoRoundedIcon className={classes.icon} />
                         </Grid>
                         <Grid xs={2}>
-                            <Typography>4.5</Typography>
+                            <Typography>{props.activity.feedback.rating}</Typography>
                         </Grid>
                     </Grid>
                     <Grid xs={12} align="start">
-                        <Typography ><BeachAccessRoundedIcon className={classes.icon}/> Activity Name</Typography>
+                        <Typography ><BeachAccessRoundedIcon className={classes.icon}/>{props.activity.name}</Typography>
                     </Grid>
                     <Grid xs={10} align="start">
                         <Typography >$ 15.000 <b>COP avg</b></Typography>

@@ -8,7 +8,9 @@ import IconButton from '@material-ui/core/IconButton';
 import EcoRoundedIcon from '@material-ui/icons/EcoRounded';
 import MoreRoundedIcon from '@material-ui/icons/MoreRounded';
 import { Link } from 'react-router-dom';
+// import Carousel from './Carousel';
 import AccountTreeRoundedIcon from '@material-ui/icons/AccountTreeRounded';
+
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -23,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export default function PlanCard() {
+export default function PlanCard(props) {
     const classes = useStyles()
     const images = [
         "https://cdn.pixabay.com/photo/2016/03/09/09/59/men-1245982_1280.jpg",
@@ -36,6 +38,9 @@ export default function PlanCard() {
     }
     return (
         <Paper elevation={0} className={classes.card}>
+            {/* <Dialog onClose={(event) => { setDialog(false) }} open={dialog} >
+                <Carousel sliders={images}/>
+            </Dialog> */}
             <Grid container>
                 <Grid xs={12}>
                     <CardMedia
@@ -45,7 +50,7 @@ export default function PlanCard() {
                 </Grid>
                 <Grid xs={12} container>
                     <Grid xs={6} align="start">
-                        <Typography variant="subtittle1" color="textSecondary">Park name</Typography>
+                        <Typography variant="subtittle1" color="textSecondary">{!props.park ? "default": props.park}</Typography>
                     </Grid>
                     <Grid xs={6} container align="end">
                         <Grid xs={10} align="end">
@@ -56,7 +61,7 @@ export default function PlanCard() {
                         </Grid>
                     </Grid>
                     <Grid xs={12} align="start">
-                        <Typography ><AccountTreeRoundedIcon className={classes.icon} /> Plan Name</Typography>
+                        <Typography ><AccountTreeRoundedIcon className={classes.icon}/> {props.plan.name}</Typography>
                     </Grid>
                     <Grid xs={10} align="start">
                         <Typography >$ 120.000 <b>COP avg</b></Typography>
