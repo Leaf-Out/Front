@@ -1,42 +1,77 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles'
+import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import IconButton from '@material-ui/core/IconButton';
 import EcoRoundedIcon from '@material-ui/icons/EcoRounded';
+import MoreRoundedIcon from '@material-ui/icons/MoreRounded';
+import { Link } from 'react-router-dom';
+import StyleIcon from '@material-ui/icons/Style';
 
-export class ParkCard extends React.Component {
 
-    state = {
-        rating: this.props.rating,
-        name: this.props.name,
-        description: this.props.description
+const useStyles = makeStyles(theme => ({
+    card: {
+        height: window.innerHeight * 0.35
+    },
+    image: {
+        width: "100%",
+        height: window.innerHeight * 0.25
+    },
+    icon: {
+        color: theme.palette.primary.main
     }
+}));
 
-    render() {
-
-        return (
-            <Paper elevation={3}>
-                <Grid container direction={"row"}>
-                    <Grid container alignItems="stretch" item xs={3} >
-                        <ButtonBase href={"/park"}>
-                            <img alt="complex" src="/public/logo512.png" />
-                        </ButtonBase>
+export default function ParkCard(props) {
+    const classes = useStyles()
+    const images = [
+        "https://cdn.pixabay.com/photo/2016/01/19/17/56/whales-1149978_1280.jpg",
+        "https://cdn.pixabay.com/photo/2017/05/08/20/50/sub-2296460_1280.jpg",
+        "https://cdn.pixabay.com/photo/2015/03/09/18/34/maldives-666122_1280.jpg",
+        "https://cdn.pixabay.com/photo/2016/10/13/09/06/travel-1737168_1280.jpg"
+    ]
+    const getImage = () => {        
+        return images[Math.floor(Math.random() * 4)]
+    }
+    return (
+        <Paper elevation={0} className={classes.card}>
+            <Grid container>
+                <Grid xs={12}>
+                    <CardMedia
+                        className={classes.image}
+                        image={getImage()}
+                    />
+                </Grid>
+                <Grid xs={12} container>
+                    <Grid xs={6} align="start">
+                        <Typography variant="subtittle1" color="textSecondary">Park</Typography>
                     </Grid>
-                    <Grid container item xs={7} direction={"column"}>
-                        <Typography>{this.state.name}</Typography>
-                        <Typography>{this.state.description}</Typography>
-                        
-                    </Grid>
-                    <Grid container justify="center" item xs={2}>
-                        <Grid container justify="center" item xs={12}>
-                            <Typography>{this.state.rating}</Typography>
-                            <EcoRoundedIcon style={{ fill: '#63ad57' }}/>
+                    <Grid xs={6} container align="end">
+                        <Grid xs={10} align="end">
+                            <EcoRoundedIcon className={classes.icon} />
+                        </Grid>
+                        <Grid xs={2}>
+                            <Typography>3.9</Typography>
                         </Grid>
                     </Grid>
+                    <Grid xs={12} align="start">
+                        <Typography ><StyleIcon className={classes.icon}/>{props.park.name}</Typography>
+                    </Grid>
+                    <Grid xs={10} align="start">
+                        <Typography >$ 15.000 <b>COP avg</b></Typography>
+                    </Grid>
+                    <Grid xs={2} align="end">
+                        <Link to="/activity">
+                            <IconButton variant="contained" color="primary">
+                                <MoreRoundedIcon />
+                            </IconButton>
+                        </Link>
+                    </Grid>
                 </Grid>
-            </Paper>
-        );
-    }
+            </Grid>
+        </Paper>
+    );
+
 }
-  

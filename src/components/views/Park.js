@@ -14,8 +14,8 @@ import AccountTreeRoundedIcon from '@material-ui/icons/AccountTreeRounded';
 import BeachAccessRoundedIcon from '@material-ui/icons/BeachAccessRounded';
 import CommentSection from '../elements/CommentSection';
 import CommentIcon from '@material-ui/icons/Comment';
-// import ChipList from '../elements/ChipList';
-// import SimpleImageSlider from "react-simple-image-slider";
+import ChipList from '../elements/ChipList';
+import SimpleImageSlider from "react-simple-image-slider";
 import axios from "axios";
 import { useParams, useHistory } from 'react-router-dom';
 import { get } from '../../api/Get';
@@ -86,15 +86,14 @@ export default function Park() {
     if(load){
         return(
             <LinearProgress style={{marginTop: "2%"}} />
-            // <CircularProgress style={{width: "50%",height: "50%",marginTop: "5%"}}/>
         )
     }
     else{
     return (
         <div>
-            {/* <Dialog onClose={(event) => { setTags(false) }} open={tags} fullWidth>
+            <Dialog onClose={(event) => { setTags(false) }} open={tags} fullWidth>
                 <ChipList tags={["Extreme sports", "Ocean", "Paradise", "Relax", "PNN", "Nature"]} />
-            </Dialog> */}
+            </Dialog>
             <Header />
             <Typography align="center" variant="h3" className={classes.title}> {park.name} </Typography>
             <Grid container>
@@ -106,13 +105,13 @@ export default function Park() {
                 </Grid>
             </Grid>
             <Divider className={classes.divider} />
-            {/* <SimpleImageSlider
+            <SimpleImageSlider
                 width={window.innerWidth * 0.42}
                 height={window.innerHeight * 0.43}
                 images={images}
                 className={classes.image}
                 style={{ marginLeft: "29%", marginTop: "1.5%" }}
-            /> */}
+            />
             <Typography variant="h4" className={classes.descriptionTitle}>
                 Park Description
                 <IconButton variant="contained" color="primary">

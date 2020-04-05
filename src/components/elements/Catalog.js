@@ -3,7 +3,7 @@ import { GridList } from "@material-ui/core";
 import GridListTile from "@material-ui/core/GridListTile";
 import { Search } from "./Search";
 import "./css/Catalog.css";
-import { ParkCard } from "./ParkCard";
+import ParkCard from "./ParkCard";
 import axios from "axios";
 
 export class Catalog extends React.Component {

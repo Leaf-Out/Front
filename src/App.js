@@ -14,6 +14,7 @@ import { ThemeProvider } from '@material-ui/styles';
 import Activity from './components/views/Activity';
 import HomeAdmin from './components/views/HomeAdmin';
 import jwt from 'jsonwebtoken';
+import ShoppingCart from './components/views/ShoppingCart';
 
 const theme = createMuiTheme({
   palette: {
@@ -60,6 +61,9 @@ const App = () => {
             </Route>
             <Route exact path="/Plan">
               <Plan />
+            </Route>
+            <Route exact path="/shoppingcart">
+              <ShoppingCart />
             </Route>
           </Switch>
         </div>

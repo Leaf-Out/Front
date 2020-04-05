@@ -39,9 +39,6 @@ export default function ActivityCard(props) {
     }
     return (
         <Paper elevation={0} className={classes.card}>
-            {/* <Dialog onClose={(event) => { setDialog(false) }} open={dialog} >
-                <Carousel sliders={images}/>
-            </Dialog> */}
             <Grid container>
                 <Grid xs={12}>
                     <CardMedia

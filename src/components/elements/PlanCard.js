@@ -8,7 +8,6 @@ import IconButton from '@material-ui/core/IconButton';
 import EcoRoundedIcon from '@material-ui/icons/EcoRounded';
 import MoreRoundedIcon from '@material-ui/icons/MoreRounded';
 import { Link } from 'react-router-dom';
-// import Carousel from './Carousel';
 import AccountTreeRoundedIcon from '@material-ui/icons/AccountTreeRounded';
 
 
@@ -18,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     },
     image: {
         width: "100%",
-        height: window.innerHeight * 0.25,
+        height: window.innerHeight * 0.25
     },
     icon: {
         color: theme.palette.primary.main
@@ -38,9 +37,6 @@ export default function PlanCard(props) {
     }
     return (
         <Paper elevation={0} className={classes.card}>
-            {/* <Dialog onClose={(event) => { setDialog(false) }} open={dialog} >
-                <Carousel sliders={images}/>
-            </Dialog> */}
             <Grid container>
                 <Grid xs={12}>
                     <CardMedia
