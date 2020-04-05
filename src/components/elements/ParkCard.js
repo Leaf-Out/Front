@@ -13,7 +13,8 @@ import StyleIcon from '@material-ui/icons/Style';
 
 const useStyles = makeStyles(theme => ({
     card: {
-        height: window.innerHeight * 0.35
+        height: window.innerHeight * 0.35,
+        width: "100%"
     },
     image: {
         width: "100%",
@@ -46,7 +47,7 @@ export default function ParkCard(props) {
                 </Grid>
                 <Grid xs={12} container>
                     <Grid xs={6} align="start">
-                        <Typography variant="subtittle1" color="textSecondary">Park</Typography>
+                        <Typography variant="subtittle1" color="textSecondary">Park Name</Typography>
                     </Grid>
                     <Grid xs={6} container align="end">
                         <Grid xs={10} align="end">

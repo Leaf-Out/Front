@@ -11,22 +11,25 @@ import {
     Select, MenuItem, FormControl, FormHelperText, Button
 }
     from '@material-ui/core';
+import ParkCard from '../elements/ParkCard';
+import PlanCard from '../elements/PlanCard';
+import ActivityCard from '../elements/ActivityCard';
 
 const useStyles = makeStyles(theme => ({
-    container: {
-        backgroundColor: theme.palette.secondary.light,
-        height: '100vh',
-        padding: "2.5%"
+    title: {
+        marginTop: "1%"
+    },
+    payGrid: {
+        marginTop: "1.5%",
+        marginLeft: "7.5%",
+        width: "85%"
     },
     card: {
-        textAlign: "center",
-        marginTop: "1%"
-    },
-    paper: {
-        padding: "2.5%"
+        marginTop: "1.5%",
     },
     price: {
-        marginTop: "1%"
+        marginTop: "1%",
+        marginRight: "7.5%"
     },
     text: {
         padding: "1%"
@@ -39,6 +42,7 @@ const useStyles = makeStyles(theme => ({
 export default function Checkout() {
     const classes = useStyles();
     let checkoutObject = JSON.parse(localStorage.getItem("checkout"))
+    const [items, setItems] = useState(Object.values(checkoutObject))
     const [cardNumber, setCardNumber] = useState("")
     const [cvv, setCvv] = useState("")
     const [expirationDate, setExpirationDate] = useState("")
@@ -48,6 +52,21 @@ export default function Checkout() {
     const [message, setMessage] = useState("")
     const [alert, setAlert] = useState(false)
     const history = useHistory()
+    const gerCard = (type) => {
+        if (type === "PARK") {
+            return (
+                <ParkCard park={{}} />
+            )
+        } else if (type === "PLAN") {
+            return (
+                <PlanCard plan={{}} />
+            )
+        } else {
+            return (
+                <ActivityCard activity={{}} />
+            )
+        }
+    }
     const handleNewPay = (event) => {
         /*if (cardholder !== "" && dni !== "" && paymentMethod !== "" && cardNumber !== "" && expirationDate !== "") {
             let requestProducts = products.map(function (product) {
@@ -83,9 +102,9 @@ export default function Checkout() {
     }
 
     let totalPrice = 0
-    /*products.forEach(product => {
-        totalPrice = totalPrice + (product.units * product.product.price)
-    });*/
+    items.forEach(item => {
+        totalPrice = totalPrice + (item.units * item.item.price)
+    });
 
     return (
         <div>
@@ -98,40 +117,33 @@ export default function Checkout() {
             >
                 <Alert severity="error">{message}</Alert>
             </Snackbar>
-            <Grid container>
-                <Grid item xs={12} className={classes.card}>
-                    <Typography variant="h2" align="center">Checkout</Typography>
+            <Grid container className={classes.payGrid}>
+                <Grid item xs={12}>
+                    <Typography align="center" variant="h3" className={classes.title}> Purchase Review </Typography>
                 </Grid>
                 {
-                    /*products.map(function (product) {
+                    items.map(function (item) {
                         return (
-                            <Grid item xs={12} className={classes.card} container>
-                                <Grid item xs={6} className={classes.card}>
-                                    <Typography variant="h5" align="left">{product.product.name}</Typography>
+                            <Grid item xs={12} container className={classes.card}>
+                                <Grid item xs={3} container>
+                                    {gerCard(item.item.type)}
                                 </Grid>
-                                <Grid item xs={6} className={classes.card}>
-                                    <Typography variant="h5" align="right">Total ${product.product.price * product.units}</Typography>
+                                <Grid xs={9} container alignItems="center" justify="flex-end" align="right">
+                                    <Grid xs={12}>
+                                        <Typography variant="h5">Price: ${item.units * item.item.price}</Typography>
+                                        <Typography variant="h5" color="textSecondary">{item.item.population} | {item.units} units</Typography>
+                                    </Grid>
                                 </Grid>
-                                <Grid item xs={6} className={classes.card}>
-                                    <Typography variant="h6" color="textSecondary" align="left">{product.product.id}</Typography>
-                                </Grid>
-                                <Grid item xs={6} className={classes.card}>
-                                    <Typography variant="h6" color="textSecondary" align="right">{product.units} Units | ${product.product.price}</Typography>
-                                </Grid>
-                                <Grid item xs={12} className={classes.card}>
-                                    <Divider light={true} variant="" />
-                                </Grid>
+                                <Grid xs={12}><Divider /></Grid>
                             </Grid>
                         )
-                    })*/
+                    })
                 }
             </Grid>
-            <Typography variant="h4" className={classes.price} align="right">Total $xxxxx</Typography> <br />
-            <Grid container justify="center">
+            <Typography variant="h4" className={classes.price} align="right">Total ${totalPrice}</Typography> <br />
+            <Typography align="center" variant="h3" className={classes.title}> Checkout </Typography>
+            <Grid container justify="center" className={classes.payGrid}>
                 <Grid item xs={12} container>
-                    <Grid item xs={12} className={classes.card}>
-                        <Typography variant="h4" className={classes.price} align="center">Payment Method</Typography>
-                    </Grid>
                     <Grid item xs={6} align="center" className={classes.text}>
                         <TextField label="Card Number" fullWidth={true} onChange={(event) => { setCardNumber(event.target.value) }} />
                     </Grid>
@@ -141,6 +153,7 @@ export default function Checkout() {
                                 <MenuItem value="AMEX">American Express</MenuItem>
                                 <MenuItem value="MASTERCARD">Mastercard</MenuItem>
                                 <MenuItem value="VISA">Visa</MenuItem>
+                                <MenuItem value="VISA_DEBIT">Visa Debit Card</MenuItem>
                             </Select>
                             <FormHelperText>Payment Method</FormHelperText>
                         </FormControl>
@@ -159,7 +172,7 @@ export default function Checkout() {
                         <TextField label="DNI" fullWidth={true} onChange={(event) => { setDni(event.target.value) }} />
                     </Grid>
                     <Grid item xs={12} align="center" className={classes.text}>
-                        <Button variant="contained" color="primary" onClick={handleNewPay}> Pay </Button>
+                        <Button variant="contained" color="primary" onClick={handleNewPay} fullWidth> Pay </Button>
                     </Grid>
                 </Grid>
             </Grid>

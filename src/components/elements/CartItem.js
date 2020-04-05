@@ -39,6 +39,13 @@ export default function CartItem(props) {
         if (!checked) {
             let item = JSON.parse(localStorage.getItem("checkout"))
             item[props.item.id] = {
+                item: {
+                    id: props.item.id,
+                    type: props.item.type,
+                    population: props.item.population,
+                    price: props.item.price
+                },
+                units: units
             }
             localStorage.setItem("checkout", JSON.stringify(item))
         } else {
@@ -101,10 +108,10 @@ export default function CartItem(props) {
                         onChange={checkHandler}
                     />
                 </Grid>
-                <Grid item xs={5} container>
+                <Grid item xs={3} container>
                     {gerCard(props.item.type)}
                 </Grid>
-                <Grid item xs={2} container>
+                <Grid item xs={2} container justify="flex-end">
                 <Typography variant="h5">Population: {props.item.population}</Typography>
                 <Typography variant="h5">Price: ${props.item.price}</Typography>
                 </Grid>

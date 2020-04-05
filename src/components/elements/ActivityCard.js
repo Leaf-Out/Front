@@ -14,7 +14,8 @@ import BeachAccessRoundedIcon from '@material-ui/icons/BeachAccessRounded';
 
 const useStyles = makeStyles(theme => ({
     card: {
-        height: window.innerHeight * 0.35
+        height: window.innerHeight * 0.35,
+        width: "100%"
     },
     image: {
         width: "100%",
