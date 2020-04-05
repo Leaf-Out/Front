@@ -16,6 +16,7 @@ import HomeAdmin from './components/views/HomeAdmin';
 import jwt from 'jsonwebtoken';
 import ShoppingCart from './components/views/ShoppingCart';
 import Checkout from './components/views/Checkout';
+import Transactions from './components/views/Transactions';
 
 const theme = createMuiTheme({
   palette: {
@@ -68,6 +69,9 @@ const App = () => {
             </Route>
             <Route exact path="/checkout">
               <Checkout />
+            </Route>
+            <Route exact path="/transactions">
+              <Transactions />
             </Route>
           </Switch>
         </div>

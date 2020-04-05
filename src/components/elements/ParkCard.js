@@ -28,10 +28,10 @@ const useStyles = makeStyles(theme => ({
 export default function ParkCard(props) {
     const classes = useStyles()
     const images = [
-        "https://cdn.pixabay.com/photo/2016/01/19/17/56/whales-1149978_1280.jpg",
-        "https://cdn.pixabay.com/photo/2017/05/08/20/50/sub-2296460_1280.jpg",
-        "https://cdn.pixabay.com/photo/2015/03/09/18/34/maldives-666122_1280.jpg",
-        "https://cdn.pixabay.com/photo/2016/10/13/09/06/travel-1737168_1280.jpg"
+        "https://cdn.pixabay.com/photo/2014/10/04/12/18/stone-arch-472976_1280.jpg",
+        "https://cdn.pixabay.com/photo/2017/10/12/06/24/allen-park-2843660_1280.jpg",
+        "https://cdn.pixabay.com/photo/2017/05/03/09/12/architecture-2280543_1280.jpg",
+        "https://cdn.pixabay.com/photo/2016/08/23/19/51/park-1615341_1280.jpg" 
     ]
     const getImage = () => {        
         return images[Math.floor(Math.random() * 4)]
@@ -47,7 +47,7 @@ export default function ParkCard(props) {
                 </Grid>
                 <Grid xs={12} container>
                     <Grid xs={6} align="start">
-                        <Typography variant="subtittle1" color="textSecondary">Park Name</Typography>
+                        <Typography variant="subtittle1" color="textSecondary">Park</Typography>
                     </Grid>
                     <Grid xs={6} container align="end">
                         <Grid xs={10} align="end">
