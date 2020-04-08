@@ -66,7 +66,7 @@ export default function ActivityCard(props) {
                         <Typography >$ 15.000 <b>COP avg</b></Typography>
                     </Grid>
                     <Grid xs={2} align="end">
-                        <Link to="/activity">
+                        <Link style={{ textDecoration: 'none' }} to={`/activity/${props.activity.name}`}>
                             <IconButton variant="contained" color="primary">
                                 <MoreRoundedIcon />
                             </IconButton>

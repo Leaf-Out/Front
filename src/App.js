@@ -52,16 +52,16 @@ const App = () => {
             <Route exact path="/catalog">
               <Catalog />
             </Route>
-            <Route path="/park/:parkId">
+            <Route path="/park/:name">
               <Park />
             </Route>
-            <Route exact path="/activity">
+            <Route exact path="/activity/:name">
               <Activity />
             </Route>
             <Route exact path="/SignIn">
               <SignIn />
             </Route>
-            <Route exact path="/Plan">
+            <Route exact path="/plan/:name">
               <Plan />
             </Route>
             <Route exact path="/shoppingcart">

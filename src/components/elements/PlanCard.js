@@ -64,7 +64,7 @@ export default function PlanCard(props) {
                         <Typography >$ 120.000 <b>COP avg</b></Typography>
                     </Grid>
                     <Grid xs={2} align="end">
-                        <Link to="/plan">
+                        <Link style={{ textDecoration: 'none' }} to={`/plan/${props.plan.name}`}>
                             <IconButton variant="contained" color="primary">
                                 <MoreRoundedIcon />
                             </IconButton>
