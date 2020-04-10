@@ -90,7 +90,7 @@ export default function Park() {
   const history = useHistory();
   const [park, setPark] = useState({});
   const [load, setLoad] = useState(true);
-  const [error, sestError] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     get(`/parks/${name}`)

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import './css/Home.css'
-import { Card, CardContent, Typography, Paper, TextField, Button, Grid, LinearProgress } from '@material-ui/core'
+import { Card, CardContent, Typography, Paper, TextField, Button, Grid, LinearProgress, MenuItem, Select } from '@material-ui/core'
 import Divider from '@material-ui/core/Divider'
 import Header from '../elements/Header'
 import { makeStyles } from '@material-ui/core/styles'
@@ -100,6 +100,7 @@ export default function HomeUser() {
             setError(true)
             setLoad(false);
         })
+        localStorage.setItem("filter", JSON.stringify({name:"",location:{},rating:"",price:[],type:"",tags:[],}));
     },[] )
 
     return (
@@ -118,11 +119,15 @@ export default function HomeUser() {
                             <TextField label="Where you want to go?" variant="outlined" className={classes.input} />
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography variant="body1" className={classes.label}>Tags</Typography>
+                            <Typography variant="body1" className={classes.label}>Type</Typography>
                         </Grid>
-                        <Grid item xs={12}>
-                            <TextField label="Key words" variant="outlined" className={classes.input} />
-                        </Grid>
+                        <Grid item xs={6} align="center" className={classes.text}>
+                            <Select autoWidth={true} >
+                                <MenuItem >Park</MenuItem>
+                                <MenuItem >Plan</MenuItem>
+                                <MenuItem >Activity</MenuItem>
+                            </Select>
+                    </Grid>
                         <Grid container xs={12}>
                             <Grid item xs={6} container>
                                 <Grid item xs={12}>

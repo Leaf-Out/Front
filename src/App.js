@@ -1,6 +1,6 @@
 import React from 'react';
 import Home from "./components/views/Home";
-import { Catalog } from "./components/elements/Catalog";
+import Catalog from "./components/views/Catalog";
 import Park from './components/views/Park';
 import Plan from './components/views/Plan';
 import SignIn from "./components/views/SignIn";
