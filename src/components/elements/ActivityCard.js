@@ -14,7 +14,8 @@ import BeachAccessRoundedIcon from '@material-ui/icons/BeachAccessRounded';
 
 const useStyles = makeStyles(theme => ({
     card: {
-        height: window.innerHeight * 0.35
+        height: window.innerHeight * 0.35,
+        width: "100%"
     },
     image: {
         width: "100%",
@@ -39,9 +40,6 @@ export default function ActivityCard(props) {
     }
     return (
         <Paper elevation={0} className={classes.card}>
-            {/* <Dialog onClose={(event) => { setDialog(false) }} open={dialog} >
-                <Carousel sliders={images}/>
-            </Dialog> */}
             <Grid container>
                 <Grid xs={12}>
                     <CardMedia
@@ -68,7 +66,7 @@ export default function ActivityCard(props) {
                         <Typography >$ 15.000 <b>COP avg</b></Typography>
                     </Grid>
                     <Grid xs={2} align="end">
-                        <Link to="/activity">
+                        <Link style={{ textDecoration: 'none' }} to={`/activity/${props.activity.name}`}>
                             <IconButton variant="contained" color="primary">
                                 <MoreRoundedIcon />
                             </IconButton>

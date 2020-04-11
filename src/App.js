@@ -1,6 +1,6 @@
 import React from 'react';
 import Home from "./components/views/Home";
-import { Catalog } from "./components/elements/Catalog";
+import Catalog from "./components/views/Catalog";
 import Park from './components/views/Park';
 import Plan from './components/views/Plan';
 import SignIn from "./components/views/SignIn";
@@ -14,6 +14,9 @@ import { ThemeProvider } from '@material-ui/styles';
 import Activity from './components/views/Activity';
 import HomeAdmin from './components/views/HomeAdmin';
 import jwt from 'jsonwebtoken';
+import ShoppingCart from './components/views/ShoppingCart';
+import Checkout from './components/views/Checkout';
+import Transactions from './components/views/Transactions';
 
 const theme = createMuiTheme({
   palette: {
@@ -49,17 +52,26 @@ const App = () => {
             <Route exact path="/catalog">
               <Catalog />
             </Route>
-            <Route path="/park/:parkId">
+            <Route path="/park/:name">
               <Park />
             </Route>
-            <Route exact path="/activity">
+            <Route exact path="/activity/:name">
               <Activity />
             </Route>
             <Route exact path="/SignIn">
               <SignIn />
             </Route>
-            <Route exact path="/Plan">
+            <Route exact path="/plan/:name">
               <Plan />
+            </Route>
+            <Route exact path="/shoppingcart">
+              <ShoppingCart />
+            </Route>
+            <Route exact path="/checkout">
+              <Checkout />
+            </Route>
+            <Route exact path="/transactions">
+              <Transactions />
             </Route>
           </Switch>
         </div>
