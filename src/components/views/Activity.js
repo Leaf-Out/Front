@@ -10,8 +10,10 @@ import FeeTable from '../elements/FeeTable';
 import { Link } from 'react-router-dom';
 import LocalOfferRoundedIcon from '@material-ui/icons/LocalOfferRounded';
 import CommentIcon from '@material-ui/icons/Comment';
-// import ChipList from '../elements/ChipList';
-// import SimpleImageSlider from "react-simple-image-slider";
+import ChipList from '../elements/ChipList';
+import SimpleImageSlider from "react-simple-image-slider";
+import AccountTreeRoundedIcon from '@material-ui/icons/AccountTreeRounded';
+
 
 const useStyles = makeStyles(theme => ({
     title: {
@@ -49,24 +51,27 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function Plan(props) {
+export default function Activity(props) {
     const classes = useStyles()
     const [tags, setTags] = useState(false)
     const images = [
-        {"url":"https://cdn.pixabay.com/photo/2017/08/07/23/50/climbing-2609319_1280.jpg"},
-        {"url":"https://cdn.pixabay.com/photo/2016/03/09/09/59/men-1245982_1280.jpg"},
-        {"url":"https://cdn.pixabay.com/photo/2017/02/16/17/52/rafting-2071980_1280.jpg"},
-        {"url":"https://cdn.pixabay.com/photo/2016/09/04/19/27/paraglider-1644986_1280.jpg"}                
+        {"url":"https://cdn.pixabay.com/photo/2016/01/19/17/56/whales-1149978_1280.jpg"},
+        {"url":"https://cdn.pixabay.com/photo/2017/05/08/20/50/sub-2296460_1280.jpg"},
+        {"url":"https://cdn.pixabay.com/photo/2015/03/09/18/34/maldives-666122_1280.jpg"},
+        {"url":"https://cdn.pixabay.com/photo/2016/10/13/09/06/travel-1737168_1280.jpg"}
     ]
     return (
         <div>
             <Dialog onClose={(event) => { setTags(false) }} open={tags} fullWidth>
-                {/* <ChipList tags={["Rafting", "Water Sports", "River", "Kayac", "Paddles", "Extreme"]} /> */}
+                <ChipList tags={["Rafting", "Water Sports", "River", "Kayac", "Paddles", "Extreme"]} />
             </Dialog>
             <Header />
-            <Typography align="center" variant="h3" className={classes.title}> Plan Name </Typography>
+            <Typography align="center" variant="h3" className={classes.title}> Activity Name </Typography>
             <Link to="/park" className={classes.link}>
                 <Typography align="center" variant="h5">Park Name <StyleIcon /></Typography>
+            </Link>
+            <Link to="/park" className={classes.link}>
+                <Typography align="center" variant="h5">Plan Name (if it has)<AccountTreeRoundedIcon /></Typography>
             </Link>
             <Grid container>
                 <Grid item xs={5} continer justify="flex-start" className={classes.rating}>
@@ -84,15 +89,15 @@ export default function Plan(props) {
             </Grid>
             <Divider className={classes.divider} />
             <div>
-                {/* <SimpleImageSlider
+                <SimpleImageSlider
                     width={window.innerWidth * 0.42}
                     height={window.innerHeight * 0.43}
                     images={images}
                     className={classes.image}
                     style={{marginLeft: "29%", marginTop: "1.5%"}}
-                /> */}
+                />
                 <Typography variant="h4" className={classes.descriptionTitle}>
-                    Plan Description
+                    Activity Description
                     <IconButton variant="contained" color="primary" onClick={(event) => { setTags(true) }}>
                         <LocalOfferRoundedIcon />
                     </IconButton>
@@ -115,11 +120,6 @@ export default function Plan(props) {
                 </Typography>
             </div>
             <Divider className={classes.divider} />
-            <div align={"center"}>
-                <Typography>Activity grid as a itinerary</Typography>
-            </div>
-            <Divider className={classes.divider} />
-            <Divider className={classes.divider} />
             <Typography variant="h4" className={classes.descriptionTitle}>
                 Comment Section
                     <IconButton variant="contained" color="primary">
@@ -128,14 +128,9 @@ export default function Plan(props) {
             </Typography>
             <CommentSection comments={[
                 {
-                    "author": "Sergio Ruiz",
-                    "title": "Me Encantó",
-                    "content": "Pagué por este plan un precio menor al que habría tenido que pagar en otros lugares y es mucho más completo"
-                },
-                {
-                    "author": "Luis Moreno",
-                    "title": "Excelente plan en familia",
-                    "content": "Este plan tiene las actividades perfectas para cada miembro de la familia, me encantó :)"
+                    "author": "Barak Obama",
+                    "title": "Dream come true",
+                    "content": "Whale lover <3"
                 }
             ]} />
             <Footer />
