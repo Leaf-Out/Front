@@ -17,6 +17,11 @@ import jwt from 'jsonwebtoken';
 import ShoppingCart from './components/views/ShoppingCart';
 import Checkout from './components/views/Checkout';
 import Transactions from './components/views/Transactions';
+import RemovePlans from './components/views/RemovePlans';
+import RemovePark from './components/views/RemovePark';
+import RemoveActivity from './components/views/RemoveActivity';
+import NewPark from './components/views/NewPark';
+
 
 const theme = createMuiTheme({
   palette: {
@@ -72,6 +77,18 @@ const App = () => {
             </Route>
             <Route exact path="/transactions">
               <Transactions />
+            </Route>
+            <Route exact path="/removePark">
+              <RemovePark />
+            </Route>
+            <Route exact path="/removePlan">
+              <RemovePlans />
+            </Route>
+            <Route exact path="/removeActivity">
+              <RemoveActivity />
+            </Route>
+            <Route exact path="/newPark">
+              <NewPark />
             </Route>
           </Switch>
         </div>
