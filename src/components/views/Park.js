@@ -101,11 +101,20 @@ export default function Park() {
       .catch((err) => {
         console.log(err);
         setLoad(false);
+        setError(true);
       });
   }, []);
 
-  if (load) {
-    return <LinearProgress style={{ marginTop: "2%" }} />;
+  if(load) {
+    return(
+        <LinearProgress style={{marginTop: "2%"}} />
+    )
+  } else if(error) {
+    return(
+        <div>
+            Error
+        </div>
+    )
   } else {
     return (
       <div>
