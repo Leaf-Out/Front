@@ -21,6 +21,8 @@ import RemovePlans from './components/views/RemovePlans';
 import RemovePark from './components/views/RemovePark';
 import RemoveActivity from './components/views/RemoveActivity';
 import NewPark from './components/views/NewPark';
+import NewPlan from './components/views/NewPlan';
+import NewActivity from './components/views/NewActivity'
 
 
 const theme = createMuiTheme({
@@ -89,6 +91,12 @@ const App = () => {
             </Route>
             <Route exact path="/newPark">
               <NewPark />
+            </Route>
+            <Route exact path="/newPlan">
+              <NewPlan />
+            </Route>
+            <Route exact path="/newActivity">
+              <NewActivity />
             </Route>
           </Switch>
         </div>

@@ -28,11 +28,9 @@ import { logDOM } from "@testing-library/react";
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 
-
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
     title: {
-        marginTop: "1%",
-        alignSelf: "center",
+        marginTop: "1%"
     },
     rating: {
         marginTop: "2%",
@@ -43,14 +41,13 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: "1%",
     },
     divider: {
-        marginTop: "1.5%",
         marginLeft: "7.5%",
-        width: "83.5%",
+        width: "83.5%"
     },
     descriptionTitle: {
         marginLeft: "7.5%",
         marginRight: "7.5%",
-        marginTop: "1.5%",
+        marginTop: "1.5%"
     },
     description: {
         marginLeft: "7.5%",
@@ -58,18 +55,16 @@ const useStyles = makeStyles((theme) => ({
         marginTop: "1.5%",
         marginBottom: "1.5%",
     },
-    planGrid: {
-        marginTop: "1.5%",
-        marginBottom: "1.5%",
-        marginLeft: "7.5%",
-        marginRight: "5.5%",
-        width: "85%",
+    link: {
+        color: theme.palette.secondary.main,
+        textDecoration: "none",
+        '&:hover': {
+            color: theme.palette.primary.light
+        }
     },
 }));
 
-
-
-export default function NewPark() {
+export default function NewPlan(props) {
     const classes = useStyles();
     const [tags, setTags] = useState(false);
     const [filter, setFilter] = useState(JSON.parse(localStorage.getItem("filter")));
@@ -95,10 +90,10 @@ export default function NewPark() {
     ];
     const { name } = useParams();
     const history = useHistory();
-    const [parkName, setParkName] = useState("");
+    const [planName, setPlanName] = useState("");
     const [description, setDescription] = useState("");
-    const [locationDescription, setLocationDescription] = useState("");
-    const [region, setRegion] = useState("");
+    const [parkName,setParkName] = useState("");
+
 
     const [load, setLoad] = useState(true);
     const [error, setError] = useState(false);
@@ -116,16 +111,13 @@ export default function NewPark() {
         //currentPrice.index.Price = event.taget.value
         //setPrices(currentPrice)
     }
-    const handleCreatePark = (event) => {
+    const handleCreatePlan = (event) => {
         console.log(parkName)
+        console.log(planName)
         console.log(description)
-        console.log(locationDescription)
-        console.log(region)
         console.log(prices)
 
     }
-
-
     return (
         <div>
             <Dialog
@@ -140,7 +132,13 @@ export default function NewPark() {
             </Dialog>
             <Header />
             <div align="center">
-                <TextField label="park name" className={classes.title} onChange={(e) => { setParkName(e.target.value) }}>
+                <TextField label="Plan name" className={classes.title} onChange={(e) => { setPlanName(e.target.value) }}>
+
+                </TextField>
+            </div>
+            <Divider className={classes.divider} />
+            <div align="center">
+                <TextField label="Park name" className={classes.title} onChange={(e) => { setParkName(e.target.value) }}>
 
                 </TextField>
             </div>
@@ -183,8 +181,8 @@ export default function NewPark() {
                 style={{ marginLeft: "29%", marginTop: "1.5%" }}
             />
             <Typography variant="h4" className={classes.descriptionTitle}>
-                Park Description
-        <Chip
+                Plan Description
+                 <Chip
                     variant="outlined"
                     color="primary"
                     icon={<TagsIcon />}
@@ -201,23 +199,12 @@ export default function NewPark() {
                     }} />
                 )
             })}</div>
-            <TextField label="park description" className={classes.divider} variant="outlined" onChange={(e) => { setDescription(e.target.value) }}>
+            <TextField label="Plan description" className={classes.divider} variant="outlined" onChange={(e) => { setDescription(e.target.value) }}>
             </TextField>
+            
             <Divider className={classes.divider} />
-            <Typography variant="h4" className={classes.descriptionTitle}>
-                Park Location
-        <PlaceRoundedIcon color="primary" />
-            </Typography>
-            <TextField label="park location description" className={classes.divider} variant="outlined" onChange={(e) => { setLocationDescription(e.target.value) }}>
-
-            </TextField>
-            <TextField label="park region" className={classes.description} onChange={(e) => { setRegion(e.target.value) }}>
-
-            </TextField>
-            <Location />
-            <Divider className={classes.divider} />
-                <Button onClick={handleCreatePark} fullWidth>
-                    Register Park
+                <Button onClick={handleCreatePlan} fullWidth>
+                    Register Plan
                 </Button>
             <Footer />
         </div>

@@ -49,16 +49,20 @@ export default function HomeAdmin() {
                         </Link>
                     </Grid>
                     <Grid xs={4} item>
-                        <Button className={classes.card}>
-                            <Typography variant="h3">New Plan</Typography>
-                            <PlanIcon />
-                        </Button>
+                        <Link to='/newPlan' style={{ textDecoration: 'none' }}>
+                            <Button className={classes.card}>
+                                <Typography variant="h3">New Plan</Typography>
+                                <PlanIcon />
+                            </Button>
+                        </Link>
                     </Grid>
                     <Grid xs={4} item>
-                        <Button className={classes.card}>
-                            <Typography variant="h3">New Activity</Typography>
-                            <ActivityIcon />
-                        </Button>
+                        <Link to='/newActivity' style={{ textDecoration: 'none' }}>
+                            <Button className={classes.card}>
+                                <Typography variant="h3">New Activity</Typography>
+                                <ActivityIcon />
+                            </Button>
+                        </Link>
                     </Grid>
                     <Grid xs={4} item>
                         <Link to='/removePark' style={{ textDecoration: 'none' }}>
