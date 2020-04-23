@@ -13,6 +13,7 @@ import AccountTreeRoundedIcon from '@material-ui/icons/AccountTreeRounded';
 import StyleIcon from '@material-ui/icons/Style';
 import { Link, useHistory } from 'react-router-dom';
 import { Divider } from '@material-ui/core';
+import jwt from 'jsonwebtoken';
 
 const useStyles = makeStyles(theme => ({
     grow: {
@@ -80,9 +81,13 @@ const PublicNav = (props) => {
 }
 
 const UserNav = (props) => {
+    const history = useHistory()
+    const signOut = (event) => {
+        localStorage.removeItem("token")
+        history.go(0)        
+    }
     const classes = useStyles()
     const buttonStyle = props.isHome ? classes.homeButton : classes.button
-    const history = useHistory();
     return (
         <div className={classes.sectionDesktop}>
             <Link to="/transactions" style={{ textDecoration: 'none' }}>
@@ -91,15 +96,19 @@ const UserNav = (props) => {
             <Link to="/shoppingcart" style={{ textDecoration: 'none' }}>
                 <Button startIcon={<ShoppingCartIcon />} className={buttonStyle}> cart </Button>
             </Link>
-            <Button startIcon={<ExitToAppIcon />} className={buttonStyle}> sign out </Button>
+            <Button startIcon={<ExitToAppIcon />} className={buttonStyle} onClick={signOut}> sign out </Button>
         </div>
     )
 }
 
 const AdminNav = (props) => {
+    const history = useHistory()
+    const signOut = (event) => {
+        localStorage.removeItem("token")
+        history.go(0)        
+    }
     const classes = useStyles()
-    const buttonStyle = props.isHome ? classes.homeButton : classes.button
-    const history = useHistory();
+    const buttonStyle = props.isHome ? classes.homeButton : classes.button    
     return (
         <div className={classes.sectionDesktop}>
             <Link to="/parks" style={{ textDecoration: 'none' }}>
@@ -114,18 +123,19 @@ const AdminNav = (props) => {
             <Link to="/transactions" style={{ textDecoration: 'none' }}>
                 <Button startIcon={<ReceiptRoundedIcon />} className={buttonStyle}> transactions </Button>
             </Link>
-            <Button startIcon={<ExitToAppIcon />} className={buttonStyle}> sign out </Button>
+            <Button startIcon={<ExitToAppIcon />} className={buttonStyle} onClick={signOut}> sign out </Button>
         </div>
     )
 }
+
 export default function Header(props) {
     const classes = useStyles()
-    const [role] = useState(
-        //TODO localstorage token
-        "ADMIN"
-    )
     const navStyle = props.isHome ? classes.homeNav : classes.nav
-    const homeButtonStyle = props.isHome ? classes.mainHomeButton : classes.mainButton
+    const homeButtonStyle = props.isHome ? classes.mainHomeButton : classes.mainButton   
+    const token = jwt.decode(localStorage.getItem("token")) 
+    const [role] = useState(
+        token === null ? null : token.rol[0]
+        )
     return (
         <div className={classes.grow}>
             <AppBar position="static" className={navStyle}>
