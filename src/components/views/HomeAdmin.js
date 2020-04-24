@@ -34,46 +34,60 @@ const useStyles = makeStyles(theme => ({
 
 export default function HomeAdmin() {
     const classes = useStyles()
+    localStorage.setItem("filter", JSON.stringify({name:"",location:{},rating:"",price:[],type:"",tags:[],}));
     return (
         <div>
             <div className={classes.background}>
                 <Header isHome={true} />
                 <Grid container spacing={5} className={classes.grid} alignItems="center">
                     <Grid xs={4} item>
-                        <Button className={classes.card}>
-                            <Typography variant="h3">New Park</Typography>
-                            <ParkIcon />
-                        </Button>
+                        <Link to='/newPark' style={{ textDecoration: 'none' }}>
+                            <Button className={classes.card}>
+                                <Typography variant="h3">New Park</Typography>
+                                <ParkIcon />
+                            </Button>
+                        </Link>
                     </Grid>
                     <Grid xs={4} item>
-                        <Button className={classes.card}>
-                            <Typography variant="h3">New Plan</Typography>
-                            <PlanIcon />
-                        </Button>
+                        <Link to='/newPlan' style={{ textDecoration: 'none' }}>
+                            <Button className={classes.card}>
+                                <Typography variant="h3">New Plan</Typography>
+                                <PlanIcon />
+                            </Button>
+                        </Link>
                     </Grid>
                     <Grid xs={4} item>
-                        <Button className={classes.card}>
-                            <Typography variant="h3">New Activity</Typography>
-                            <ActivityIcon />
-                        </Button>
+                        <Link to='/newActivity' style={{ textDecoration: 'none' }}>
+                            <Button className={classes.card}>
+                                <Typography variant="h3">New Activity</Typography>
+                                <ActivityIcon />
+                            </Button>
+                        </Link>
                     </Grid>
                     <Grid xs={4} item>
-                        <Button className={classes.card}>
-                            <Typography variant="h3">New Park</Typography>
-                            <ParkIcon />
-                        </Button>
+                        <Link to='/removePark' style={{ textDecoration: 'none' }}>
+                            <Button className={classes.card}>
+                                <Typography variant="h3">Delete Park</Typography>
+                                <ParkIcon />
+                            </Button>
+                        </Link>
                     </Grid>
                     <Grid xs={4} item>
-                        <Button className={classes.card}>
-                            <Typography variant="h3">New Plan</Typography>
-                            <PlanIcon />
-                        </Button>
+                        <Link to='/removePlan' style={{ textDecoration: 'none' }}>
+                            <Button className={classes.card}>
+                                <Typography variant="h3">Delete Plan</Typography>
+                                <PlanIcon />
+                            </Button>
+                        </Link>
                     </Grid>
                     <Grid xs={4} item>
-                        <Button className={classes.card}>
-                            <Typography variant="h3">New Activity</Typography>
-                            <ActivityIcon />
-                        </Button>
+                        <Link to='/removeActivity' style={{ textDecoration: 'none' }}>
+                            <Button className={classes.card}>
+                                <Typography variant="h3">Delete Activity</Typography>
+                                <ActivityIcon />
+                            </Button>
+                        </Link>
+
                     </Grid>
                 </Grid>
             </div>
