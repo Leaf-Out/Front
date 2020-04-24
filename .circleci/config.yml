@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-   heroku: circleci/heroku@x.y # Use the Heroku orb in your config
+   heroku: circleci/heroku@0.0.10
 
 workflows:
    heroku_deploy:
