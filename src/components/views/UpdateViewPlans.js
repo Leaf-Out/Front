@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import GridListTile from "@material-ui/core/GridListTile";
 import LocalOfferRoundedIcon from '@material-ui/icons/LocalOfferRounded';
-import ParkCard from "../elements/ParkCard";
+import PlanCard from "../elements/PlanCard";
 import { get } from "../../api/Get";
 import Header from "../elements/Header";
 import { Filter } from "../elements/Filter";
@@ -36,16 +36,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RemovePark() {
+export default function UpdateViewPlans() {
   const classes = useStyles();
   const history = useHistory();
-  const [parks, setParks] = useState({});
+  const [plans, setPlans] = useState({});
   const [load, setLoad] = useState(true);
   const [error, setError] = useState(false);
   useEffect(() => {
-    get(`/parks/`)
+    get(`/plans/`)
       .then((res) => {
-        setParks(res);
+        setPlans(res);
         setLoad(false);
       })
       .catch((err) => {
@@ -64,10 +64,10 @@ export default function RemovePark() {
       <div>
         <Header />
         <Grid container xs={12} spacing={3} className={classes.grid}>
-          {parks.map((card) => {
+          {plans.map((card) => {
             return (
               <Grid item xs={3}>
-                <ParkCard park={card} isUpdate={false} />
+                <PlanCard plan={card} isUpdate={true} />
               </Grid>
             );
           })}

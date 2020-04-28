@@ -78,7 +78,7 @@ export default function Catalog() {
           {parks.map((card) => {
             return (
               <Grid item xs={3}>
-                <ParkCard park={card} />
+                <ParkCard park={card}  />
               </Grid>
             );
           })}
@@ -87,3 +87,4 @@ export default function Catalog() {
     );
   }
 }
+

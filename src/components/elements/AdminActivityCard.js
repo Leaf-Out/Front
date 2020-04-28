@@ -9,6 +9,7 @@ import EcoRoundedIcon from '@material-ui/icons/EcoRounded';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Dialog, DialogContent, Button, DialogTitle, Divider } from '@material-ui/core';
 import { Link } from 'react-router-dom';
+import CreateIcon from '@material-ui/icons/Create';
 // import Carousel from './Carousel';
 import BeachAccessRoundedIcon from '@material-ui/icons/BeachAccessRounded';
 
@@ -40,6 +41,24 @@ export default function AdminActivityCard(props) {
     ]
     const getImage = () => {
         return images[Math.floor(Math.random() * 4)]
+    }
+    const IconButtonDelete = () => {
+        return(
+            <IconButton onClick={(e) => { setConfimation(true) }} variant="contained" color="primary">
+                <DeleteIcon />
+            </IconButton>
+        )
+    
+    }
+    const IconButtonUpdate = () => {
+        return(
+            <Link style={{ textDecoration: 'none' }} to={`/updateActivity/${props.activity.name}`}>
+                <IconButton variant="contained" color="primary">
+                    <CreateIcon />
+                </IconButton>
+            </Link>
+        )
+        
     }
     return (
         <Paper elevation={0} className={classes.card}>
@@ -88,7 +107,7 @@ export default function AdminActivityCard(props) {
                     </Grid>
                     <Grid xs={2} align="end">
                         <IconButton onClick={(e) => { setConfimation(true) }} variant="contained" color="primary">
-                            <DeleteIcon />
+                            {props.isUpdate === true ? <IconButtonUpdate />  : <IconButtonDelete /> }
                         </IconButton>
                     </Grid>
                 </Grid>

@@ -23,6 +23,12 @@ import RemoveActivity from './components/views/RemoveActivity';
 import NewPark from './components/views/NewPark';
 import NewPlan from './components/views/NewPlan';
 import NewActivity from './components/views/NewActivity'
+import UpdatePark from './components/views/UpdatePark';
+import UpdateViewPark from './components/views/UpdateViewPark';
+import UpdateViewPlans from './components/views/UpdateViewPlans';
+import UpdatePlan from './components/views/UpdatePlan';
+import UpdateActivity from './components/views/UpdateActivity';
+import UpdateViewActivities from './components/views/UpdateViewActivities';
 
 
 const theme = createMuiTheme({
@@ -98,6 +104,27 @@ const App = () => {
             <Route exact path="/newActivity">
               <NewActivity />
             </Route>
+            <Route exact path="/updatePark/:name">
+              <UpdatePark />
+            </Route>
+            <Route exact path="/updateViewPark">
+              <UpdateViewPark />
+            </Route>
+            <Route exact path="/updatePlan/:name">
+              <UpdatePlan />
+            </Route>
+            <Route exact path="/updateViewPlans">
+              <UpdateViewPlans />
+            </Route>
+            <Route exact path="/updateActivity/:name">
+              <UpdateActivity />
+            </Route>
+            <Route exact path="/updateViewActivities">
+              <UpdateViewActivities />
+            </Route>
+
+
+            
           </Switch>
         </div>
       </Router>
