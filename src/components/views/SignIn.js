@@ -15,7 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import './css/SignIn.css';
 import { useHistory } from "react-router-dom";
 import jwt from 'jsonwebtoken';
-import axios from "axios";
+import {login} from "../../api/Get"
 
 function Copyright() {
   return (
@@ -67,19 +67,13 @@ export default function SignIn() {
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
 
-  const login = async () => {
-
-    let requestUrl = 'http://localhost:8080/login?username=' + name + '&password=' + password
-    await axios.post(requestUrl, { "headers": { "Authorization": "" } })
+  const handleSubmit = (event) => {
+    login(name,password)
       .then(res => {
         console.log(jwt.decode(res.data.token))
         localStorage.setItem("token",res.data.token)
         history.push("/")
       })
-  }
-
-  const handleSubmit = (event) => {
-    login();
   }
 
   return (
