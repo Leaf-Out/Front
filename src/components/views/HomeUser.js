@@ -86,7 +86,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function HomeUser() {
     const classes = useStyles()
-    const [plans,setPlans] = useState({})
+    const [plans,setPlans] = useState([])
     const [load,setLoad] = useState(true)
     const [error,setError] = useState(false)
 
