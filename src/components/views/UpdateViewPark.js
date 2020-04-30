@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RemovePark() {
+export default function UpdateViewPark() {
   const classes = useStyles();
   const history = useHistory();
   const [parks, setParks] = useState({});
@@ -67,7 +67,7 @@ export default function RemovePark() {
           {parks.map((card) => {
             return (
               <Grid item xs={3}>
-                <ParkCard park={card} isUpdate={false} />
+                <ParkCard park={card} isUpdate={true} />
               </Grid>
             );
           })}

@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import EcoRoundedIcon from '@material-ui/icons/EcoRounded';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CreateIcon from '@material-ui/icons/Create';
 import { Link } from 'react-router-dom';
 import AccountTreeRoundedIcon from '@material-ui/icons/AccountTreeRounded';
 import { Dialog, DialogContent, Button, DialogTitle, Divider } from '@material-ui/core';
@@ -38,6 +39,25 @@ export default function AdminPlanCard(props) {
     ]
     const getImage = () => {
         return images[Math.floor(Math.random() * 4)]
+    }
+
+    const IconButtonDelete = () => {
+        return(
+            <IconButton onClick={(e) => { setConfimation(true) }} variant="contained" color="primary">
+                <DeleteIcon />
+            </IconButton>
+        )
+    
+    }
+    const IconButtonUpdate = () => {
+        return(
+            <Link style={{ textDecoration: 'none' }} to={`/updatePlan/${props.plan.name}`}>
+                <IconButton variant="contained" color="primary">
+                    <CreateIcon />
+                </IconButton>
+            </Link>
+        )
+        
     }
     return (
         <Paper elevation={0} className={classes.card}>
@@ -82,11 +102,11 @@ export default function AdminPlanCard(props) {
                         <Typography ><AccountTreeRoundedIcon className={classes.icon} /> {props.plan.name}</Typography>
                     </Grid>
                     <Grid xs={10} align="start">
-                        <Typography >$ 120.000 <b>COP avg</b></Typography>
+                        <Typography >$ 130.000 <b>COP avg</b></Typography>
                     </Grid>
                     <Grid xs={2} align="end">
                         <IconButton onClick={(e) => { setConfimation(true) }} variant="contained" color="primary">
-                            <DeleteIcon />
+                            {props.isUpdate === true ? <IconButtonUpdate />  : <IconButtonDelete /> }
                         </IconButton>
                     </Grid>
                 </Grid>

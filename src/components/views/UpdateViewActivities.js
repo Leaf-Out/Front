@@ -7,13 +7,11 @@ import {
   Divider,
   Chip,
 } from "@material-ui/core";
-import GridListTile from "@material-ui/core/GridListTile";
-import LocalOfferRoundedIcon from '@material-ui/icons/LocalOfferRounded';
-import ParkCard from "../elements/ParkCard";
 import { get } from "../../api/Get";
 import Header from "../elements/Header";
 import { Filter } from "../elements/Filter";
 import { useHistory } from "react-router-dom";
+import ActivityCard from "../elements/ActivityCard";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -36,16 +34,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RemovePark() {
+export default function UpdateViewActivities() {
   const classes = useStyles();
   const history = useHistory();
-  const [parks, setParks] = useState({});
+  const [activities, setActivities] = useState({});
   const [load, setLoad] = useState(true);
   const [error, setError] = useState(false);
   useEffect(() => {
-    get(`/parks/`)
+    get(`/activities/`)
       .then((res) => {
-        setParks(res);
+        setActivities(res);
         setLoad(false);
       })
       .catch((err) => {
@@ -64,10 +62,10 @@ export default function RemovePark() {
       <div>
         <Header />
         <Grid container xs={12} spacing={3} className={classes.grid}>
-          {parks.map((card) => {
+          {activities.map((card) => {
             return (
               <Grid item xs={3}>
-                <ParkCard park={card} isUpdate={false} />
+                <ActivityCard activity={card} isUpdate={true} />
               </Grid>
             );
           })}

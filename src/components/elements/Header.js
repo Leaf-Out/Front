@@ -111,13 +111,13 @@ const AdminNav = (props) => {
     const buttonStyle = props.isHome ? classes.homeButton : classes.button    
     return (
         <div className={classes.sectionDesktop}>
-            <Link to="/parks" style={{ textDecoration: 'none' }}>
+            <Link to="/updateViewPark" style={{ textDecoration: 'none' }}>
                 <Button startIcon={<StyleIcon />} className={buttonStyle}> parks </Button>
             </Link>
-            <Link to="/plans" style={{ textDecoration: 'none' }}>
+            <Link to="/updateViewPlans" style={{ textDecoration: 'none' }}>
                 <Button startIcon={<AccountTreeRoundedIcon />} className={buttonStyle}> plans </Button>
             </Link>
-            <Link to="/activities" style={{ textDecoration: 'none' }}>
+            <Link to="/updateViewActivities" style={{ textDecoration: 'none' }}>
                 <Button startIcon={<BeachAccessRoundedIcon />} className={buttonStyle}> activities </Button>
             </Link>
             <Link to="/transactions" style={{ textDecoration: 'none' }}>

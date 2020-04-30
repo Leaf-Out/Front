@@ -11,7 +11,7 @@ export default function ActivityCard(props) {
         token === null ? null : token.rol[0]
     )
     return (
-        (role === null) || (role === "USER") ? <UserActivityCard activity={props.activity} /> : <AdminActivityCard activity={props.activity} />
+        (role === null) || (role === "USER") ? <UserActivityCard activity={props.activity} /> : <AdminActivityCard activity={props.activity} isUpdate={props.isUpdate} />
     )
 
 }

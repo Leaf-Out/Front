@@ -13,7 +13,7 @@ export default function ParkCard(props) {
         token === null ? null : token.rol[0]
     )
     return (
-        (role === null) || (role === "USER") ? <UserParkCard park={props.park} /> : <AdminParkCard park={props.park} />
+        (role === null) || (role === "USER") ? <UserParkCard park={props.park} /> : <AdminParkCard park={props.park} isUpdate={props.isUpdate} />
     )
 
 }

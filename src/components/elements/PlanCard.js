@@ -12,7 +12,7 @@ export default function PlanCard(props) {
         token === null ? null : token.rol[0]
     )
     return (
-        (role === null) || (role === "USER") ? <UserPlanCard plan={props.plan} /> : <AdminPlanCard plan={props.plan} />
+        (role === null) || (role === "USER") ? <UserPlanCard plan={props.plan} /> : <AdminPlanCard plan={props.plan} isUpdate={props.isUpdate} />
     )
 
 }

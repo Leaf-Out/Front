@@ -6,7 +6,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import EcoRoundedIcon from '@material-ui/icons/EcoRounded';
-import DeleteIcon from '@material-ui/icons/Delete';
+import MoreRoundedIcon from '@material-ui/icons/MoreRounded';
 import { Link } from 'react-router-dom';
 import AccountTreeRoundedIcon from '@material-ui/icons/AccountTreeRounded';
 
@@ -64,9 +64,11 @@ export default function UserPlanCard(props) {
                         <Typography >$ 120.000 <b>COP avg</b></Typography>
                     </Grid>
                     <Grid xs={2} align="end">
-                        <IconButton variant="contained" color="primary">
-                            <DeleteIcon />
-                        </IconButton>
+                            <Link style={{ textDecoration: 'none' }} to={`/plan/${props.plan.name}`}>
+                                <IconButton variant="contained" color="primary">
+                                    <MoreRoundedIcon />
+                                </IconButton>
+                        </Link>
                     </Grid>
                 </Grid>
             </Grid>
