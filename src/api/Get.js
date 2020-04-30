@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const url = 'https://leaf-out.herokuapp.com/'
+const url = 'https://leaf-out.herokuapp.com'
 
 export const login = (name, pass) => {
 
-    let requestUrl = `${url}login?username=${name}&password=${pass}`
+    let requestUrl = `${url}/login?username=${name}&password=${pass}`
 
     return new Promise((resolve, reject) => {
         axios.get(requestUrl,{ "headers": { "Authorization": "Bearer " + localStorage.getItem("token") } })
