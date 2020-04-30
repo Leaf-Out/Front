@@ -31,7 +31,7 @@ export const get = (apiPath)=>{
 }
 
 export const pay = ({cardNumber,cvv,expirationDate,cardholder,paymentMethod,requestProducts})=>{
-    let url = `http://localhost:8080/payments/pay/id/${JSON.parse(localStorage.getItem("token")).user.id}`
+    let url = `${url}payments/pay/id/${JSON.parse(localStorage.getItem("token")).user.id}`
     return new Promise((resolve, reject) =>{
         axios.post(url,
             {
