@@ -7,7 +7,7 @@ export const login = (name, pass) => {
     let requestUrl = `${url}/login?username=${name}&password=${pass}`
 
     return new Promise((resolve, reject) => {
-        axios.get(requestUrl,{ "headers": { "Authorization": "Bearer " + localStorage.getItem("token") } })
+        axios.get(requestUrl,{ "headers": { "Authorization": "Bearer "} })
         .then(res => {
             resolve(res);
         }).catch(err => {
@@ -18,10 +18,24 @@ export const login = (name, pass) => {
 
 export const get = (apiPath)=>{
     let requestUrl = `${url}${apiPath}`;
-    console.log(url);
+    let bearer = localStorage.getItem("token")
     
     return new Promise((resolve, reject) => {
-        axios.get(requestUrl,{ "headers": { "Authorization": "Bearer " + localStorage.getItem("token") } })
+        axios.get(requestUrl,{ "headers": { "Authorization": `Bearer ${bearer}` } })
+        .then(res => {
+            resolve(res.data);
+        }).catch(err => {
+            reject(err)
+        });
+    });
+}
+
+export const post = (path, data)=>{
+    let requestUrl = `${url}${path}`;    
+    return new Promise((resolve, reject) => {
+        axios.post(requestUrl,
+             data,
+             { "headers": { "Authorization": "Bearer " + localStorage.getItem("token") } })
         .then(res => {
             resolve(res.data);
         }).catch(err => {
