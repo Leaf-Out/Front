@@ -11,10 +11,13 @@ import { Typography } from '@material-ui/core';
 import TransactionCard from '../elements/TransactionCard'
 
 const useStyles = makeStyles(theme => ({
-    container: {
-        backgroundColor: theme.palette.secondary.light,
-        height: '100vh',
-        padding: "2.5%"
+    grid: {
+        marginLeft: "7.5%",
+        marginTop: "2.5%",
+        width: "85%"
+    },
+    title: {
+        marginTop: "1%"
     },
 }));
 
@@ -41,7 +44,7 @@ export default function Transactions() {
             {
                 id: "9754c04e-4a55-4d70-b78b-7e8310e4f6b5",
                 date: "2020-03-25",
-                updateDate: null,
+                updateDate: "2020-03-25",
                 state: "SUCCESSFUL",
                 paymentMethod: "VISA",
                 ticket: {
@@ -60,7 +63,8 @@ export default function Transactions() {
     return (
         <div>
             <Header />
-            <Grid container spacing={3} >
+            <Typography align="center" variant="h3" className={classes.title}> Transactions </Typography>
+            <Grid container spacing={3}  className={classes.grid}>
                 {
                     transactions.map(function (transaction) {
                         return (

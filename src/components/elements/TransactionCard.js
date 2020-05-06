@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-import { Typography, Grid, CardContent, TextField, Paper, Divider } from '@material-ui/core';
+import { Typography, Grid, CardContent, TextField, Paper, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import Dialog from '@material-ui/core/Dialog';
@@ -10,7 +10,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import axios from 'axios';
 import RestorePageIcon from '@material-ui/icons/RestorePage';
-import PaymentIcon from '@material-ui/icons/Payment';
+import RefundIcon from '@material-ui/icons/KeyboardReturn';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 
@@ -21,28 +21,24 @@ const useStyles = makeStyles(theme => ({
     },
     dialogTitle: {
         backgroundColor: theme.palette.primary.main,
+        color: theme.palette.common.white,
     },
     productName: {
+        textAlign: "center",
+        color: theme.palette.common.white,
         backgroundColor: theme.palette.primary.main,
-        '&:hover': {
-            backgroundColor: theme.palette.primary.dark,
-        },
-        textAlign: "center"
     },
-    refunded: {
-        backgroundColor: theme.palette.secondary.main,
-        textAlign: "center"
+    refundedName: {
+        textAlign: "center",
+        color: theme.palette.common.white,
+        backgroundColor: theme.palette.secondary.dark
     },
     text: {
         textAlign: "center",
         marginTop: "2.5%"
     },
-    icon: {
-        backgroundColor: theme.palette.primary.light,
-    },
-    ShoppingCart: {
-        textAlign: "center",
-        marginTop: "7px"
+    values: {
+        marginTop: "1%"
     },
 }));
 
@@ -52,11 +48,11 @@ export default function TransactionCard(props) {
     const [reason, setReason] = useState("")
     const [error, setError] = useState(false)
     const [succes, setSuccess] = useState(false)
-    const [productName, setProductName] = useState()
     const history = useHistory()
     const refund = (event) => {
     }
-    //const avialable = data.data.responseCode === "SUCCESSFUL_TRANSACTION" ? true : false
+    const avialable = props.transaction.state === "SUCCESSFUL" ? false : true
+    const colorAvialable = props.transaction.state === "SUCCESSFUL" ? classes.productName : classes.refundedName
     return (
         <Grid item xs={3}>
             <Snackbar
@@ -83,20 +79,48 @@ export default function TransactionCard(props) {
                 <DialogTitle className={classes.dialogTitle}>Why do you want to refund the transaction?</DialogTitle>
                 <DialogContent className={classes.text}>
                     <TextField label="reason" variant="outlined" onChange={(event) => { setReason(event.target.value) }}></TextField> <br />
-                    <IconButton onClick={refund}>
-                        <RestorePageIcon />
+                    <IconButton variant="contained" className={colorAvialable} disabled={avialable} onClick={refund}>
+                        <RefundIcon />
                     </IconButton>
                     <Typography variant="subtitle2">refund</Typography>
                 </DialogContent>
             </Dialog>
-            <Paper>
-                <Typography>{props.transaction.ticket.name}</Typography>
-                <Divider />
-                <Typography>{props.transaction.state}</Typography>
-                <Typography>{props.transaction.paymentMethod}</Typography>
-                <Typography>{props.transaction.ticket.expirationDate}</Typography>
-                <Typography>{props.transaction.ticket.population}</Typography>
-                <Typography>{props.transaction.ticket.totalPrice}</Typography>
+            <Paper >
+                <Grid container>
+                    <Grid item xs={12}>
+                        <Typography className={colorAvialable}><b>{props.transaction.ticket.name}</b></Typography>
+                    </Grid>
+                    <Grid item xs={12} className={classes.values}>
+                        <Typography align="center"><b>{props.transaction.state}</b></Typography>
+                        <Typography color="secondary" align="center">{props.transaction.id}</Typography>
+                    </Grid>
+                    <Grid item xs={6} className={classes.values}>
+                        <Typography align="center">bought {props.transaction.date}</Typography>
+                    </Grid>
+                    <Grid item xs={6} className={classes.values}>
+                        <Typography align="center">expires {props.transaction.ticket.expirationDate}</Typography>
+                    </Grid>
+                    <Grid item xs={6} className={classes.values}>
+                        <Typography align="center">{props.transaction.paymentMethod}</Typography>
+                    </Grid>
+                    <Grid item xs={6} className={classes.values}>
+                        <Typography align="center">{props.transaction.updateDate === null ? "not refunded" : "refunded " + props.transaction.updateDate}</Typography>
+                    </Grid>
+                    <Grid item xs={6} className={classes.values}>
+                        <Typography align="center">{props.transaction.ticket.population}</Typography>
+                    </Grid>
+                    <Grid item xs={6} className={classes.values}>
+                        <Typography align="center">{props.transaction.ticket.units} units</Typography>
+                    </Grid>
+                    <Grid item xs={12} className={classes.values}>
+                        <Typography align="center">${props.transaction.ticket.totalPrice}</Typography> <br />
+                    </Grid>
+                    <Grid item xs={12} container justify="flex-end">
+                        <IconButton variant="contained" className={colorAvialable} disabled={avialable} onClick={(e) => { setMessage(true) }}>
+                            <RefundIcon />
+                        </IconButton>
+                    </Grid>
+                </Grid>
             </Paper>
         </Grid>
 
