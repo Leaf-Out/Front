@@ -26,7 +26,7 @@ export default function Transactions() {
     const [error,setError] = useState(false);
 
     useEffect(()=>{
-        get('/payments')
+        get('/payments/')
         .then((res) => {
             setTransactions(res);
             setLoad(false);
@@ -52,7 +52,7 @@ export default function Transactions() {
             <div>
                 <Header />
                 <Typography align="center" variant="h3" className={classes.title}> Transactions </Typography>
-                <Grid container spacing={3} >
+                <Grid container spacing={3} className={classes.grid}>
                     {
                         transactions.map(function (transaction) {
                             return (
