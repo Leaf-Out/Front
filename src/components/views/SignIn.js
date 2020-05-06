@@ -15,7 +15,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import './css/SignIn.css';
 import { useHistory } from "react-router-dom";
 import jwt from 'jsonwebtoken';
-import {login} from "../../api/Get"
+import { login } from "../../api/Get"
 
 function Copyright() {
   return (
@@ -61,17 +61,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SignIn() {
-  const history=useHistory();
+  const history = useHistory();
   const classes = useStyles();
 
   const [name, setName] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (event) => {
-    login(name,password)
+    login(name, password)
       .then(res => {
         console.log(jwt.decode(res.data.token))
-        localStorage.setItem("token",res.data.token)
+        localStorage.setItem("token", res.data.token)
         history.push("/")
       })
   }
@@ -129,12 +129,12 @@ export default function SignIn() {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2" color="secondary">
-                  Forgot password?
+                <Link href="/" variant="body2" color="secondary">
+                  {"Home"}
                 </Link>
               </Grid>
               <Grid item>
-                <Link href="#" variant="body2" color="secondary">
+                <Link href="/SignUp" variant="body2" color="secondary">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

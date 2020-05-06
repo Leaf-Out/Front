@@ -4,6 +4,7 @@ import Catalog from "./components/views/Catalog";
 import Park from './components/views/Park';
 import Plan from './components/views/Plan';
 import SignIn from "./components/views/SignIn";
+import SignUp from "./components/views/SignUp";
 import {
   BrowserRouter as Router,
   Switch,
@@ -59,8 +60,7 @@ const App = () => {
               <Home />
             </Route>
             <Route exact path="/home">
-              <Home />
-              {/* {localStorage.getItem("token") ? jwt.decode(localStorage.getItem("token")).rol[0] === "ADMIN" ? <HomeAdmin /> : <Home /> : <Home />} */}
+              <Home />              
             </Route>
             <Route exact path="/catalog">
               <Catalog />
@@ -73,6 +73,9 @@ const App = () => {
             </Route>
             <Route exact path="/SignIn">
               <SignIn />
+            </Route>
+            <Route exact path="/SignUp">
+              <SignUp />
             </Route>
             <Route exact path="/plan/:name">
               <Plan />
