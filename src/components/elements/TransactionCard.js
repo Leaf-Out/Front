@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, Grid, Paper, TextField} from '@material-ui/core';
+import { Typography, Grid, Paper, TextField } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import IconButton from '@material-ui/core/IconButton';
 import Dialog from '@material-ui/core/Dialog';
@@ -53,13 +53,13 @@ export default function TransactionCard(props) {
             "transactionId": props.transaction.id,
             "reason": reason
         }
-        post('/payments/refund',refundRequest)
-                .then((res) => {
-                    history.go(0)
-                })
-                .catch((err) => {
-                    setError(true)
-                });
+        post('/payments/refund', refundRequest)
+            .then((res) => {
+                history.go(0)
+            })
+            .catch((err) => {
+                setError(true)
+            });
     }
     const avialable = props.transaction.state === "SUCCESSFUL" ? false : true
     const colorAvialable = props.transaction.state === "SUCCESSFUL" ? classes.productName : classes.refundedName

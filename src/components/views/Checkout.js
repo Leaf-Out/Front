@@ -14,6 +14,7 @@ import {
 import ParkCard from '../elements/ParkCard';
 import PlanCard from '../elements/PlanCard';
 import ActivityCard from '../elements/ActivityCard';
+import { post } from '../../api/Get';
 
 const useStyles = makeStyles(theme => ({
     title: {
@@ -68,33 +69,30 @@ export default function Checkout() {
         }
     }
     const handleNewPay = (event) => {
+        //TODO user buying
         /*if (cardholder !== "" && dni !== "" && paymentMethod !== "" && cardNumber !== "" && expirationDate !== "") {
-            let requestProducts = products.map(function (product) {
-                return (
-                    {
-                        "product": product.product.id,
-                        "units": product.units
-                    }
-                )
-            })
-            let url = 'http://localhost:8080/payments/pay/id/' + JSON.parse(localStorage.getItem("token")).user.id
-            axios.post(url,
-                {
-                    "cardNumber": cardNumber,
-                    "securityCode": cvv,
-                    "expirationDate": expirationDate,
-                    "name": cardholder,
-                    "paymentMethod": paymentMethod,
-                    "items": requestProducts
-                },
-                { "headers": { "Authorization": "Bearer " + localStorage.getItem("bearer") } })
-                .then(res => {
-                    history.push("/transactions")
+            let requestProducts = {
+                "cardNumber": "",
+                "securityCode": "",
+                "expirationDate": "",
+                "name": "",
+                "dni": "",
+                "paymentMethod": "",
+                "units": "",
+                "population": "",
+                "pay": "",
+                "payId": ""
+            }
+            post('/payments//pay/user/' + '', requestProducts)
+                .then((res) => {
+                    history.go("/transactions")
                 })
-                .catch(err => {
+                .catch((err) => {
+                    console.log(err);
+                    
                     setMessage("The payment could not be done. " + err.response.data.message)
                     setAlert(true)
-                })
+                });
         } else {
             setMessage("All fields must be filled")
             setAlert(true)
