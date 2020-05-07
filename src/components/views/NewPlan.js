@@ -93,6 +93,7 @@ export default function NewPlan(props) {
     const [planName, setPlanName] = useState("");
     const [description, setDescription] = useState("");
     const [parkName,setParkName] = useState("");
+    const [activityDescription,setActivityDescription] = useState("");
 
 
     const [load, setLoad] = useState(true);
@@ -201,6 +202,10 @@ export default function NewPlan(props) {
             })}</div>
             <TextField label="Plan description" className={classes.divider} variant="outlined" onChange={(e) => { setDescription(e.target.value) }}>
             </TextField>
+            <Divider className={classes.divider} />
+            <TextField label="Activity description" className={classes.divider} variant="outlined" onChange={(e) => { setActivityDescription(e.target.value) }}>
+            </TextField>
+            
             
             <Divider className={classes.divider} />
                 <Button onClick={handleCreatePlan} fullWidth>
