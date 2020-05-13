@@ -14,7 +14,7 @@ import {
 import ParkCard from '../elements/ParkCard';
 import PlanCard from '../elements/PlanCard';
 import ActivityCard from '../elements/ActivityCard';
-import { post } from '../../api/Get';
+import { post, pay } from '../../api/Get';
 
 const useStyles = makeStyles(theme => ({
     title: {
@@ -69,34 +69,40 @@ export default function Checkout() {
         }
     }
     const handleNewPay = (event) => {
-        //TODO user buying
-        /*if (cardholder !== "" && dni !== "" && paymentMethod !== "" && cardNumber !== "" && expirationDate !== "") {
-            let requestProducts = {
-                "cardNumber": "",
-                "securityCode": "",
-                "expirationDate": "",
-                "name": "",
-                "dni": "",
-                "paymentMethod": "",
-                "units": "",
-                "population": "",
-                "pay": "",
-                "payId": ""
-            }
-            post('/payments//pay/user/' + '', requestProducts)
-                .then((res) => {
-                    history.go("/transactions")
-                })
-                .catch((err) => {
-                    console.log(err);
-                    
-                    setMessage("The payment could not be done. " + err.response.data.message)
-                    setAlert(true)
-                });
+        if (cardholder !== "" && dni !== "" && paymentMethod !== "" && cardNumber !== "" && expirationDate !== "") {
+            items.forEach(
+                item => {
+                    let requestProduct = {
+                        "cardNumber": cardNumber,
+                        "securityCode": cvv,
+                        "expirationDate": expirationDate,
+                        "name": cardholder,
+                        "dni": dni,
+                        "paymentMethod": paymentMethod,
+                        "units": item.units,
+                        "population": item.item.population,
+                        "pay": item.item.type,
+                        "payId": item.item.id
+                    }
+                    console.log(requestProduct)
+                    post('/payments/pay/user/' + localStorage.getItem("email"), requestProduct)
+                        .then((res) => {
+                            history.go("/transactions")
+                        })
+                        .catch((err) => {
+                            console.log(err);
+
+                            setMessage("The payment could not be done. " + err.response.data.message)
+                            setAlert(true)
+                        });
+                }
+            );
+
+
         } else {
             setMessage("All fields must be filled")
             setAlert(true)
-        }*/
+        }
     }
 
     let totalPrice = 0

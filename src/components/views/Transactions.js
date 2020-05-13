@@ -6,6 +6,8 @@ import { useHistory } from 'react-router-dom';
 import { Typography, LinearProgress } from '@material-ui/core';
 import TransactionCard from '../elements/TransactionCard'
 import { get } from '../../api/Get';
+import jwt from 'jsonwebtoken';
+
 
 const useStyles = makeStyles(theme => ({
     grid: {
@@ -23,26 +25,40 @@ export default function Transactions() {
     const [transactions, setTransactions] = useState([])
     const history = useHistory()
     const [load, setLoad] = useState(true);
-    const [error,setError] = useState(false);
+    const [error, setError] = useState(false);
 
-    useEffect(()=>{
-        get('/payments/')
-        .then((res) => {
-            setTransactions(res);
-            setLoad(false);
-          })
-          .catch((err) => {
-            setLoad(false);
-            setError(true)
-          });
-    },[]);
-    
-    if(load) {
-        return(
-            <LinearProgress style={{marginTop: "2%"}} />
+    useEffect(() => {
+        const token = jwt.decode(localStorage.getItem("token"))
+        if (token.rol[0] === "ADMIN") {
+            get('/payments/')
+                .then((res) => {
+                    setTransactions(res);
+                    setLoad(false);
+                })
+                .catch((err) => {
+                    setLoad(false);
+                    setError(true)
+                });
+        } else {
+            get('/payments/user/'+localStorage.getItem("email"))
+                .then((res) => {
+                    setTransactions(res);
+                    setLoad(false);
+                })
+                .catch((err) => {
+                    setLoad(false);
+                    setError(true)
+                });
+        }
+
+    }, []);
+
+    if (load) {
+        return (
+            <LinearProgress style={{ marginTop: "2%" }} />
         )
-    } else if(error) {
-        return(
+    } else if (error) {
+        return (
             <div>
                 Error
             </div>

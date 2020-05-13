@@ -70,7 +70,7 @@ export default function SignIn() {
   const handleSubmit = (event) => {
     login(name, password)
       .then(res => {
-        console.log(jwt.decode(res.data.token))
+        localStorage.setItem("email",jwt.decode(res.data.token).sub)
         localStorage.setItem("token", res.data.token)
         history.push("/")
       })
