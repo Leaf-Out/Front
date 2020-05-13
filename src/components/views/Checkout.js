@@ -14,7 +14,7 @@ import {
 import ParkCard from '../elements/ParkCard';
 import PlanCard from '../elements/PlanCard';
 import ActivityCard from '../elements/ActivityCard';
-import { post, pay } from '../../api/Get';
+import { post } from '../../api/Get';
 
 const useStyles = makeStyles(theme => ({
     title: {
@@ -87,7 +87,7 @@ export default function Checkout() {
                     console.log(requestProduct)
                     post('/payments/pay/user/' + localStorage.getItem("email"), requestProduct)
                         .then((res) => {
-                            history.go("/transactions")
+                            history.push("/transactions")
                         })
                         .catch((err) => {
                             console.log(err);

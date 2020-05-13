@@ -97,7 +97,7 @@ export default function AdminParkCard(props) {
                             <EcoRoundedIcon className={classes.icon} />
                         </Grid>
                         <Grid xs={2}>
-                            <Typography>3.9</Typography>
+                        <Typography>{props.park.feedback.rating}</Typography>
                         </Grid>
                     </Grid>
                     <Grid xs={12} align="start">
