@@ -42,22 +42,22 @@ export default function AdminPlanCard(props) {
     }
 
     const IconButtonDelete = () => {
-        return(
+        return (
             <IconButton onClick={(e) => { setConfimation(true) }} variant="contained" color="primary">
                 <DeleteIcon />
             </IconButton>
         )
-    
+
     }
     const IconButtonUpdate = () => {
-        return(
+        return (
             <Link style={{ textDecoration: 'none' }} to={`/updatePlan/${props.plan.name}`}>
                 <IconButton variant="contained" color="primary">
                     <CreateIcon />
                 </IconButton>
             </Link>
         )
-        
+
     }
     return (
         <Paper elevation={0} className={classes.card}>
@@ -95,7 +95,7 @@ export default function AdminPlanCard(props) {
                             <EcoRoundedIcon className={classes.icon} />
                         </Grid>
                         <Grid xs={2}>
-                            <Typography>4.5</Typography>
+                            <Typography>{props.plan.feedback.rating}</Typography>
                         </Grid>
                     </Grid>
                     <Grid xs={12} align="start">
@@ -106,7 +106,7 @@ export default function AdminPlanCard(props) {
                     </Grid>
                     <Grid xs={2} align="end">
                         <IconButton onClick={(e) => { setConfimation(true) }} variant="contained" color="primary">
-                            {props.isUpdate === true ? <IconButtonUpdate />  : <IconButtonDelete /> }
+                            {props.isUpdate === true ? <IconButtonUpdate /> : <IconButtonDelete />}
                         </IconButton>
                     </Grid>
                 </Grid>

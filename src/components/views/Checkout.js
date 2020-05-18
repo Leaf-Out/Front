@@ -14,6 +14,7 @@ import {
 import ParkCard from '../elements/ParkCard';
 import PlanCard from '../elements/PlanCard';
 import ActivityCard from '../elements/ActivityCard';
+import { post } from '../../api/Get';
 
 const useStyles = makeStyles(theme => ({
     title: {
@@ -68,37 +69,40 @@ export default function Checkout() {
         }
     }
     const handleNewPay = (event) => {
-        /*if (cardholder !== "" && dni !== "" && paymentMethod !== "" && cardNumber !== "" && expirationDate !== "") {
-            let requestProducts = products.map(function (product) {
-                return (
-                    {
-                        "product": product.product.id,
-                        "units": product.units
+        if (cardholder !== "" && dni !== "" && paymentMethod !== "" && cardNumber !== "" && expirationDate !== "") {
+            items.forEach(
+                item => {
+                    let requestProduct = {
+                        "cardNumber": cardNumber,
+                        "securityCode": cvv,
+                        "expirationDate": expirationDate,
+                        "name": cardholder,
+                        "dni": dni,
+                        "paymentMethod": paymentMethod,
+                        "units": item.units,
+                        "population": item.item.population,
+                        "pay": item.item.type,
+                        "payId": item.item.id
                     }
-                )
-            })
-            let url = 'http://localhost:8080/payments/pay/id/' + JSON.parse(localStorage.getItem("token")).user.id
-            axios.post(url,
-                {
-                    "cardNumber": cardNumber,
-                    "securityCode": cvv,
-                    "expirationDate": expirationDate,
-                    "name": cardholder,
-                    "paymentMethod": paymentMethod,
-                    "items": requestProducts
-                },
-                { "headers": { "Authorization": "Bearer " + localStorage.getItem("bearer") } })
-                .then(res => {
-                    history.push("/transactions")
-                })
-                .catch(err => {
-                    setMessage("The payment could not be done. " + err.response.data.message)
-                    setAlert(true)
-                })
+                    console.log(requestProduct)
+                    post('/payments/pay/user/' + localStorage.getItem("email"), requestProduct)
+                        .then((res) => {
+                            history.push("/transactions")
+                        })
+                        .catch((err) => {
+                            console.log(err);
+
+                            setMessage("The payment could not be done. " + err.response.data.message)
+                            setAlert(true)
+                        });
+                }
+            );
+
+
         } else {
             setMessage("All fields must be filled")
             setAlert(true)
-        }*/
+        }
     }
 
     let totalPrice = 0

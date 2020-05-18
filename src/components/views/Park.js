@@ -101,11 +101,20 @@ export default function Park() {
       .catch((err) => {
         console.log(err);
         setLoad(false);
+        setError(true);
       });
   }, []);
 
-  if (load) {
-    return <LinearProgress style={{ marginTop: "2%" }} />;
+  if(load) {
+    return(
+        <LinearProgress style={{marginTop: "2%"}} />
+    )
+  } else if(error) {
+    return(
+        <div>
+            Error
+        </div>
+    )
   } else {
     return (
       <div>
@@ -131,7 +140,7 @@ export default function Park() {
             justify="flex-start"
             className={classes.rating}
           >
-            <LeafRating />
+            <LeafRating pay={park}/>
           </Grid>
           <Grid
             item
@@ -215,7 +224,7 @@ export default function Park() {
         <Divider className={classes.divider} />
         <Typography variant="h4" className={classes.descriptionTitle}>
           Comment Section
-          <IconButton variant="contained" color="primary">
+          <IconButton variant="contained" color="primary" >
             <CommentIcon />
           </IconButton>
         </Typography>

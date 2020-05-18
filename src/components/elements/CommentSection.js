@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles'
 import { Typography, List, ListItem, Divider, ListItemText, ListItemAvatar, Avatar, TextField, IconButton } from '@material-ui/core';
 import PublishRoundedIcon from '@material-ui/icons/PublishRounded';
+import { post } from '../../api/Get';
 
 const useStyles = makeStyles(theme => ({
     divider: {
@@ -42,6 +43,10 @@ const useStyles = makeStyles(theme => ({
 
 export default function CommentSection(props) {
     const classes = useStyles()
+    const [commentContent, setCommentContent] = useState("")
+    const postComment = (e) =>{
+        //TODO post comment
+    }
     return (
         <div>
             <List>
@@ -91,7 +96,7 @@ export default function CommentSection(props) {
             <Avatar className={classes.postAvatar}>
                 {
                     //Inicial del usuario actualmente logeado
-                    "U"
+                    localStorage.getItem("email").charAt(0)
                 }
             </Avatar>
             <Typography
@@ -100,10 +105,11 @@ export default function CommentSection(props) {
                 color="textSecondary"
                 className={classes.comments}
             >
-                Logged User
+                {localStorage.getItem("email")}
             </Typography><br />
-            <TextField label="Tell everyone about it ..." className={classes.comment} disableRipple={true} disableFocusRipple={true} />
-            <IconButton variant="contained" className={classes.uploadIcon} size="medium">
+            <TextField label="Tell everyone about it ..." className={classes.comment} disableRipple={true} disableFocusRipple={true}
+             onChange={(e)=>{setCommentContent(e.target.value)}}/>
+            <IconButton variant="contained" className={classes.uploadIcon} size="medium" onClick={postComment}>
                 <PublishRoundedIcon />
             </IconButton>
         </div>

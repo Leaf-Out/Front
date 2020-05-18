@@ -54,7 +54,7 @@ export default function UserPlanCard(props) {
                             <EcoRoundedIcon className={classes.icon} />
                         </Grid>
                         <Grid xs={2}>
-                            <Typography>4.5</Typography>
+                        <Typography>{props.plan.feedback.rating}</Typography>
                         </Grid>
                     </Grid>
                     <Grid xs={12} align="start">

@@ -60,8 +60,7 @@ const App = () => {
               <Home />
             </Route>
             <Route exact path="/home">
-              <Home />
-              {/* {localStorage.getItem("token") ? jwt.decode(localStorage.getItem("token")).rol[0] === "ADMIN" ? <HomeAdmin /> : <Home /> : <Home />} */}
+              <Home />              
             </Route>
             <Route exact path="/catalog">
               <Catalog />

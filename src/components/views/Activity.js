@@ -65,7 +65,7 @@ export default function Activity(props) {
     const {name} = useParams();
     const [activity,setActivity] = useState({});
     const [load, setLoad] = useState(true);
-    const [error,sestError] = useState(false);
+    const [error,setError] = useState(false);
     
     useEffect(()=>{
         get(`/activities/${name}`)
@@ -74,7 +74,7 @@ export default function Activity(props) {
             setLoad(false)
         }).catch((err)=>{
             console.log(err);
-            sestError(true);
+            setError(true);
             setLoad(false);
         })
     },[])

@@ -12,6 +12,7 @@ import Container from '@material-ui/core/Container';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';
 import axios from 'axios';
+import { post } from '../../api/Get';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -63,7 +64,20 @@ export default function SignUp() {
     }
     const handleSubmitClick = (event) => {
         if (fullname !== "" && email !== "" && password !== "" && phone !== "") {
-            
+            var newUser = {
+                "name": fullname,
+                "email": email,
+                "password": password,
+                "phone": phone
+            }
+            post('/users',newUser)
+                .then((res) => {
+                    history.push("/")
+                })
+                .catch((err) => {
+                    setMessage("The user was registered")
+                    setAlert(true);
+                });
         } else {
             setMessage("All fields must be filled")
             setAlert(true)
@@ -79,6 +93,7 @@ export default function SignUp() {
             >
                 <Alert severity="error">{message}</Alert>
             </Snackbar>
+            
             <br />
             <Container component="main" maxWidth="xs">
                 <CssBaseline />

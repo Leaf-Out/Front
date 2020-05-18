@@ -31,9 +31,9 @@ export default function UserParkCard(props) {
         "https://cdn.pixabay.com/photo/2014/10/04/12/18/stone-arch-472976_1280.jpg",
         "https://cdn.pixabay.com/photo/2017/10/12/06/24/allen-park-2843660_1280.jpg",
         "https://cdn.pixabay.com/photo/2017/05/03/09/12/architecture-2280543_1280.jpg",
-        "https://cdn.pixabay.com/photo/2016/08/23/19/51/park-1615341_1280.jpg" 
+        "https://cdn.pixabay.com/photo/2016/08/23/19/51/park-1615341_1280.jpg"
     ]
-    const getImage = () => {        
+    const getImage = () => {
         return images[Math.floor(Math.random() * 4)]
     }
     return (
@@ -54,11 +54,11 @@ export default function UserParkCard(props) {
                             <EcoRoundedIcon className={classes.icon} />
                         </Grid>
                         <Grid xs={2}>
-                            <Typography>3.9</Typography>
+                            <Typography>{props.park.feedback.rating}</Typography>
                         </Grid>
                     </Grid>
                     <Grid xs={12} align="start">
-                        <Typography ><StyleIcon className={classes.icon}/>{props.park.name}</Typography>
+                        <Typography ><StyleIcon className={classes.icon} />{props.park.name}</Typography>
                     </Grid>
                     <Grid xs={10} align="start">
                         <Typography >$ 15.000 <b>COP avg</b></Typography>
