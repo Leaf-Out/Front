@@ -87,10 +87,28 @@ export default function UpdatePlan(props) {
 
     const handleUpdatePlan = (event) => {
     
-        editTitle ? console.log(newTitle) : console.log(plan.name)
-        editParkTitle ? console.log(newParkTitle) : console.log(plan.parkName)
-        editDesc ? console.log(newDesc) : console.log(plan.description)
-        editActivitiesDesc ? console.log(newActivitiesDesc) : console.log(plan.activityDescription)
+        var updateTitle;
+        var updateParkTitle;
+        var updateDescription;
+        var updateActivityDescription;
+        editTitle ? updateTitle = newTitle : updateTitle = plan.name
+        editParkTitle ? updateParkTitle = newParkTitle : updateParkTitle = plan.parkName
+        editDesc ? updateDescription = newDesc : updateDescription = plan.description
+        editActivitiesDesc ? updateActivityDescription = newActivitiesDesc : updateActivityDescription = plan.activityDescription
+
+        var requestObject = {
+            "name": updateTitle,
+            "parkName": updateParkName,
+            "activityDescription": updateActivityDescription,
+            "description": updateDescription
+        }
+        update(`/plans/` + plan.name, requestObject)
+        .then(res => {
+            history.go(0)
+        }).catch((err)=>{
+            sestError(true);
+            setLoad(false);
+        })
       }
     
     useEffect(()=>{
@@ -133,12 +151,6 @@ export default function UpdatePlan(props) {
                 </div>
                 
                 <Grid container>
-                    <Grid item xs={5} continer justify="flex-start" className={classes.rating}>
-                        <LeafRating />
-                    </Grid>
-                    <Grid item xs={5} container justify="flex-end" className={classes.fee}>
-                        <FeeTable prices={ plan.prices } />
-                    </Grid>
                 </Grid>
                 <Divider className={classes.divider} />
                 <div>
@@ -183,7 +195,7 @@ export default function UpdatePlan(props) {
                     })}
                 </Grid>
                 <Divider className={classes.divider} />
-                <Button onClick={handleUpdatePlan} fullWidth>
+                <Button variant="contained" color="primary" onClick={handleUpdatePlan} fullWidth>
                     Update Plan
                 </Button>
                 <Footer />

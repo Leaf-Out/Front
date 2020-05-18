@@ -44,12 +44,29 @@ export const post = (path, data) => {
             });
     });
 }
+
 export const remove = (path, data) => {
-    let requestUrl = `${url}${path}`;    
+    let requestUrl = `${url}${path}`;
     return new Promise((resolve, reject) => {
         axios.delete(requestUrl,
-            {"data": data,
-             "headers": { "Authorization": "Bearer " + localStorage.getItem("token") } })
+            {
+                "data": data,
+                "headers": { "Authorization": "Bearer " + localStorage.getItem("token") }
+            })
+            .then(res => {
+                resolve(res.data);
+            }).catch(err => {
+                reject(err)
+            });
+    });
+}
+
+export const update = (path, data) => {
+    let requestUrl = `${url}${path}`;
+    return new Promise((resolve, reject) => {
+        axios.put(requestUrl,
+            data,
+            { "headers": { "Authorization": "Bearer " + localStorage.getItem("token") } })
             .then(res => {
                 resolve(res.data);
             }).catch(err => {
