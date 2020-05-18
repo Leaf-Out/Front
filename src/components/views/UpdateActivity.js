@@ -22,6 +22,7 @@ import {
     CircularProgress,
     Dialog,
     TextField,
+    Button,
   } from "@material-ui/core";
 
 
@@ -81,6 +82,18 @@ export default function UpdateActivity(props) {
     const [newParkTitle, setNewParkTitle] = useState("");
     const [editPlanTitle,setEditPlanTitle] = useState(false);
     const [newPlanTitle, setNewPlanTitle] = useState("");
+    const [editDesc, setEditDesc] = useState(false);
+    const [newDesc, setNewDesc] = useState("");
+
+    const handleUpdateActivity = (event) => {
+    
+        editTitle ? console.log(newTitle) : console.log(activity.name)
+        editParkTitle ? console.log(newParkTitle) : console.log(activity.parkName)
+        editPlanTitle ? console.log(newPlanTitle) : console.log(activity.parkName)
+        editDesc ? console.log(newDesc) : console.log(activity.description)
+       
+      }
+
     
     useEffect(()=>{
         get(`/activities/${name}`)
@@ -111,28 +124,30 @@ export default function UpdateActivity(props) {
                     <ChipList tags={activity.tags} />
                 </Dialog>
                 <Header />
-
-                {editTitle  ? <TextField align="center" onChange={(e)=>{setNewTitle(e.target.value)}} /> :
-                <Typography  onClick={()=>{setEditTitle(true)}} align="center" variant="h3" className={classes.title} >
-                    {" "}
-                    {activity.name}{" "}
-                </Typography>
-                }
-                <Divider className={classes.divider} />
-                <Divider className={classes.divider} />
-                {editParkTitle  ? <TextField align="center" onChange={(e)=>{setNewParkTitle(e.target.value)}} /> :
-                <Typography  onClick={()=>{setEditParkTitle(true)}} align="center" variant="h3" className={classes.title} >
-                    {" "}
-                    {"activity.park.name"}{" "}
-                </Typography>
-                }
-                <Divider className={classes.divider} />
-                {editPlanTitle  ? <TextField align="center" onChange={(e)=>{setNewPlanTitle(e.target.value)}} /> :
-                <Typography  onClick={()=>{setEditPlanTitle(true)}} align="center" variant="h3" className={classes.title} >
-                    {" "}
-                    {"activity.plan.name"}{" "}
-                </Typography>
-                }
+                <div align = "center">
+                    {editTitle  ? <TextField align="center" onChange={(e)=>{setNewTitle(e.target.value)}} /> :
+                    <Typography  onClick={()=>{setEditTitle(true)}} align="center" variant="h3" className={classes.title} >
+                        {" "}
+                        {activity.name}{" "}
+                    </Typography>
+                    }
+                    <Divider className={classes.divider} />
+                    <Divider className={classes.divider} />
+                    {editParkTitle  ? <TextField align="center" onChange={(e)=>{setNewParkTitle(e.target.value)}} /> :
+                    <Typography  onClick={()=>{setEditParkTitle(true)}} align="center" variant="h3" className={classes.title} >
+                        {" "}
+                        {"activity.parkName"}{" "}
+                    </Typography>
+                    }
+                    <Divider className={classes.divider} />
+                    {editPlanTitle  ? <TextField align="center" onChange={(e)=>{setNewPlanTitle(e.target.value)}} /> :
+                    <Typography  onClick={()=>{setEditPlanTitle(true)}} align="center" variant="h3" className={classes.title} >
+                        {" "}
+                        {activity.planName}{" "}
+                    </Typography>
+                    }
+                </div>
+                
                 <Divider className={classes.divider} />
                 <Grid container>
                     <Grid item xs={5} continer justify="flex-start" className={classes.rating}>
@@ -157,10 +172,16 @@ export default function UpdateActivity(props) {
                             <LocalOfferRoundedIcon />
                         </IconButton>
                     </Typography>
-                    <Typography variant="h5" className={classes.description}>
-                        { activity.description }
+                    {editDesc ? <TextField onChange={(e) => { setNewDesc(e.target.value) }}  className={classes.description}/> :
+                    <Typography onClick={() => { setEditDesc(true) }} variant="h5" className={classes.description} >
+                        {activity.description}
                     </Typography>
+                    }
                 </div>
+                <Divider className={classes.divider} />
+                <Button onClick={handleUpdateActivity} fullWidth>
+                    Update Activity
+                </Button>
                 
                 <Footer />
             </div>

@@ -10,7 +10,10 @@ import {
   CircularProgress,
   Dialog,
   TextField,
+  Button,
 } from "@material-ui/core";
+import { Chip } from "@material-ui/core";
+import TagsIcon from "@material-ui/icons/LocalOffer";
 import { makeStyles } from "@material-ui/core/styles";
 import Footer from "../elements/Footer";
 import Location from "../elements/Location";
@@ -22,8 +25,6 @@ import PlanCard from "../elements/PlanCard";
 import ActivityCard from "../elements/ActivityCard";
 import AccountTreeRoundedIcon from "@material-ui/icons/AccountTreeRounded";
 import BeachAccessRoundedIcon from "@material-ui/icons/BeachAccessRounded";
-import CommentSection from "../elements/CommentSection";
-import CommentIcon from "@material-ui/icons/Comment";
 import ChipList from "../elements/ChipList";
 import SimpleImageSlider from "react-simple-image-slider";
 import axios from "axios";
@@ -69,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
 export default function UpdatePark() {
   const classes = useStyles();
   const [tags, setTags] = useState(false);
+  const [filter, setFilter] = useState(JSON.parse(localStorage.getItem("filter")));
   const images = [
     {
       url:
@@ -92,11 +94,26 @@ export default function UpdatePark() {
   const [park, setPark] = useState({});
   const [load, setLoad] = useState(true);
   const [error, setError] = useState(false);
-  const [editTitle,setEditTitle] = useState(false);
+  const [editTitle, setEditTitle] = useState(false);
   const [newTitle, setNewTitle] = useState("");
+  const [editDesc, setEditDesc] = useState(false);
+  const [newDesc, setNewDesc] = useState("");
+  const [editLocDesc, setEditLocDesc] = useState(false);
+  const [newLocDesc, setNewLocDesc] = useState("");
+  const [editPlansDesc, setEditPlansDesc] = useState(false);
+  const [newPlansDesc, setNewPlansDesc] = useState("");
+  const [editActivitiesDesc, setEditActivitiesDesc] = useState(false);
+  const [newActivitiesDesc, setNewActivitiesDesc] = useState("");
+  
 
 
-
+  const handleUpdatePark = (event) => {
+    editTitle ? console.log(newTitle) : console.log(park.name)
+    editDesc ? console.log(newDesc) : console.log(park.description)
+    editLocDesc ? console.log(newLocDesc) : console.log(park.location.description)
+    editPlansDesc ? console.log(newPlansDesc) : console.log(park.planDescription)
+    editActivitiesDesc ? console.log(newActivitiesDesc) : console.log(park.activityDescription)
+  }
   useEffect(() => {
     get(`/parks/${name}`)
       .then((res) => {
@@ -117,29 +134,29 @@ export default function UpdatePark() {
         <Dialog
           onClose={(event) => {
             setTags(false);
+            history.go(0);
           }}
           open={tags}
           fullWidth
         >
-          <ChipList tags={park.tags} />
+          <ChipList click={true} tags={["AVISTAMIENTO_PERROS"]} />
         </Dialog>
         <Header />
-        {editTitle  ? <TextField align="center" onChange={(e)=>{setNewTitle(e.target.value)}} /> :
-        <Typography  onClick={()=>{setEditTitle(true)}} align="center" variant="h3" className={classes.title} >
-          {" "}
-           {park.name}{" "}
-        </Typography>
-        }
-        
+        <div align="center" >
+          {editTitle ? <TextField align="center" onChange={(e) => { setNewTitle(e.target.value) }} /> :
+            <Typography onClick={() => { setEditTitle(true) }} align="center" variant="h3" className={classes.title} >
+              {" "}
+              {park.name}{" "}
+            </Typography>
+          }
+        </div>
+
         <Grid container>
-          <Grid
-            item
-            xs={5}
-            container
-            justify="flex-end"
-            className={classes.fee}
-          >
-            {<FeeTable prices={park.prices} />}
+          <Grid item xs={5} continer justify="flex-start" className={classes.rating}>
+            <LeafRating />
+          </Grid>
+          <Grid item xs={5} container justify="flex-end" className={classes.fee}>
+            <FeeTable prices={park.prices} />
           </Grid>
         </Grid>
         <Divider className={classes.divider} />
@@ -152,25 +169,41 @@ export default function UpdatePark() {
         />
         <Typography variant="h4" className={classes.descriptionTitle}>
           Park Description
-          <IconButton variant="contained" color="primary">
-            <LocalOfferRoundedIcon
-              onClick={(event) => {
-                setTags(true);
-              }}
-            />
-          </IconButton>
+          <Chip
+            variant="outlined"
+            color="primary"
+            icon={<TagsIcon />}
+            label="Tags"
+            onClick={(e) => { setTags(true) }}
+        />
         </Typography>
-        <Typography variant="h5" className={classes.description}>
-          {park.description}
-        </Typography>
+        <div className={classes.divider} >{filter.tags.map((tag, i) => {
+          return (
+              <Chip size="small" label={tag} icon={<LocalOfferRoundedIcon />} color="primary" onDelete={(e) => {
+                  filter.tags.splice(i, 1);
+                  localStorage.setItem("filter", JSON.stringify(filter))
+                  history.go(0)
+              }} />
+          )
+          })}</div>
+        
+        {editDesc ? <TextField onChange={(e) => { setNewDesc(e.target.value) }}  className={classes.description}/> :
+          <Typography onClick={() => { setEditDesc(true) }} variant="h5" className={classes.description} >
+            {park.description}
+          </Typography>
+        }
+        
+    
         <Divider className={classes.divider} />
         <Typography variant="h4" className={classes.descriptionTitle}>
           Park Location
           <PlaceRoundedIcon color="primary" />
         </Typography>
-        <Typography variant="h5" className={classes.description}>
-          {park.location.description}
-        </Typography>
+        {editLocDesc ? <TextField onChange={(e) => { setNewLocDesc(e.target.value) }}  className={classes.description}/> :
+          <Typography onClick={() => { setEditLocDesc(true) }} variant="h5" className={classes.description} >
+            {park.location.description}
+          </Typography>
+        }
         <Location />
         <Divider className={classes.divider} />
         <Typography variant="h4" className={classes.descriptionTitle}>
@@ -179,15 +212,16 @@ export default function UpdatePark() {
             <AccountTreeRoundedIcon />
           </IconButton>
         </Typography>
-        <Typography variant="h5" className={classes.description}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry.
-        </Typography>
+        {editPlansDesc ? <TextField onChange={(e) => { setNewPlansDesc(e.target.value) }}  className={classes.description}/> :
+          <Typography onClick={() => { setEditPlansDesc(true) }} variant="h5" className={classes.description} >
+            {park.planDescription}
+          </Typography>
+        }
         <Grid container spacing={3} align="center" className={classes.planGrid}>
           {park.planList.map((plan) => {
             return (
               <Grid item xs={3}>
-                <PlanCard park={park.name} plan={plan} />
+                <PlanCard park={park.name} plan={plan} isUpdate = {true} />
               </Grid>
             );
           })}
@@ -199,19 +233,24 @@ export default function UpdatePark() {
             <BeachAccessRoundedIcon />
           </IconButton>
         </Typography>
-        <Typography variant="h5" className={classes.description}>
-          General description
-        </Typography>
+        {editActivitiesDesc ? <TextField onChange={(e) => { setNewActivitiesDesc(e.target.value) }}  className={classes.description}/> :
+          <Typography onClick={() => { setEditActivitiesDesc(true) }} variant="h5" className={classes.description} >
+            {park.activityDescription}
+          </Typography>
+        }
         <Grid container spacing={3} align="center" className={classes.planGrid}>
           {park.activitiesList.map((activity) => {
             return (
               <Grid item xs={3}>
-                <ActivityCard park={name} activity={activity} />
+                <ActivityCard park={name} activity={activity} isUpdate = {true} />
               </Grid>
             );
           })}
         </Grid>
         <Divider className={classes.divider} />
+        <Button onClick={handleUpdatePark} fullWidth>
+          Update Park
+        </Button>
         <Footer />
       </div>
     );
