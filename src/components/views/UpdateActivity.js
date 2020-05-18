@@ -5,13 +5,15 @@ import Footer from '../elements/Footer';
 import LeafRating from '../elements/LeafRating';
 import StyleIcon from '@material-ui/icons/Style';
 import CommentSection from "../elements/CommentSection";
+import { useHistory } from 'react-router-dom';
+
 import FeeTable from '../elements/FeeTable';
 import { Link, useParams } from 'react-router-dom';
 import LocalOfferRoundedIcon from '@material-ui/icons/LocalOfferRounded';
 import CommentIcon from '@material-ui/icons/Comment';
 import ChipList from '../elements/ChipList';
 import SimpleImageSlider from "react-simple-image-slider";
-import { get } from '../../api/Get';
+import { get, update } from '../../api/Get';
 import {
     Typography,
     Divider,
@@ -64,6 +66,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function UpdateActivity(props) {
     const classes = useStyles()
+    const history = useHistory()
     const [tags, setTags] = useState(false)
     const images = [
         {"url":"https://cdn.pixabay.com/photo/2016/01/19/17/56/whales-1149978_1280.jpg"},
@@ -86,12 +89,27 @@ export default function UpdateActivity(props) {
     const [newDesc, setNewDesc] = useState("");
 
     const handleUpdateActivity = (event) => {
-    
-        editTitle ? console.log(newTitle) : console.log(activity.name)
-        editParkTitle ? console.log(newParkTitle) : console.log(activity.parkName)
-        editPlanTitle ? console.log(newPlanTitle) : console.log(activity.parkName)
-        editDesc ? console.log(newDesc) : console.log(activity.description)
-       
+        var updateName;
+        var updatePlanName;
+        var updateParkName;
+        var updateDescription;
+        editTitle ? updateName = newTitle : updateName = activity.name;
+        editParkTitle ? updateParkName = newParkTitle : updateParkName = activity.parkName
+        editPlanTitle ? updatePlanName = newPlanTitle : updatePlanName = activity.parkName
+        editDesc ? updateDescription = newDesc : updateDescription = activity.description
+        var requestObject = {
+            "parkName": updateParkName,
+            "planName": updatePlanName,
+            "name": updateName,
+            "description": updateDescription
+        }
+        update(`/activities/` + activity.name, requestObject)
+        .then(res => {
+            history.go(0)
+        }).catch((err)=>{
+            sestError(true);
+            setLoad(false);
+        })
       }
 
     
@@ -136,26 +154,20 @@ export default function UpdateActivity(props) {
                     {editParkTitle  ? <TextField align="center" onChange={(e)=>{setNewParkTitle(e.target.value)}} /> :
                     <Typography  onClick={()=>{setEditParkTitle(true)}} align="center" variant="h3" className={classes.title} >
                         {" "}
-                        {"activity.parkName"}{" "}
+                        {activity.parkName ? activity.parkName : "No Park Assigned" }{" "}
                     </Typography>
                     }
                     <Divider className={classes.divider} />
                     {editPlanTitle  ? <TextField align="center" onChange={(e)=>{setNewPlanTitle(e.target.value)}} /> :
                     <Typography  onClick={()=>{setEditPlanTitle(true)}} align="center" variant="h3" className={classes.title} >
                         {" "}
-                        {activity.planName}{" "}
+                        {activity.planName ? activity.planName : "No Plan Assigned" }{" "}
                     </Typography>
                     }
                 </div>
                 
                 <Divider className={classes.divider} />
                 <Grid container>
-                    <Grid item xs={5} continer justify="flex-start" className={classes.rating}>
-                        <LeafRating />
-                    </Grid>
-                    <Grid item xs={5} container justify="flex-end" className={classes.fee}>
-                        <FeeTable prices={ activity.prices } />
-                    </Grid>
                 </Grid>
                 <Divider className={classes.divider} />
                 <div>
@@ -179,7 +191,7 @@ export default function UpdateActivity(props) {
                     }
                 </div>
                 <Divider className={classes.divider} />
-                <Button onClick={handleUpdateActivity} fullWidth>
+                <Button variant="contained" color="primary" onClick={handleUpdateActivity} fullWidth>
                     Update Activity
                 </Button>
                 

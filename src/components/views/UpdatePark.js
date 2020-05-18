@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from "react";
-import LeafRating from "../elements/LeafRating";
 import {
   Typography,
   Divider,
-  CardMedia,
   Grid,
   IconButton,
   LinearProgress,
-  CircularProgress,
   Dialog,
   TextField,
   Button,
@@ -108,6 +105,7 @@ export default function UpdatePark() {
 
 
   const handleUpdatePark = (event) => {
+    
     editTitle ? console.log(newTitle) : console.log(park.name)
     editDesc ? console.log(newDesc) : console.log(park.description)
     editLocDesc ? console.log(newLocDesc) : console.log(park.location.description)
@@ -152,12 +150,6 @@ export default function UpdatePark() {
         </div>
 
         <Grid container>
-          <Grid item xs={5} continer justify="flex-start" className={classes.rating}>
-            <LeafRating />
-          </Grid>
-          <Grid item xs={5} container justify="flex-end" className={classes.fee}>
-            <FeeTable prices={park.prices} />
-          </Grid>
         </Grid>
         <Divider className={classes.divider} />
         <SimpleImageSlider
@@ -248,7 +240,7 @@ export default function UpdatePark() {
           })}
         </Grid>
         <Divider className={classes.divider} />
-        <Button onClick={handleUpdatePark} fullWidth>
+        <Button variant="contained" color="primary" onClick={handleUpdatePark} fullWidth>
           Update Park
         </Button>
         <Footer />

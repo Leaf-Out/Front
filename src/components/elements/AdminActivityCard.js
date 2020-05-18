@@ -10,9 +10,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import { Dialog, DialogContent, Button, DialogTitle, Divider } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 import CreateIcon from '@material-ui/icons/Create';
-// import Carousel from './Carousel';
 import BeachAccessRoundedIcon from '@material-ui/icons/BeachAccessRounded';
-
+import { useHistory } from 'react-router-dom';
+import { remove } from '../../api/Get';
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -31,8 +31,17 @@ const useStyles = makeStyles(theme => ({
 
 export default function AdminActivityCard(props) {
     const classes = useStyles()
-    const handleDelete = (event) => {}//todoDelte
+    const handleDelete = (event) => {
+        remove("/activities", props.activity)
+            .then((res) => {
+                history.go(0)
+            })
+            .catch((err) => {
+                history.go(0)
+            });
+    }
     const [confirmation, setConfimation] = useState(false)
+    const history = useHistory()
     const images = [
         "https://cdn.pixabay.com/photo/2016/01/19/17/56/whales-1149978_1280.jpg",
         "https://cdn.pixabay.com/photo/2017/05/08/20/50/sub-2296460_1280.jpg",
@@ -103,7 +112,6 @@ export default function AdminActivityCard(props) {
                         <Typography ><BeachAccessRoundedIcon className={classes.icon} />{props.activity.name}</Typography>
                     </Grid>
                     <Grid xs={10} align="start">
-                        <Typography >$ 15.000 <b>COP avg</b></Typography>
                     </Grid>
                     <Grid xs={2} align="end">
                         <IconButton onClick={(e) => { setConfimation(true) }} variant="contained" color="primary">
