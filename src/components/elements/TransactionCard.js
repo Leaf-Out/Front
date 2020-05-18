@@ -6,8 +6,6 @@ import IconButton from '@material-ui/core/IconButton';
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
-import axios from 'axios';
-import RestorePageIcon from '@material-ui/icons/RestorePage';
 import RefundIcon from '@material-ui/icons/KeyboardReturn';
 import Snackbar from '@material-ui/core/Snackbar';
 import Alert from '@material-ui/lab/Alert';

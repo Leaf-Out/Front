@@ -10,7 +10,9 @@ import { Link } from 'react-router-dom';
 import StyleIcon from '@material-ui/icons/Style';
 import DeleteIcon from '@material-ui/icons/Delete';
 import CreateIcon from '@material-ui/icons/Create';
+import { useHistory } from 'react-router-dom';
 import { Dialog, DialogContent, Button, DialogTitle, Divider } from '@material-ui/core';
+import { remove } from '../../api/Get';
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -32,7 +34,16 @@ const useStyles = makeStyles(theme => ({
 
 export default function AdminParkCard(props) {
     const classes = useStyles()
-    const handleDelete = (event) => {}//todoDelte
+    const handleDelete = (event) => {
+        remove("/parks", props.park)
+            .then((res) => {
+                history.go(0)
+            })
+            .catch((err) => {
+                history.go(0)
+            });
+    }
+    const history = useHistory()
     const [confirmation, setConfimation] = useState(false)
     const images = [
         "https://cdn.pixabay.com/photo/2014/10/04/12/18/stone-arch-472976_1280.jpg",
@@ -44,22 +55,22 @@ export default function AdminParkCard(props) {
         return images[Math.floor(Math.random() * 4)]
     }
     const IconButtonDelete = () => {
-        return(
+        return (
             <IconButton onClick={(e) => { setConfimation(true) }} variant="contained" color="primary">
                 <DeleteIcon />
             </IconButton>
         )
-    
+
     }
     const IconButtonUpdate = () => {
-        return(
+        return (
             <Link style={{ textDecoration: 'none' }} to={`/updatePark/${props.park.name}`}>
                 <IconButton variant="contained" color="primary">
                     <CreateIcon />
                 </IconButton>
             </Link>
         )
-        
+
     }
     return (
         <Paper elevation={0} className={classes.card}>
@@ -71,14 +82,14 @@ export default function AdminParkCard(props) {
                         If you delete this park, all its plans and activities will be deleted too.
                     </Typography>
                     <div align="center">
-                        <Button variant="contained" color="primary" onClick={(e) => { setConfimation(false)}}>
+                        <Button variant="contained" color="primary" onClick={(e) => { setConfimation(false) }}>
                             Cancel
                         </Button>
                         <Button variant="contained" color="primary" onClick={handleDelete}>
                             Delete
                         </Button>
                     </div>
-                    
+
                 </DialogContent>
             </Dialog>
             <Grid container>
@@ -97,17 +108,16 @@ export default function AdminParkCard(props) {
                             <EcoRoundedIcon className={classes.icon} />
                         </Grid>
                         <Grid xs={2}>
-                        <Typography>{props.park.feedback.rating}</Typography>
+                            <Typography>{props.park.feedback.rating}</Typography>
                         </Grid>
                     </Grid>
                     <Grid xs={12} align="start">
                         <Typography ><StyleIcon className={classes.icon} />{props.park.name}</Typography>
                     </Grid>
                     <Grid xs={10} align="start">
-                        <Typography >$ 15.000 <b>COP avg</b></Typography>
                     </Grid>
                     <Grid xs={2} align="end">
-                       {props.isUpdate === true ? <IconButtonUpdate />  : <IconButtonDelete /> }
+                        {props.isUpdate === true ? <IconButtonUpdate /> : <IconButtonDelete />}
                     </Grid>
                 </Grid>
             </Grid>

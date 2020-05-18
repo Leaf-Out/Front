@@ -170,69 +170,6 @@ export default function HomeUser() {
                     })
                 }
             </Grid>
-            <Divider />
-            <div align={"center"}>
-                <Card className="friendsCard">
-                    <CardContent>
-                        <Grid container spacing={7}>
-                            <Grid item xs={5}>
-                                <Paper className="partnersPaper">
-                                    Lorem Ipsum is simply dummy text of the
-                                    printing and typesetting industry. Lorem
-                                    Ipsum has been the industry's standard
-                                    dummy text ever since the 1500s, when an
-                                    unknown printer took a galley of type and
-                                    scrambled it to make a type specimen book.
-                                    It has survived not only five centuries,
-                                    but also the leap into electronic
-                                    typesetting, remaining essentially
-                                    unchanged. It was popularised in the 1960s
-                                    with the release of Letraset sheets
-                                    with the release of Letraset sheets
-                                    with the release of Letraset sheets
-                                    with the release of Letraset sheets
-                                    </Paper>
-                            </Grid>
-                            <Grid item xs={7}>
-                                <Grid container spacing={10}>
-                                    <Grid item>
-                                        <Paper className="paperGrid">
-                                            <img /*To Put*/ />
-                                        </Paper>
-                                    </Grid>
-                                    <Grid item>
-                                        <Paper className="paperGrid">
-                                            <img /*To Put*/ />
-                                        </Paper>
-                                    </Grid>
-                                    <Grid item>
-                                        <Paper className="paperGrid">
-                                            <img /*To Put*/ />
-                                        </Paper>
-                                    </Grid>
-                                </Grid>
-                                <Grid container spacing={10}>
-                                    <Grid item>
-                                        <Paper className="paperGrid">
-                                            <img /*To Put*/ />
-                                        </Paper>
-                                    </Grid>
-                                    <Grid item>
-                                        <Paper className="paperGrid">
-                                            <img /*To Put*/ />
-                                        </Paper>
-                                    </Grid>
-                                    <Grid item>
-                                        <Paper className="paperGrid">
-                                            <img /*To Put*/ />
-                                        </Paper>
-                                    </Grid>
-                                </Grid>
-                            </Grid>
-                        </Grid>
-                    </CardContent>
-                </Card>
-            </div>
         </div>
     );
 }

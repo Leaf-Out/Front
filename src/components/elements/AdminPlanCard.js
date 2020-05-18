@@ -11,7 +11,8 @@ import CreateIcon from '@material-ui/icons/Create';
 import { Link } from 'react-router-dom';
 import AccountTreeRoundedIcon from '@material-ui/icons/AccountTreeRounded';
 import { Dialog, DialogContent, Button, DialogTitle, Divider } from '@material-ui/core';
-
+import { useHistory } from 'react-router-dom';
+import { remove } from '../../api/Get';
 
 const useStyles = makeStyles(theme => ({
     card: {
@@ -29,8 +30,17 @@ const useStyles = makeStyles(theme => ({
 
 export default function AdminPlanCard(props) {
     const classes = useStyles()
-    const handleDelete = (event) => { }//todoDelte
+    const handleDelete = (event) => { 
+        remove("/plans", props.plan)
+            .then((res) => {
+                history.go(0)
+            })
+            .catch((err) => {
+                history.go(0)
+            });
+    }
     const [confirmation, setConfimation] = useState(false)
+    const history = useHistory()
     const images = [
         "https://cdn.pixabay.com/photo/2016/03/09/09/59/men-1245982_1280.jpg",
         "https://cdn.pixabay.com/photo/2017/02/16/17/52/rafting-2071980_1280.jpg",
@@ -102,7 +112,6 @@ export default function AdminPlanCard(props) {
                         <Typography ><AccountTreeRoundedIcon className={classes.icon} /> {props.plan.name}</Typography>
                     </Grid>
                     <Grid xs={10} align="start">
-                        <Typography >$ 130.000 <b>COP avg</b></Typography>
                     </Grid>
                     <Grid xs={2} align="end">
                         <IconButton onClick={(e) => { setConfimation(true) }} variant="contained" color="primary">

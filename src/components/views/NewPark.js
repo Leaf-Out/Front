@@ -227,7 +227,7 @@ export default function NewPark() {
             <TextField label="Activity description" className={classes.divider} variant="outlined" onChange={(e) => { setActivityDescription(e.target.value) }}>
             </TextField>
             <Divider className={classes.divider} />
-            <Button onClick={handleCreatePark} fullWidth>
+            <Button color="primary" variant="contained" onClick={handleCreatePark} fullWidth>
                 Register Park
             </Button>
             <Footer />

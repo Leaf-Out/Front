@@ -30,7 +30,7 @@ export default function LeafRating(props) {
         } else {
             path = "/activities/" + props.pay.name + "/rating"
         }
-        post(path, {"rating":value})
+        post(path + "/" + value)
             .then((res) => {
                 history.go(0)
             })
