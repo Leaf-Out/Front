@@ -99,6 +99,9 @@ export default function NewPark() {
     const [description, setDescription] = useState("");
     const [locationDescription, setLocationDescription] = useState("");
     const [region, setRegion] = useState("");
+    const [planDescription,setPlanDescription] = useState("");
+    const [activityDescription,setActivityDescription] = useState("");
+
 
     const [load, setLoad] = useState(true);
     const [error, setError] = useState(false);
@@ -122,6 +125,8 @@ export default function NewPark() {
         console.log(locationDescription)
         console.log(region)
         console.log(prices)
+        console.log(planDescription)
+        console.log(activityDescription)
 
     }
 
@@ -184,7 +189,7 @@ export default function NewPark() {
             />
             <Typography variant="h4" className={classes.descriptionTitle}>
                 Park Description
-        <Chip
+                <Chip
                     variant="outlined"
                     color="primary"
                     icon={<TagsIcon />}
@@ -216,9 +221,15 @@ export default function NewPark() {
             </TextField>
             <Location />
             <Divider className={classes.divider} />
-                <Button onClick={handleCreatePark} fullWidth>
-                    Register Park
-                </Button>
+            <TextField label="plan description" className={classes.divider} variant="outlined" onChange={(e) => { setPlanDescription(e.target.value) }}>
+            </TextField>
+            <Divider className={classes.divider} />
+            <TextField label="Activity description" className={classes.divider} variant="outlined" onChange={(e) => { setActivityDescription(e.target.value) }}>
+            </TextField>
+            <Divider className={classes.divider} />
+            <Button onClick={handleCreatePark} fullWidth>
+                Register Park
+            </Button>
             <Footer />
         </div>
     );

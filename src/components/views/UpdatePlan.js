@@ -12,6 +12,7 @@ import CommentIcon from '@material-ui/icons/Comment';
 import ChipList from '../elements/ChipList';
 import SimpleImageSlider from "react-simple-image-slider";
 import { get } from '../../api/Get';
+import BeachAccessRoundedIcon from "@material-ui/icons/BeachAccessRounded";
 import {
     Typography,
     Divider,
@@ -22,43 +23,45 @@ import {
     CircularProgress,
     Dialog,
     TextField,
+    Button,
   } from "@material-ui/core";
+import ActivityCard from '../elements/ActivityCard';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     title: {
-        marginTop: "1%"
+      marginTop: "1%",
     },
     rating: {
-        marginTop: "2%",
-        marginLeft: "7.5%",
+      marginTop: "2%",
+      marginLeft: "7.5%",
     },
     fee: {
-        marginTop: "1%",
-        marginBottom: "1%",
+      marginTop: "1%",
+      marginBottom: "1%",
     },
     divider: {
-        marginLeft: "7.5%",
-        width: "83.5%"
+      marginLeft: "7.5%",
+      width: "83.5%",
     },
     descriptionTitle: {
-        marginLeft: "7.5%",
-        marginRight: "7.5%",
-        marginTop: "1.5%"
+      marginLeft: "7.5%",
+      marginRight: "7.5%",
+      marginTop: "1.5%",
     },
     description: {
-        marginLeft: "7.5%",
-        marginRight: "7.5%",
-        marginTop: "1.5%",
-        marginBottom: "1.5%",
+      marginLeft: "7.5%",
+      marginRight: "7.5%",
+      marginTop: "1.5%",
+      marginBottom: "1.5%",
     },
-    link: {
-        color: theme.palette.secondary.main,
-        textDecoration: "none",
-        '&:hover': {
-            color: theme.palette.primary.light
-        }
+    planGrid: {
+      marginTop: "1.5%",
+      marginBottom: "1.5%",
+      marginLeft: "7.5%",
+      marginRight: "5.5%",
+      width: "85%",
     },
-}));
+  }));
 
 export default function UpdatePlan(props) {
     const classes = useStyles()
@@ -77,6 +80,18 @@ export default function UpdatePlan(props) {
     const [newTitle, setNewTitle] = useState("");
     const [editParkTitle,setEditParkTitle] = useState(false);
     const [newParkTitle, setNewParkTitle] = useState("");
+    const [editDesc, setEditDesc] = useState(false);
+    const [newDesc, setNewDesc] = useState("");
+    const [editActivitiesDesc, setEditActivitiesDesc] = useState(false);
+    const [newActivitiesDesc, setNewActivitiesDesc] = useState("");
+
+    const handleUpdatePlan = (event) => {
+    
+        editTitle ? console.log(newTitle) : console.log(plan.name)
+        editParkTitle ? console.log(newParkTitle) : console.log(plan.parkName)
+        editDesc ? console.log(newDesc) : console.log(plan.description)
+        editActivitiesDesc ? console.log(newActivitiesDesc) : console.log(plan.activityDescription)
+      }
     
     useEffect(()=>{
         get(`/plans/${name}`)
@@ -101,19 +116,22 @@ export default function UpdatePlan(props) {
                     <ChipList tags={plan.tags} />
                 </Dialog>
                 <Header />
-                {editTitle  ? <TextField align="center" onChange={(e)=>{setNewTitle(e.target.value)}} /> :
-                <Typography  onClick={()=>{setEditTitle(true)}} align="center" variant="h3" className={classes.title} >
-                    {" "}
-                    {plan.name}{" "}
-                </Typography>
-                }
-                <Divider className={classes.divider} />
-                {editParkTitle  ? <TextField align="center" onChange={(e)=>{setNewParkTitle(e.target.value)}} /> :
-                <Typography  onClick={()=>{setEditParkTitle(true)}} align="center" variant="h3" className={classes.title} >
-                    {" "}
-                    {"plan.park.name"}{" "}
-                </Typography>
-                }
+                <div align = "center">
+                    {editTitle  ? <TextField align="center" onChange={(e)=>{setNewTitle(e.target.value)}} /> :
+                    <Typography  onClick={()=>{setEditTitle(true)}} align="center" variant="h3" className={classes.title} >
+                        {" "}
+                        {plan.name}{" "}
+                    </Typography>
+                    }
+                    <Divider className={classes.divider} />
+                    {editParkTitle  ? <TextField align="center" onChange={(e)=>{setNewParkTitle(e.target.value)}} /> :
+                    <Typography  onClick={()=>{setEditParkTitle(true)}} align="center" variant="h3" className={classes.title} >
+                        {" "}
+                        {plan.parkName}{" "}
+                    </Typography>
+                    }
+                </div>
+                
                 <Grid container>
                     <Grid item xs={5} continer justify="flex-start" className={classes.rating}>
                         <LeafRating />
@@ -137,16 +155,37 @@ export default function UpdatePlan(props) {
                             <LocalOfferRoundedIcon />
                         </IconButton>
                     </Typography>
-                    <Typography variant="h5" className={classes.description}>
+                    {editDesc ? <TextField onChange={(e) => { setNewDesc(e.target.value) }}  className={classes.description}/> :
+                    <Typography onClick={() => { setEditDesc(true) }} variant="h5" className={classes.description} >
                         {plan.description}
                     </Typography>
+                    }
                 </div>
+                <Typography variant="h4" className={classes.descriptionTitle}>
+                     Activities
+                <IconButton variant="contained" color="primary">
+                    <BeachAccessRoundedIcon />
+                </IconButton>
+                </Typography>
+                {editActivitiesDesc ? <TextField onChange={(e) => { setNewActivitiesDesc(e.target.value) }}  className={classes.description}/> :
+                <Typography onClick={() => { setEditActivitiesDesc(true) }} variant="h5" className={classes.description} >
+                    {plan.activityDescription}
+                </Typography>
+                 }
                 <Divider className={classes.divider} />
-                <div align={"center"}>
-                    <Typography>Activity grid as a itinerary</Typography>
-                </div>
+                <Grid container spacing={3} align="center" className={classes.planGrid}>
+                    {plan.activitiesList.map((activity) => {
+                        return (
+                        <Grid item xs={3}>
+                            <ActivityCard park={name} activity={activity} isUpdate = {true} />
+                        </Grid>
+                        );
+                    })}
+                </Grid>
                 <Divider className={classes.divider} />
-               
+                <Button onClick={handleUpdatePlan} fullWidth>
+                    Update Plan
+                </Button>
                 <Footer />
             </div>
         );
