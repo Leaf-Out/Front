@@ -6,12 +6,12 @@ import LeafRating from '../elements/LeafRating';
 import StyleIcon from '@material-ui/icons/Style';
 import CommentSection from "../elements/CommentSection";
 import FeeTable from '../elements/FeeTable';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useHistory } from 'react-router-dom';
 import LocalOfferRoundedIcon from '@material-ui/icons/LocalOfferRounded';
 import CommentIcon from '@material-ui/icons/Comment';
 import ChipList from '../elements/ChipList';
 import SimpleImageSlider from "react-simple-image-slider";
-import { get } from '../../api/Get';
+import { get, update } from '../../api/Get';
 import BeachAccessRoundedIcon from "@material-ui/icons/BeachAccessRounded";
 import {
     Typography,
@@ -65,6 +65,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function UpdatePlan(props) {
     const classes = useStyles()
+    const history = useHistory();
     const [tags, setTags] = useState(false)
     const images = [
         {"url":"https://cdn.pixabay.com/photo/2017/08/07/23/50/climbing-2609319_1280.jpg"},
@@ -98,13 +99,13 @@ export default function UpdatePlan(props) {
 
         var requestObject = {
             "name": updateTitle,
-            "parkName": updateParkName,
+            "parkName": updateParkTitle,
             "activityDescription": updateActivityDescription,
             "description": updateDescription
         }
         update(`/plans/` + plan.name, requestObject)
         .then(res => {
-            history.go(0)
+            history.push("/")
         }).catch((err)=>{
             sestError(true);
             setLoad(false);
@@ -138,14 +139,14 @@ export default function UpdatePlan(props) {
                     {editTitle  ? <TextField align="center" onChange={(e)=>{setNewTitle(e.target.value)}} /> :
                     <Typography  onClick={()=>{setEditTitle(true)}} align="center" variant="h3" className={classes.title} >
                         {" "}
-                        {plan.name}{" "}
+                        {plan.name ? plan.name : "No Name Assigned" }{" "}
                     </Typography>
                     }
                     <Divider className={classes.divider} />
                     {editParkTitle  ? <TextField align="center" onChange={(e)=>{setNewParkTitle(e.target.value)}} /> :
                     <Typography  onClick={()=>{setEditParkTitle(true)}} align="center" variant="h3" className={classes.title} >
                         {" "}
-                        {plan.parkName}{" "}
+                        {plan.parkName ? plan.parkName : "No Park Assigned" }{" "}
                     </Typography>
                     }
                 </div>
@@ -169,7 +170,7 @@ export default function UpdatePlan(props) {
                     </Typography>
                     {editDesc ? <TextField onChange={(e) => { setNewDesc(e.target.value) }}  className={classes.description}/> :
                     <Typography onClick={() => { setEditDesc(true) }} variant="h5" className={classes.description} >
-                        {plan.description}
+                        {plan.description ? plan.description : "No Description" }
                     </Typography>
                     }
                 </div>
@@ -181,7 +182,7 @@ export default function UpdatePlan(props) {
                 </Typography>
                 {editActivitiesDesc ? <TextField onChange={(e) => { setNewActivitiesDesc(e.target.value) }}  className={classes.description}/> :
                 <Typography onClick={() => { setEditActivitiesDesc(true) }} variant="h5" className={classes.description} >
-                    {plan.activityDescription}
+                    {plan.activityDescription ? plan.activityDescription : "No Activity Set Description" }
                 </Typography>
                  }
                 <Divider className={classes.divider} />

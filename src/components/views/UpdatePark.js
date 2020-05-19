@@ -26,7 +26,7 @@ import ChipList from "../elements/ChipList";
 import SimpleImageSlider from "react-simple-image-slider";
 import axios from "axios";
 import { useParams, useHistory } from "react-router-dom";
-import { get } from "../../api/Get";
+import { get, update } from "../../api/Get";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -101,17 +101,37 @@ export default function UpdatePark() {
   const [newPlansDesc, setNewPlansDesc] = useState("");
   const [editActivitiesDesc, setEditActivitiesDesc] = useState(false);
   const [newActivitiesDesc, setNewActivitiesDesc] = useState("");
-  
+
 
 
   const handleUpdatePark = (event) => {
-    
-    editTitle ? console.log(newTitle) : console.log(park.name)
-    editDesc ? console.log(newDesc) : console.log(park.description)
-    editLocDesc ? console.log(newLocDesc) : console.log(park.location.description)
-    editPlansDesc ? console.log(newPlansDesc) : console.log(park.planDescription)
-    editActivitiesDesc ? console.log(newActivitiesDesc) : console.log(park.activityDescription)
+    var updateName;
+    var updateDescription;
+    var updateLocationDescription;
+    var updatePlanDescription;
+    var updateActivityDescription;
+    editTitle ? updateName = newTitle : updateName = park.name
+    editDesc ? updateDescription = newDesc : updateDescription = park.description
+    editLocDesc ? updateLocationDescription = newLocDesc : updateLocationDescription = park.location.description
+    editPlansDesc ? updatePlanDescription = newPlansDesc : updatePlanDescription = park.planDescription
+    editActivitiesDesc ? updateActivityDescription = newActivitiesDesc : updateActivityDescription = park.activityDescription
+    var updateLocation = park.location;
+    updateLocation.description = updateLocationDescription;
+    var requestObject = {
+      "name": updateName,
+      "planDescription": updatePlanDescription,
+      "activityDescription": updateActivityDescription,
+      "location": updateLocation,
+      "description": updateDescription
   }
+    update(`/parks/` + park.name, requestObject)
+      .then(res => {
+        history.push("/")
+      }).catch((err) => {
+        setLoad(false);
+      })
+  }
+
   useEffect(() => {
     get(`/parks/${name}`)
       .then((res) => {
@@ -144,7 +164,7 @@ export default function UpdatePark() {
           {editTitle ? <TextField align="center" onChange={(e) => { setNewTitle(e.target.value) }} /> :
             <Typography onClick={() => { setEditTitle(true) }} align="center" variant="h3" className={classes.title} >
               {" "}
-              {park.name}{" "}
+              {park.name ? park.name : "No Name Assigned"}{" "}
             </Typography>
           }
         </div>
@@ -167,33 +187,33 @@ export default function UpdatePark() {
             icon={<TagsIcon />}
             label="Tags"
             onClick={(e) => { setTags(true) }}
-        />
+          />
         </Typography>
         <div className={classes.divider} >{filter.tags.map((tag, i) => {
           return (
-              <Chip size="small" label={tag} icon={<LocalOfferRoundedIcon />} color="primary" onDelete={(e) => {
-                  filter.tags.splice(i, 1);
-                  localStorage.setItem("filter", JSON.stringify(filter))
-                  history.go(0)
-              }} />
+            <Chip size="small" label={tag} icon={<LocalOfferRoundedIcon />} color="primary" onDelete={(e) => {
+              filter.tags.splice(i, 1);
+              localStorage.setItem("filter", JSON.stringify(filter))
+              history.go(0)
+            }} />
           )
-          })}</div>
-        
-        {editDesc ? <TextField onChange={(e) => { setNewDesc(e.target.value) }}  className={classes.description}/> :
+        })}</div>
+
+        {editDesc ? <TextField onChange={(e) => { setNewDesc(e.target.value) }} className={classes.description} /> :
           <Typography onClick={() => { setEditDesc(true) }} variant="h5" className={classes.description} >
-            {park.description}
+            {park.description ? park.description : "No Description"}
           </Typography>
         }
-        
-    
+
+
         <Divider className={classes.divider} />
         <Typography variant="h4" className={classes.descriptionTitle}>
           Park Location
           <PlaceRoundedIcon color="primary" />
         </Typography>
-        {editLocDesc ? <TextField onChange={(e) => { setNewLocDesc(e.target.value) }}  className={classes.description}/> :
+        {editLocDesc ? <TextField onChange={(e) => { setNewLocDesc(e.target.value) }} className={classes.description} /> :
           <Typography onClick={() => { setEditLocDesc(true) }} variant="h5" className={classes.description} >
-            {park.location.description}
+            {park.location.description ? park.location.description : "No Location Description"}
           </Typography>
         }
         <Location />
@@ -204,16 +224,16 @@ export default function UpdatePark() {
             <AccountTreeRoundedIcon />
           </IconButton>
         </Typography>
-        {editPlansDesc ? <TextField onChange={(e) => { setNewPlansDesc(e.target.value) }}  className={classes.description}/> :
+        {editPlansDesc ? <TextField onChange={(e) => { setNewPlansDesc(e.target.value) }} className={classes.description} /> :
           <Typography onClick={() => { setEditPlansDesc(true) }} variant="h5" className={classes.description} >
-            {park.planDescription}
+            {park.planDescription ? park.planDescription : "No Plan Set Description"}
           </Typography>
         }
         <Grid container spacing={3} align="center" className={classes.planGrid}>
           {park.planList.map((plan) => {
             return (
               <Grid item xs={3}>
-                <PlanCard park={park.name} plan={plan} isUpdate = {true} />
+                <PlanCard park={park.name} plan={plan} isUpdate={true} />
               </Grid>
             );
           })}
@@ -225,16 +245,16 @@ export default function UpdatePark() {
             <BeachAccessRoundedIcon />
           </IconButton>
         </Typography>
-        {editActivitiesDesc ? <TextField onChange={(e) => { setNewActivitiesDesc(e.target.value) }}  className={classes.description}/> :
+        {editActivitiesDesc ? <TextField onChange={(e) => { setNewActivitiesDesc(e.target.value) }} className={classes.description} /> :
           <Typography onClick={() => { setEditActivitiesDesc(true) }} variant="h5" className={classes.description} >
-            {park.activityDescription}
+            {park.activityDescription ? park.activityDescription : "No Activity Set Description"}
           </Typography>
         }
         <Grid container spacing={3} align="center" className={classes.planGrid}>
           {park.activitiesList.map((activity) => {
             return (
               <Grid item xs={3}>
-                <ActivityCard park={name} activity={activity} isUpdate = {true} />
+                <ActivityCard park={name} activity={activity} isUpdate={true} />
               </Grid>
             );
           })}

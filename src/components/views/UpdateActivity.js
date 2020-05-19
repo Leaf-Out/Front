@@ -95,7 +95,7 @@ export default function UpdateActivity(props) {
         var updateDescription;
         editTitle ? updateName = newTitle : updateName = activity.name;
         editParkTitle ? updateParkName = newParkTitle : updateParkName = activity.parkName
-        editPlanTitle ? updatePlanName = newPlanTitle : updatePlanName = activity.parkName
+        editPlanTitle ? updatePlanName = newPlanTitle : updatePlanName = activity.planName
         editDesc ? updateDescription = newDesc : updateDescription = activity.description
         var requestObject = {
             "parkName": updateParkName,
@@ -105,7 +105,7 @@ export default function UpdateActivity(props) {
         }
         update(`/activities/` + activity.name, requestObject)
         .then(res => {
-            history.go(0)
+            history.push("/")
         }).catch((err)=>{
             sestError(true);
             setLoad(false);
@@ -146,7 +146,7 @@ export default function UpdateActivity(props) {
                     {editTitle  ? <TextField align="center" onChange={(e)=>{setNewTitle(e.target.value)}} /> :
                     <Typography  onClick={()=>{setEditTitle(true)}} align="center" variant="h3" className={classes.title} >
                         {" "}
-                        {activity.name}{" "}
+                        {activity.name ? activity.name : "No Name Assigned" }{" "}
                     </Typography>
                     }
                     <Divider className={classes.divider} />
@@ -186,7 +186,7 @@ export default function UpdateActivity(props) {
                     </Typography>
                     {editDesc ? <TextField onChange={(e) => { setNewDesc(e.target.value) }}  className={classes.description}/> :
                     <Typography onClick={() => { setEditDesc(true) }} variant="h5" className={classes.description} >
-                        {activity.description}
+                        {activity.description ? activity.description : "No Description" }
                     </Typography>
                     }
                 </div>
