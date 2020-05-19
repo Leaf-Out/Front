@@ -227,7 +227,7 @@ export default function Park() {
           <IconButton variant="contained" color="primary" >
             <CommentIcon />
           </IconButton>
-        </Typography>
+        </Typography> 
         <CommentSection comments={park.feedback.comments} />
         <Footer />
       </div>

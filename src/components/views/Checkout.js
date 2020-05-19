@@ -53,18 +53,18 @@ export default function Checkout() {
     const [message, setMessage] = useState("")
     const [alert, setAlert] = useState(false)
     const history = useHistory()
-    const gerCard = (type) => {
-        if (type === "PARK") {
+    const gerCard = (item) => {
+        if (item.type === "PARK") {
             return (
-                <ParkCard park={{}} />
+                <ParkCard park={item} />
             )
-        } else if (type === "PLAN") {
+        } else if (item.type === "PLAN") {
             return (
-                <PlanCard plan={{}} />
+                <PlanCard plan={item} />
             )
         } else {
             return (
-                <ActivityCard activity={{}} />
+                <ActivityCard activity={item} />
             )
         }
     }
@@ -130,7 +130,7 @@ export default function Checkout() {
                         return (
                             <Grid item xs={12} container className={classes.card}>
                                 <Grid item xs={3} container>
-                                    {gerCard(item.item.type)}
+                                    {gerCard(item.item)}
                                 </Grid>
                                 <Grid xs={9} container alignItems="center" justify="flex-end" align="right">
                                     <Grid xs={12}>

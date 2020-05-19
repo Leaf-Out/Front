@@ -43,7 +43,8 @@ export default function CartItem(props) {
                     id: props.item.id,
                     type: props.item.type,
                     population: props.item.population,
-                    price: props.item.price
+                    price: props.item.price,
+                    feedback: props.item.feedback
                 },
                 units: units
             }
@@ -76,15 +77,15 @@ export default function CartItem(props) {
     const gerCard = (type) => {
         if (type === "PARK") {
             return (
-                <ParkCard park={{name: props.id}}/>
+                <ParkCard park={props.item}/>
             )
         } else if (type === "PLAN") {
             return (
-                <PlanCard plan={{name: props.id}}/>
+                <PlanCard plan={props.item}/>
             )
         } else {
             return (
-                <ActivityCard activity={props.id}/>
+                <ActivityCard activity={props.item}/>
             )
         }
     }

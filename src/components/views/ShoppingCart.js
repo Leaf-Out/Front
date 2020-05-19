@@ -27,14 +27,14 @@ export default function ShoppingCart() {
                     "type": "PLAN",
                     "id": "plan2Park1",
                     "price": 12000,
-                    "rating": 4.3,
+                    "feedback": {"rating": 4.5},
                     "population": "CHILDREN"
                 },
                 {
                     "type": "PARK",
                     "id": "purbaNuevaParks",
                     "price": 5000,
-                    "rating": 3.9,
+                    "feedback": {"rating": 3.5},
                     "population": "ADULTS"
                 }
             ])

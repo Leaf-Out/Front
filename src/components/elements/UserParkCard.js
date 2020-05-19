@@ -36,6 +36,14 @@ export default function UserParkCard(props) {
     const getImage = () => {
         return images[Math.floor(Math.random() * 4)]
     }
+    const createAvg = () => {
+        var sum = 0
+        var prices = Object.values(props.park.prices)
+        prices.forEach((price)=>{          
+            sum = sum + price
+        })        
+        return sum / prices.length
+    }
     return (
         <Paper elevation={0} className={classes.card}>
             <Grid container>
@@ -61,7 +69,7 @@ export default function UserParkCard(props) {
                         <Typography ><StyleIcon className={classes.icon} />{props.park.name}</Typography>
                     </Grid>
                     <Grid xs={10} align="start">
-                        <Typography >$ 15.000 <b>COP avg</b></Typography>
+                        <Typography >$ {createAvg()} <b>COP avg</b></Typography>
                     </Grid>
                     <Grid xs={2} align="end">
                         <Link style={{ textDecoration: 'none' }} to={`/park/${props.park.name}`}>

@@ -8,7 +8,6 @@ import IconButton from '@material-ui/core/IconButton';
 import EcoRoundedIcon from '@material-ui/icons/EcoRounded';
 import MoreRoundedIcon from '@material-ui/icons/MoreRounded';
 import { Link } from 'react-router-dom';
-// import Carousel from './Carousel';
 import BeachAccessRoundedIcon from '@material-ui/icons/BeachAccessRounded';
 
 
@@ -38,6 +37,14 @@ export default function UserActivityCard(props) {
     const getImage = () => {        
         return images[Math.floor(Math.random() * 4)]
     }
+    const createAvg = () => {
+        var sum = 0
+        var prices = Object.values(props.activity.prices)
+        prices.forEach((price)=>{          
+            sum = sum + price
+        })        
+        return sum / prices.length
+    }
     return (
         <Paper elevation={0} className={classes.card}>
             <Grid container>
@@ -63,7 +70,7 @@ export default function UserActivityCard(props) {
                         <Typography ><BeachAccessRoundedIcon className={classes.icon}/>{props.activity.name}</Typography>
                     </Grid>
                     <Grid xs={10} align="start">
-                        <Typography >$ 15.000 <b>COP avg</b></Typography>
+                        <Typography >$ {createAvg()} <b>COP avg</b></Typography>
                     </Grid>
                     <Grid xs={2} align="end">
                         <Link style={{ textDecoration: 'none' }} to={`/activity/${props.activity.name}`}>

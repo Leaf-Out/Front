@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const url = 'https://leaf-out.herokuapp.com'
-//const url = 'http://localhost:8080'
 
 export const login = (name, pass) => {
 
