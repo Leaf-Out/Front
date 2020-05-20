@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles'
 import { Typography, List, ListItem, Divider, ListItemText, ListItemAvatar, Avatar, TextField, IconButton } from '@material-ui/core';
 import PublishRoundedIcon from '@material-ui/icons/PublishRounded';
+import { useHistory } from "react-router-dom";
+
 import { post } from '../../api/Get';
 
 const useStyles = makeStyles(theme => ({
@@ -43,26 +45,43 @@ const useStyles = makeStyles(theme => ({
 
 export default function CommentSection(props) {
     const classes = useStyles()
+    const history = useHistory();
+
     const [commentContent, setCommentContent] = useState("")
-    const postComment = (e) =>{
-        //TODO post comment
+    const postComment = (e) =>{        
+        var path
+        if (props.pay.type === "PARK") {
+            path = "/parks/"
+        } else if (props.pay.type === "PLAN") {
+            path = "/plans/"
+        } else {
+            path = "/activities/"
+        }
+        post(path + `${props.pay.name}/feedback/${localStorage.getItem("email")}/content/` + commentContent)
+            .then((res) => {
+                history.go(0)
+            })
+            .catch((err) => {
+                console.log(err);
+            })
     }
     return (
         <div>
             <List>
                 {
-                    props.comments.map(function (comment) {
+                    props.pay.feedback.comments.map(function (comment) {
+                        
                         return (
                             <div>
                                 <ListItem alignItems="flex-start" className={classes.comments}>
                                     <ListItemAvatar>
                                         <Avatar className={classes.avatar}>
                                             {
-                                                comment.author.charAt(0)
+                                                comment.user.email.charAt(0)
                                             }
                                         </Avatar>
                                         <ListItemText
-                                            primary={<b>{comment.title}</b>}
+                                            primary={<b>{comment.user.name}</b>}
                                             secondary={
                                                 <div>
                                                     <Typography
@@ -70,7 +89,7 @@ export default function CommentSection(props) {
                                                         variant="body2"
                                                         color="textSecondary"
                                                     >
-                                                        {comment.author}
+                                                        {comment.user.email}
                                                     </Typography>
                                                     <br />
                                                     <Typography

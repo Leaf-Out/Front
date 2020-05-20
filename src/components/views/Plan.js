@@ -88,12 +88,12 @@ export default function Plan(props) {
                 </Dialog>
                 <Header />
                 <Typography align="center" variant="h3" className={classes.title}> {plan.name} </Typography>
-                <Link to="/park" className={classes.link}>
-                    <Typography align="center" variant="h5">Park Name //TODO <StyleIcon /></Typography>
+                <Link to={plan.parkName ? `/park/${plan.parkName}` : "/catalog"} className={classes.link}>
+                    <Typography align="center" variant="h5"> {plan.parkName ? plan.parkName : "No park" } <StyleIcon /></Typography>
                 </Link>
                 <Grid container>
                     <Grid item xs={5} continer justify="flex-start" className={classes.rating}>
-                        <LeafRating />
+                        <LeafRating pay={plan}/>
                     </Grid>
                     <Grid item xs={5} container justify="flex-end" className={classes.fee}>
                         <FeeTable prices={ plan.prices } />
@@ -130,7 +130,7 @@ export default function Plan(props) {
                         <CommentIcon />
                     </IconButton>
                 </Typography>
-                <CommentSection comments={ plan.feedback.comments} />
+                <CommentSection pay={ plan } />
                 <Footer />
             </div>
         );

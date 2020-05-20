@@ -228,7 +228,7 @@ export default function Park() {
             <CommentIcon />
           </IconButton>
         </Typography> 
-        <CommentSection comments={park.feedback.comments} />
+        <CommentSection pay={park} />
         <Footer />
       </div>
     );

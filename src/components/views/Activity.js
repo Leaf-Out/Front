@@ -97,15 +97,15 @@ export default function Activity(props) {
                 </Dialog>
                 <Header />
                 <Typography align="center" variant="h3" className={classes.title}> {activity.name} </Typography>
-                <Link to="/park" className={classes.link}>
-                    <Typography align="center" variant="h5">Park Name <StyleIcon /></Typography>
+                <Link to={activity.parkName ? `/park/${activity.parkName}` : "/catalog"} className={classes.link}>
+                    <Typography align="center" variant="h5"> {activity.parkName ? activity.parkName : "No Park" } <StyleIcon /></Typography>
                 </Link>
-                <Link to="/park" className={classes.link}>
-                    <Typography align="center" variant="h5">Plan Name (if it has)<AccountTreeRoundedIcon /></Typography>
+                <Link to={activity.planName ? `/plan/${activity.planName}` : "/catalog"} className={classes.link}>
+                    <Typography align="center" variant="h5">{activity.planName ? activity.planName : "No Plan" }<AccountTreeRoundedIcon /></Typography>
                 </Link>
                 <Grid container>
                     <Grid item xs={5} continer justify="flex-start" className={classes.rating}>
-                        <LeafRating />
+                        <LeafRating pay={activity}/>
                     </Grid>
                     <Grid item xs={5} container justify="flex-end" className={classes.fee}>
                         <FeeTable prices={ activity.prices } />
@@ -137,7 +137,7 @@ export default function Activity(props) {
                         <CommentIcon />
                     </IconButton>
                 </Typography>
-                <CommentSection comments={ activity.feedback.comments } />
+                <CommentSection pay={ activity } />
                 <Footer />
             </div>
         );
