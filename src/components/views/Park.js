@@ -190,8 +190,7 @@ export default function Park() {
           </IconButton>
         </Typography>
         <Typography variant="h5" className={classes.description}>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry.
+            {park.planDescription ? park.planDescription : "No Description"}
         </Typography>
         <Grid container spacing={3} align="center" className={classes.planGrid}>
           {park.planList.map((plan) => {
@@ -210,7 +209,7 @@ export default function Park() {
           </IconButton>
         </Typography>
         <Typography variant="h5" className={classes.description}>
-          General description
+            {park.activityDescription ? park.activityDescription : "No Description"}
         </Typography>
         <Grid container spacing={3} align="center" className={classes.planGrid}>
           {park.activitiesList.map((activity) => {
