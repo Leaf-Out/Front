@@ -48,7 +48,10 @@ export default function CommentSection(props) {
     const history = useHistory();
 
     const [commentContent, setCommentContent] = useState("")
-    const postComment = (e) =>{        
+    const postComment = (e) =>{
+        if (!localStorage.getItem("token")){
+            history.push("/signIn")
+        }
         var path
         if (props.pay.type === "PARK") {
             path = "/parks/"
@@ -77,7 +80,7 @@ export default function CommentSection(props) {
                                     <ListItemAvatar>
                                         <Avatar className={classes.avatar}>
                                             {
-                                                comment.user.email.charAt(0)
+                                                 comment.user.email.charAt(0)
                                             }
                                         </Avatar>
                                         <ListItemText
@@ -115,7 +118,7 @@ export default function CommentSection(props) {
             <Avatar className={classes.postAvatar}>
                 {
                     //Inicial del usuario actualmente logeado
-                    localStorage.getItem("email").charAt(0)
+                    localStorage.getItem("token") ? localStorage.getItem("email").charAt(0) : "?"
                 }
             </Avatar>
             <Typography

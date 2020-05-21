@@ -14,6 +14,7 @@ import Alert from '@material-ui/lab/Alert';
 import ParkCard from './ParkCard';
 import PlanCard from './PlanCard';
 import ActivityCard from './ActivityCard';
+import {remove} from "../../api/Get";
 
 const useStyles = makeStyles(theme => ({
     container: {
@@ -38,20 +39,16 @@ export default function CartItem(props) {
     const checkHandler = (event) => {
         if (!checked) {
             let item = JSON.parse(localStorage.getItem("checkout"))
-            item[props.item.id] = {
-                item: {
-                    id: props.item.id,
-                    type: props.item.type,
-                    population: props.item.population,
-                    price: props.item.price,
-                    feedback: props.item.feedback
-                },
+            item[props.pay.pay.id] = {
+                item: props.pay.pay,
+                price:props.pay.price,
+                population:props.pay.population,
                 units: units
             }
             localStorage.setItem("checkout", JSON.stringify(item))
         } else {
             let item = JSON.parse(localStorage.getItem("checkout"))
-            delete item[props.item.id]
+            delete item[props.pay.pay.id]
             localStorage.setItem("checkout", JSON.stringify(item))
         }
         setChecked(!checked);
@@ -72,20 +69,28 @@ export default function CartItem(props) {
 
     const removeHandler = (event) => {
         //TODO remove from cart
+
+        remove(`/carts/${localStorage.getItem("email")}/items/${props.pay.pay.id+props.pay.population}`)
+            .then((res) => {
+                history.go(0)
+            })
+            .catch((err) => {
+                console.log("")
+            });
     };
 
     const gerCard = (type) => {
         if (type === "PARK") {
             return (
-                <ParkCard park={props.item}/>
+                <ParkCard park={props.pay.pay}/>
             )
         } else if (type === "PLAN") {
             return (
-                <PlanCard plan={props.item}/>
+                <PlanCard plan={props.pay.pay}/>
             )
         } else {
             return (
-                <ActivityCard activity={props.item}/>
+                <ActivityCard activity={props.pay.pay}/>
             )
         }
     }
@@ -110,15 +115,15 @@ export default function CartItem(props) {
                     />
                 </Grid>
                 <Grid item xs={3} container>
-                    {gerCard(props.item.type)}
+                    {gerCard(props.pay.type)}
                 </Grid>
                 <Grid item xs={2} container justify="flex-end">
-                <Typography variant="h5">Population: {props.item.population}</Typography>
-                <Typography variant="h5">Price: ${props.item.price}</Typography>
+                <Typography variant="h5">Population: {props.pay.population}</Typography>
+                <Typography variant="h5">Price: ${props.pay.price}</Typography>
                 </Grid>
                 <Grid item xs={3} container className={classes.icon}>
                     <Grid item xs={12} className={classes.text}>
-                        <Typography variant="h5">Total: ${props.item.price * units}</Typography>
+                        <Typography variant="h5">Total: ${props.pay.price * units}</Typography>
                     </Grid>
                     <Grid item xs={12} container className={classes.text} justify="center">
                         <Grid item xs={1} className={classes.text}>

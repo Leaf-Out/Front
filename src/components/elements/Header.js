@@ -84,7 +84,8 @@ const UserNav = (props) => {
     const history = useHistory()
     const signOut = (event) => {
         localStorage.removeItem("token")
-        history.push("/signin")        
+        localStorage.removeItem("email")
+        history.push("/signIn")
     }
     const classes = useStyles()
     const buttonStyle = props.isHome ? classes.homeButton : classes.button
@@ -105,7 +106,8 @@ const AdminNav = (props) => {
     const history = useHistory()
     const signOut = (event) => {
         localStorage.removeItem("token")
-        history.push("/signin")        
+        localStorage.removeItem("email")
+        history.push("/signIn")
     }
     const classes = useStyles()
     const buttonStyle = props.isHome ? classes.homeButton : classes.button    

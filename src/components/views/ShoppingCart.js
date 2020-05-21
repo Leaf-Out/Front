@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { List, Button, Typography } from '@material-ui/core';
 import Header from '../elements/Header'
 import CartItem from '../elements/CartItem';
+import {get} from "../../api/Get";
 
 const useStyles = makeStyles(theme => ({
     title: {
@@ -21,24 +22,20 @@ export default function ShoppingCart() {
     const classes = useStyles();
 
     const getItems = () => {
-        setItems(
-            [
-                {
-                    "type": "PLAN",
-                    "id": "plan2Park1",
-                    "price": 12000,
-                    "feedback": {"rating": 4.5},
-                    "population": "CHILDREN"
-                },
-                {
-                    "type": "PARK",
-                    "id": "purbaNuevaParks",
-                    "price": 5000,
-                    "feedback": {"rating": 3.5},
-                    "population": "ADULTS"
-                }
-            ])
+        get(`/carts/${localStorage.getItem("email")}`)
+            .then((res) => {
+                console.log(res);
+                setItems(res);
+                //setLoad(false);
+            })
+            .catch((err) => {
+                console.log(err);
+                //setLoad(false);
+                //setError(true);
+            });
+
     }
+
     useEffect(() => {
         localStorage.setItem("checkout", JSON.stringify({}))
         getItems()
@@ -51,7 +48,7 @@ export default function ShoppingCart() {
                 {
                     items.map(function (item) {
                         return (
-                            <CartItem item={item}/>
+                            <CartItem pay={item}/>
                         )
                     })
                 }

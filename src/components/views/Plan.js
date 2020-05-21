@@ -96,7 +96,7 @@ export default function Plan(props) {
                         <LeafRating pay={plan}/>
                     </Grid>
                     <Grid item xs={5} container justify="flex-end" className={classes.fee}>
-                        <FeeTable prices={ plan.prices } />
+                        <FeeTable pay={ plan } />
                     </Grid>
                 </Grid>
                 <Divider className={classes.divider} />
