@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './css/Home.css'
-import { Card, CardContent, Typography, Paper, TextField, Button, Grid, LinearProgress, MenuItem, Select } from '@material-ui/core'
+import { Card, CardContent, Typography, Paper, TextField, Button, Grid, LinearProgress, MenuItem, Select, FormControl } from '@material-ui/core'
 import Divider from '@material-ui/core/Divider'
 import Header from '../elements/Header'
 import { makeStyles } from '@material-ui/core/styles'
@@ -89,6 +89,15 @@ export default function HomeUser() {
     const [plans,setPlans] = useState([])
     const [load,setLoad] = useState(true)
     const [error,setError] = useState(false)
+    const [filter, setFilter] = useState({
+        name: "",
+        location: "region",
+        rating: "",
+        price: [],
+        type: "parks",
+        tags: [],
+      })
+    const history = useHistory()
 
     useEffect(()=>{
         
@@ -100,8 +109,23 @@ export default function HomeUser() {
             setError(true)
             setLoad(false);
         })
-        localStorage.setItem("filter", JSON.stringify({name:"",location:{},rating:"",price:[],type:"",tags:[],}));
+        localStorage.setItem("filter", JSON.stringify({name:"",location:{},rating:"",price:[],type:"parks",tags:[]}));
     },[] )
+
+    const search= (e)=>{
+        localStorage.setItem(
+            "filter",
+            JSON.stringify(filter)
+        )
+        history.push("/catalog")
+    }
+
+    const handleTypeChange = (event) =>{
+        let newFilter = filter
+        newFilter["type"] = event.target.value
+        setFilter(newFilter)
+             
+    }
 
     return (
         <div>
@@ -113,7 +137,7 @@ export default function HomeUser() {
                             <Typography variant="h4" className={classes.title}>Prepare your trip just as you want it.</Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <Typography variant="body1" className={classes.label}>Place</Typography>
+                            <Typography variant="body1" className={classes.label}>Region</Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <TextField label="Where you want to go?" variant="outlined" className={classes.input} />
@@ -122,34 +146,17 @@ export default function HomeUser() {
                             <Typography variant="body1" className={classes.label}>Type</Typography>
                         </Grid>
                         <Grid item xs={6} align="center" className={classes.text}>
-                            <Select autoWidth={true} >
-                                <MenuItem >Park</MenuItem>
-                                <MenuItem >Plan</MenuItem>
-                                <MenuItem >Activity</MenuItem>
+                        <FormControl className={classes.formControl}>
+                            <Select autoWidth={true} onChange={handleTypeChange}>
+                                <MenuItem value="parks">Parks</MenuItem>
+                                <MenuItem value="plans">Plans</MenuItem>
+                                <MenuItem value="activities">Activities</MenuItem>
                             </Select>
+                        </FormControl>
                     </Grid>
-                        <Grid container xs={12}>
-                            <Grid item xs={6} container>
-                                <Grid item xs={12}>
-                                    <Typography variant="body1" className={classes.adultLabel}>Adults</Typography>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField label="Adults" type="number" variant="outlined" className={classes.adults} />
-                                </Grid>
-                            </Grid>
-                            <Grid item xs={6} container>
-                                <Grid item xs={12}>
-                                    <Typography variant="body1" className={classes.childrenLabel}>Children</Typography>
-                                </Grid>
-                                <Grid item xs={12}>
-                                    <TextField label="Children" type="number" variant="outlined" className={classes.children} />
-                                </Grid>
-                            </Grid>
-                        </Grid>
+                        
                         <Grid item xs={12} container justify="flex-end">
-                            <Link to="/catalog" className={classes.searchButton} style={{ textDecoration: 'none' }}>
-                                <Button  color="primary" variant="contained"> Search </Button>
-                            </Link>
+                            <Button  color="primary" variant="contained" onClick={ search }> Search </Button>
                         </Grid>
                     </Grid>
                 </Paper>

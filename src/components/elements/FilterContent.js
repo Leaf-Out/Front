@@ -16,7 +16,7 @@ import { useHistory } from "react-router-dom";
 export default function FilterContent(props) {
   const history = useHistory();
   const [openModal, setOpenModal] = useState(false);
-  const [type, setType] = useState("park");
+  const [type, setType] = useState({});
   const toogleModal = (event) => {
     setOpenModal(!openModal);
   };
@@ -73,13 +73,14 @@ export default function FilterContent(props) {
         <Select
           value={type}
           onChange={(e) => {
+            localStorage.setItem("filter", JSON.stringify({"name":"","location":{},"rating":"","price":[],"type":e.target.value,"tags":[]}));
             setType(e.target.value);
           }}
           displayEmpty
         >
-          <MenuItem value={"park"}>Park</MenuItem>
-          <MenuItem value={"plan"}>Plan</MenuItem>
-          <MenuItem value={"activity"}>Activity</MenuItem>
+          <MenuItem value={"parks"}>Park</MenuItem>
+          <MenuItem value={"plans"}>Plan</MenuItem>
+          <MenuItem value={"activities"}>Activity</MenuItem>
         </Select>
       </FormControl>
     );
@@ -94,7 +95,7 @@ export default function FilterContent(props) {
         }}
         open={!openModal}
       >
-        <ChipList tags={["PARAISO", "AVISTAMIENTO_PERROS"]} click={true} />
+        <ChipList tags={["PARAISO", "TROPICAL"]} click={true} />
       </Dialog>
     );
   };

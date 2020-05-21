@@ -73,6 +73,10 @@ export function Filter(props) {
     history.go(0);
   };
 
+  const redirect = (e) =>{
+    history.push("/catalog")
+  }
+
   return (
     <Grid container xs={12} className={classes.bar} aling="center" spacing={2}>
       <Popper
@@ -137,7 +141,7 @@ export function Filter(props) {
         />
       </Grid>
       <Grid item>
-        <IconButton>
+        <IconButton onCLick={ redirect }>
           <SearchIcon />
         </IconButton>
       </Grid>

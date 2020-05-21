@@ -14,6 +14,8 @@ import { get } from "../../api/Get";
 import Header from "../elements/Header";
 import { Filter } from "../elements/Filter";
 import { useHistory } from "react-router-dom";
+import PlanCard from "../elements/PlanCard";
+import ActivityCard from "../elements/ActivityCard";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -39,12 +41,27 @@ const useStyles = makeStyles((theme) => ({
 export default function Catalog() {
   const classes = useStyles();
   const history = useHistory();
-  const [parks, setParks] = useState({});
-  const [filter, setFilter] = useState(JSON.parse(localStorage.getItem("filter")));
+  const [parks, setParks] = useState({name:"",location:{},rating:"",price:[],type:"",tags:[]})
+  const [filter, setFilter] = useState({});
   const [load, setLoad] = useState(true);
   const [error, setError] = useState(false);
+
   useEffect(() => {
-    get(`/parks/`)
+    setFilter(JSON.parse(localStorage.getItem("filter")))
+    console.log(filter);
+    
+    // type
+    let f = JSON.parse(localStorage.getItem("filter"))
+    if(f.type === null){
+      f["type"] = "parks"
+    }
+    let base = `/${f.type}/`
+    console.log(" url ", base);
+    
+    // tags
+    if(f.tags.length !== 0){
+      let api = base + "tags"
+      get(api)
       .then((res) => {
         setParks(res);
         setLoad(false);
@@ -54,6 +71,19 @@ export default function Catalog() {
         setError(true);
         setLoad(false);
       });
+    // Region
+    } else{
+      get(base)
+            .then((res) => {
+              setParks(res);
+              setLoad(false);
+            })
+            .catch((err) => {
+              console.log(err);
+              setError(true);
+              setLoad(false);
+            });
+    }    
   }, []);
 
   if (load) {
@@ -76,9 +106,17 @@ export default function Catalog() {
         })}</div>
         <Grid container xs={12} spacing={3} className={classes.grid}>
           {parks.map((card) => {
+            let item
+            if(filter.type === "parks"){
+              item = <ParkCard park={card}  />
+            } else if(filter.type === "plans"){
+              item = <PlanCard plan={card}  />
+            } else if(filter.type === "activities"){
+              item = <ActivityCard activity={card}  />
+            }
             return (
               <Grid item xs={3}>
-                <ParkCard park={card}  />
+                {item}
               </Grid>
             );
           })}
