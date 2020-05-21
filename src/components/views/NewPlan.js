@@ -27,6 +27,7 @@ import TagsIcon from "@material-ui/icons/LocalOffer";
 import { logDOM } from "@testing-library/react";
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import {post} from "../../api/Get";
 
 const useStyles = makeStyles(theme => ({
     title: {
@@ -68,8 +69,8 @@ export default function NewPlan(props) {
     const classes = useStyles();
     const [tags, setTags] = useState(false);
     const [filter, setFilter] = useState(JSON.parse(localStorage.getItem("filter")));
-    const [priceNumber, setPriceNumber] = useState(1);
-    const [prices, setPrices] = useState({ 1: { "Population": "", "Price": "" } });
+    const [priceNumber, setPriceNumber] = useState(0);
+    const [prices, setPrices] = useState({ 0: { "Population": "", "Price": "" } });
     const images = [
         {
             url:
@@ -98,25 +99,58 @@ export default function NewPlan(props) {
 
     const [load, setLoad] = useState(true);
     const [error, setError] = useState(false);
-    const setFeePopulation = (event, index) => {
+    const setFeePopulation = (index,price) => {
         let currentPrice = prices;
-        console.log(index);
-        console.log(currentPrice);
-        //currentPrice[index].Population = event.taget.value
-        //setPrices(currentPrice)
+        currentPrice[index].Population = price
+        setPrices(currentPrice)
     }
-    const setFeePrice = (event, index) => {
+    const setFeePrice = (index,value) => {
+
         let currentPrice = prices;
-        console.log(index);
-        console.log(currentPrice);
-        //currentPrice.index.Price = event.taget.value
-        //setPrices(currentPrice)
+        currentPrice[index].Price = value
+        setPrices(currentPrice)
+    }
+    const addNewPrice = (index) => {
+        setPriceNumber(index )
+        let currentPrice = prices
+        currentPrice[index] = { "Population": "", "Price": "" }
+    }
+    const removeNewPrice = (index) => {
+        let currentPrice = prices
+        delete currentPrice[index]
+        setPrices(currentPrice)
+        setPriceNumber(index -1)
+
     }
     const handleCreatePlan = (event) => {
-        console.log(parkName)
-        console.log(planName)
-        console.log(description)
-        console.log(prices)
+
+        var feeTable = {
+
+        }
+        Object.values(prices).map((e) => {
+            feeTable[e.Population] = e.Price
+        })
+        delete feeTable[""]
+        var feedback = {
+            comments:[],
+            rating: 5.0
+        }
+        var newPlan = {
+            name: planName,
+            parkName: parkName,
+            description: description,
+            prices: feeTable,
+            activityDescription:activityDescription,
+            feedback: feedback
+
+        }
+        post( "/plans" ,newPlan)
+            .then((res) => {
+                history.push("/")
+            })
+            .catch((err) => {
+                console.log(err);
+            })
 
     }
     return (
@@ -154,12 +188,12 @@ export default function NewPlan(props) {
                                 </Typography>
                             </Grid>
                             <Grid>
-                                <TextField label="Population" onChange={setFeePopulation(index)}>
+                                <TextField label="Population" onChange={(event) => {setFeePopulation(index,event.target.value)}}>
 
                                 </TextField>
                             </Grid>
                             <Grid>
-                                <TextField label="Price" onChange={setFeePrice(index)}>
+                                <TextField label="Price" onChange={(event) => {setFeePrice(index,event.target.value)}}>
 
                                 </TextField>
                             </Grid>
@@ -168,10 +202,10 @@ export default function NewPlan(props) {
 
                 })}
                 <IconButton>
-                    <AddIcon onClick={(e) => { setPriceNumber(priceNumber + 1) }}></AddIcon>
+                    <AddIcon onClick={(e) => { addNewPrice(priceNumber +1 ) }}></AddIcon>
                 </IconButton>
                 <IconButton>
-                    <RemoveIcon onClick={(e) => { priceNumber > 1 ? setPriceNumber(priceNumber - 1) : setPriceNumber(priceNumber) }}></RemoveIcon>
+                    <RemoveIcon onClick={(e) => { priceNumber > 1 ? removeNewPrice(priceNumber) : setPriceNumber(priceNumber) }}></RemoveIcon>
                 </IconButton>
             </Grid>
             <SimpleImageSlider
@@ -203,12 +237,16 @@ export default function NewPlan(props) {
             <TextField label="Plan description" className={classes.divider} variant="outlined" onChange={(e) => { setDescription(e.target.value) }}>
             </TextField>
             <Divider className={classes.divider} />
+            <Typography variant="h4" className={classes.descriptionTitle}>
+                Activities Description
+            </Typography>
+            <Divider className={classes.divider} />
             <TextField label="Activity description" className={classes.divider} variant="outlined" onChange={(e) => { setActivityDescription(e.target.value) }}>
             </TextField>
             
             
             <Divider className={classes.divider} />
-                <Button onClick={handleCreatePlan} fullWidth>
+                <Button color="primary" variant="contained" onClick={handleCreatePlan} fullWidth>
                     Register Plan
                 </Button>
             <Footer />
