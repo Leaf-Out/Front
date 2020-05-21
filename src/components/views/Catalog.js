@@ -56,6 +56,8 @@ export default function Catalog() {
       f["type"] = "parks"
     }
     let base = `/${f.type}/`
+    console.log(" url ", base);
+    
     // tags
     if(f.tags.length !== 0){
       let api = base + "tags"
@@ -108,9 +110,9 @@ export default function Catalog() {
             if(filter.type === "parks"){
               item = <ParkCard park={card}  />
             } else if(filter.type === "plans"){
-              item = <PlanCard park={card}  />
+              item = <PlanCard plan={card}  />
             } else if(filter.type === "activities"){
-              item = <ActivityCard park={card}  />
+              item = <ActivityCard activity={card}  />
             }
             return (
               <Grid item xs={3}>
