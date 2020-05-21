@@ -263,6 +263,7 @@ export default function NewPark() {
             <TextField label="plan description" className={classes.divider} variant="outlined" onChange={(e) => { setPlanDescription(e.target.value) }}>
             </TextField>
             <Divider className={classes.divider} />
+
             <TextField label="Activity description" className={classes.divider} variant="outlined" onChange={(e) => { setActivityDescription(e.target.value) }}>
             </TextField>
             <Divider className={classes.divider} />

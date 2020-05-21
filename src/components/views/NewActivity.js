@@ -27,6 +27,7 @@ import TagsIcon from "@material-ui/icons/LocalOffer";
 import { logDOM } from "@testing-library/react";
 import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
+import {post} from "../../api/Get";
 
 
 const useStyles = makeStyles(theme => ({
@@ -69,8 +70,8 @@ export default function NewActivity(props) {
     const classes = useStyles();
     const [tags, setTags] = useState(false);
     const [filter, setFilter] = useState(JSON.parse(localStorage.getItem("filter")));
-    const [priceNumber, setPriceNumber] = useState(1);
-    const [prices, setPrices] = useState({ 1: { "Population": "", "Price": "" } });
+    const [priceNumber, setPriceNumber] = useState(0);
+    const [prices, setPrices] = useState({ 0: { "Population": "", "Price": "" } });
     const images = [
         {
             url:
@@ -99,19 +100,28 @@ export default function NewActivity(props) {
 
     const [load, setLoad] = useState(true);
     const [error, setError] = useState(false);
-    const setFeePopulation = (event, index) => {
+    const setFeePopulation = (index,price) => {
         let currentPrice = prices;
-        console.log(index);
-        console.log(currentPrice);
-        //currentPrice[index].Population = event.taget.value
-        //setPrices(currentPrice)
+        currentPrice[index].Population = price
+        setPrices(currentPrice)
     }
-    const setFeePrice = (event, index) => {
+    const setFeePrice = (index,value) => {
+
         let currentPrice = prices;
-        console.log(index);
-        console.log(currentPrice);
-        //currentPrice.index.Price = event.taget.value
-        //setPrices(currentPrice)
+        currentPrice[index].Price = value
+        setPrices(currentPrice)
+    }
+    const addNewPrice = (index) => {
+        setPriceNumber(index )
+        let currentPrice = prices
+        currentPrice[index] = { "Population": "", "Price": "" }
+    }
+    const removeNewPrice = (index) => {
+        let currentPrice = prices
+        delete currentPrice[index]
+        setPrices(currentPrice)
+        setPriceNumber(index -1)
+
     }
     const handleCreateActivity = (event) => {
         console.log(parkName)
@@ -119,6 +129,33 @@ export default function NewActivity(props) {
         console.log(planName)
         console.log(description)
         console.log(prices)
+        var feeTable = {
+
+        }
+        Object.values(prices).map((e) => {
+            feeTable[e.Population] = e.Price
+        })
+        delete feeTable[""]
+        var feedback = {
+            comments:[],
+            rating: 5.0
+        }
+        var newActivity = {
+            name: ActivityName,
+            description: description,
+            parkName: parkName,
+            planName: planName,
+            prices: feeTable,
+            feedback: feedback
+
+        }
+        post( "/activities" ,newActivity)
+            .then((res) => {
+                history.push("/")
+            })
+            .catch((err) => {
+                console.log(err);
+            })
 
     }
     return (
@@ -161,12 +198,12 @@ export default function NewActivity(props) {
                                 </Typography>
                             </Grid>
                             <Grid>
-                                <TextField label="Population" onChange={setFeePopulation(index)}>
+                                <TextField label="Population" onChange={(event) => {setFeePopulation(index,event.target.value)}}>
 
                                 </TextField>
                             </Grid>
                             <Grid>
-                                <TextField label="Price" onChange={setFeePrice(index)}>
+                                <TextField label="Price" onChange={(event) => {setFeePrice(index,event.target.value)}}>
 
                                 </TextField>
                             </Grid>
@@ -175,10 +212,10 @@ export default function NewActivity(props) {
 
                 })}
                 <IconButton>
-                    <AddIcon onClick={(e) => { setPriceNumber(priceNumber + 1) }}></AddIcon>
+                    <AddIcon onClick={(e) => { addNewPrice(priceNumber +1 ) }}></AddIcon>
                 </IconButton>
                 <IconButton>
-                    <RemoveIcon onClick={(e) => { priceNumber > 1 ? setPriceNumber(priceNumber - 1) : setPriceNumber(priceNumber) }}></RemoveIcon>
+                    <RemoveIcon onClick={(e) => { priceNumber > 1 ? removeNewPrice(priceNumber) : setPriceNumber(priceNumber) }}></RemoveIcon>
                 </IconButton>
             </Grid>
             <Divider className={classes.divider} />
@@ -209,11 +246,14 @@ export default function NewActivity(props) {
                     }} />
                 )
             })}</div>
+
+            <Divider className={classes.divider} />
+
             <TextField label="Activity description" className={classes.divider} variant="outlined" onChange={(e) => { setDescription(e.target.value) }}>
             </TextField>
             
             <Divider className={classes.divider} />
-                <Button onClick={handleCreateActivity} fullWidth>
+                <Button color="primary" variant="contained"  onClick={handleCreateActivity} fullWidth>
                     Register Activity
                 </Button>
             <Footer />
