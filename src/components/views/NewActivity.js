@@ -251,6 +251,8 @@ export default function NewActivity(props) {
 
             <TextField label="Activity description" className={classes.divider} variant="outlined" onChange={(e) => { setDescription(e.target.value) }}>
             </TextField>
+
+
             
             <Divider className={classes.divider} />
                 <Button color="primary" variant="contained"  onClick={handleCreateActivity} fullWidth>

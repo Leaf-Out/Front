@@ -21,8 +21,8 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="https://leaf-out-front.herokuapp.com/">
+        Leaf Out
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}

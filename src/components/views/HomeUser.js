@@ -22,7 +22,9 @@ const useStyles = makeStyles(theme => ({
         marginTop: "5%",
         marginLeft: "5%",
         width: "25%",
-        height: "53%",
+        height: "auto",
+        paddingBottom: "2%",
+        paddingRight: "1%",
     },
     title: {
         marginLeft: "7.5%",
@@ -147,7 +149,7 @@ export default function HomeUser() {
                         </Grid>
                         <Grid item xs={6} align="center" className={classes.text}>
                         <FormControl className={classes.formControl}>
-                            <Select autoWidth={true} onChange={handleTypeChange}>
+                            <Select value={"parks"} autoWidth={true} onChange={handleTypeChange}>
                                 <MenuItem value="parks">Parks</MenuItem>
                                 <MenuItem value="plans">Plans</MenuItem>
                                 <MenuItem value="activities">Activities</MenuItem>
