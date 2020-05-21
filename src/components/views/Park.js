@@ -149,7 +149,7 @@ export default function Park() {
             justify="flex-end"
             className={classes.fee}
           >
-            {<FeeTable prices={park.prices} />}
+            {<FeeTable pay={park}  />}
           </Grid>
         </Grid>
         <Divider className={classes.divider} />
