@@ -80,8 +80,8 @@ export default function Checkout() {
                         "dni": dni,
                         "paymentMethod": paymentMethod,
                         "units": item.units,
-                        "population": item.item.population,
-                        "pay": item.item.type,
+                        "population": item.population,
+                        "pay": item.item.typ.toUpperCase(),
                         "payId": item.item.id
                     }
                     console.log(requestProduct)
@@ -107,7 +107,7 @@ export default function Checkout() {
 
     let totalPrice = 0
     items.forEach(item => {
-        totalPrice = totalPrice + (item.units * item.item.price)
+        totalPrice = totalPrice + (item.units * item.price)
     });
 
     return (
@@ -134,8 +134,8 @@ export default function Checkout() {
                                 </Grid>
                                 <Grid xs={9} container alignItems="center" justify="flex-end" align="right">
                                     <Grid xs={12}>
-                                        <Typography variant="h5">Price: ${item.units * item.item.price}</Typography>
-                                        <Typography variant="h5" color="textSecondary">{item.item.population} | {item.units} units</Typography>
+                                        <Typography variant="h5">Price: ${item.units * item.price}</Typography>
+                                        <Typography variant="h5" color="textSecondary">{item.population} | {item.units} units</Typography>
                                     </Grid>
                                 </Grid>
                                 <Grid xs={12}><Divider /></Grid>

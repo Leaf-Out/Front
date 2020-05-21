@@ -22,6 +22,9 @@ export default function LeafRating(props) {
     const [rating, setRating] = useState(props.pay.feedback.rating);
     const history = useHistory()
     const vote = (value) => {
+        if (!localStorage.getItem('token')){
+            history.push("/signIn")
+        }
         var path
         if (props.pay.type === "PARK") {
             path = "/parks/" + props.pay.name + "/rating"
