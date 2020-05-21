@@ -173,6 +173,10 @@ export default function Park() {
         <Typography variant="h5" className={classes.description}>
           {park.description}
         </Typography>
+          <Divider className={classes.divider} />
+          <Typography variant="h4" className={classes.descriptionTitle}>
+              Current Availability: {Math.floor(Math.random() * 5000) }
+          </Typography>
         <Divider className={classes.divider} />
         <Typography variant="h4" className={classes.descriptionTitle}>
           Park Location

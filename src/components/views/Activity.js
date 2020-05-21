@@ -132,6 +132,10 @@ export default function Activity(props) {
                 </div>
                 <Divider className={classes.divider} />
                 <Typography variant="h4" className={classes.descriptionTitle}>
+                    Current Availability: {Math.floor(Math.random() * 30) }
+                </Typography>
+                <Divider className={classes.divider} />
+                <Typography variant="h4" className={classes.descriptionTitle}>
                     Comment Section
                         <IconButton variant="contained" color="primary">
                         <CommentIcon />

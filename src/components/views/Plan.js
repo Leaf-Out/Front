@@ -13,6 +13,9 @@ import CommentIcon from '@material-ui/icons/Comment';
 import ChipList from '../elements/ChipList';
 import SimpleImageSlider from "react-simple-image-slider";
 import { get } from '../../api/Get';
+import ActivityCard from "../elements/ActivityCard";
+import AccountTreeRoundedIcon from "@material-ui/icons/AccountTreeRounded";
+import BeachAccessRoundedIcon from "@material-ui/icons/BeachAccessRounded";
 
 const useStyles = makeStyles(theme => ({
     title: {
@@ -47,6 +50,13 @@ const useStyles = makeStyles(theme => ({
         '&:hover': {
             color: theme.palette.primary.light
         }
+    },
+    planGrid: {
+        marginTop: "1.5%",
+        marginBottom: "1.5%",
+        marginLeft: "7.5%",
+        marginRight: "5.5%",
+        width: "85%",
     },
 }));
 
@@ -119,9 +129,29 @@ export default function Plan(props) {
                     </Typography>
                 </div>
                 <Divider className={classes.divider} />
-                <div align={"center"}>
-                    <Typography>Activity grid as a itinerary</Typography>
-                </div>
+
+                <Typography variant="h4" className={classes.descriptionTitle}>
+                    Current Availability: {Math.floor(Math.random() * 100) }
+                </Typography>
+                <Divider className={classes.divider} />
+                <Typography variant="h4" className={classes.descriptionTitle}>
+                    Activities
+                    <IconButton variant="contained" color="primary">
+                        <BeachAccessRoundedIcon />
+                    </IconButton>
+                </Typography>
+                <Typography variant="h5" className={classes.description}>
+                    {plan.activityDescription ? plan.activityDescription : "No Description"}
+                </Typography>
+                <Grid container spacing={3} align="center" className={classes.planGrid}>
+                    {plan.activitiesList.map((activity) => {
+                        return (
+                            <Grid item xs={3}>
+                                <ActivityCard park={name} activity={activity} isUpdate = {true} />
+                            </Grid>
+                        );
+                    })}
+                </Grid>
                 <Divider className={classes.divider} />
                 <Divider className={classes.divider} />
                 <Typography variant="h4" className={classes.descriptionTitle}>
